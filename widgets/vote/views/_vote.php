@@ -60,9 +60,15 @@ $this->registerCss("
 
                 </div>
                 <div class="modal-footer">
-                    <button type="button" id="vote-submit" class="btn btn-success btn-vote">Vote!</button>
-                    <span class="btn btn-primary dropdown-results btn-results" data-for=".results">View Results</span>
-                    <button type="button" class="btn btn-default btn-close" data-dismiss="modal">Close</button>
+                    <button type="button" id="vote-submit" class="btn btn-success btn-vote">
+                        <?= Yii::t('app', 'Vote')?>
+                    </button>
+                    <span class="btn btn-primary dropdown-results btn-results" data-for=".results">
+                        <?= Yii::t('app', 'View Results')?>
+                    </span>
+                    <button type="button" class="btn btn-default btn-close" data-dismiss="modal">
+                        <?= Yii::t('app', 'Close')?>
+                    </button>
 
                 </div>
                 </form>

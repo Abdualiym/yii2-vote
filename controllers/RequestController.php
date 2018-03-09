@@ -33,6 +33,11 @@ class RequestController extends Controller
     {
         \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
         $vote = Question::find()->active()->one();
+        if(!$vote){
+            $response['status'] = 5;
+            $response['status'] = Yii::t('app', 'Not detected database or values!');
+            return $response;
+        }
         $response['vote'] = $vote->translations['1']->question; // question text
         $response['vote_id'] = $vote->id; // vote id
         if($vote->resultsUserVote->id){
