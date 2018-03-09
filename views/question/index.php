@@ -39,7 +39,6 @@ $this->registerCss("
     transform: rotate(90deg); */
     color: #454444;
 }");
-
 ?>
 <div class="col-md-6">
     <a href="<?= Url::toRoute(['question/create'])?>" class="btn btn-default"><i class="fa fa-plus-circle"></i> Добавить вопрос</a>
