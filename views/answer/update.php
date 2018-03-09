@@ -32,7 +32,7 @@ foreach ($model->translations as $i => $translation) {
         <div class="col-md-8">
             <div class="box box-default">
                 <div class="box-body">
-                    <?= $form->errorSummary($model) ?>
+                    <?php echo $form->errorSummary($model) ?>
                     <!-- Nav tabs -->
                     <ul class="nav nav-tabs" role="tablist">
                         <?php
@@ -41,11 +41,11 @@ foreach ($model->translations as $i => $translation) {
                             if (isset($langList[$translation->lang_id])) {
                                 $j++;
                                 ?>
-                                <li role="presentation" <?= $j === 1 ? 'class="active"' : '' ?>>
-                                    <a href="#<?= $langList[$translation->lang_id]['prefix'] ?>"
-                                       aria-controls="<?= $langList[$translation->lang_id]['prefix'] ?>"
+                                <li role="presentation" <?php echo $j === 1 ? 'class="active"' : '' ?>>
+                                    <a href="#<?php echo $langList[$translation->lang_id]['prefix'] ?>"
+                                       aria-controls="<?php echo $langList[$translation->lang_id]['prefix'] ?>"
                                        role="tab" data-toggle="tab">
-                                        <?= '(' . $langList[$translation->lang_id]['prefix'] . ') ' . $langList[$translation->lang_id]['title'] ?>
+                                        <?php echo '(' . $langList[$translation->lang_id]['prefix'] . ') ' . $langList[$translation->lang_id]['title'] ?>
                                     </a>
                                 </li>
                             <?php }
@@ -62,11 +62,11 @@ foreach ($model->translations as $i => $translation) {
                             if (isset($langList[$translation->lang_id])) {
                                 $j++;
                                 ?>
-                                <div role="tabpanel" class="tab-pane <?= $j == 1 ? 'active' : '' ?>"
-                                     id="<?= $langList[$translation->lang_id]['prefix'] ?>">
+                                <div role="tabpanel" class="tab-pane <?php echo $j == 1 ? 'active' : '' ?>"
+                                     id="<?php echo $langList[$translation->lang_id]['prefix'] ?>">
 
-                                    <?= $form->field($translation, '[' . $i . ']answer')->textarea(); ?>
-                                    <?= $form->field($translation, '[' . $i . ']lang_id')->hiddenInput(['value' => $translation->lang_id])->label(false) ?>
+                                    <?php echo $form->field($translation, '[' . $i . ']answer')->textarea(); ?>
+                                    <?php echo $form->field($translation, '[' . $i . ']lang_id')->hiddenInput(['value' => $translation->lang_id])->label(false) ?>
                                 </div>
                             <?php }
                         } ?>
@@ -78,9 +78,9 @@ foreach ($model->translations as $i => $translation) {
             <div class="box box-default">
                 <div class="box-header with-border">Vote</div>
                 <div class="box-body">
-                    <?= $form->field($model, 'vote_id')->hiddenInput(['value'=> $model->vote_id])->label(false); ?>
-                    <?= $form->field($model, 'sort')->dropDownList([1 => 1, 2 => 2, 3 => 3, 4 => 4, 5 => 5, 6 => 6, 7 => 7, 8 => 8, 9 => 9, 10 => 10]) ?>
-                    <?= Html::submitButton('<i class="fa fa-edit"></i> Изменить', ['class' => 'btn btn-success btn-block']) ?>
+                    <?php echo $form->field($model, 'vote_id')->hiddenInput(['value'=> $model->vote_id])->label(false); ?>
+                    <?php echo $form->field($model, 'sort')->dropDownList([1 => 1, 2 => 2, 3 => 3, 4 => 4, 5 => 5, 6 => 6, 7 => 7, 8 => 8, 9 => 9, 10 => 10]) ?>
+                    <?php echo Html::submitButton('<i class="fa fa-edit"></i> Изменить', ['class' => 'btn btn-success btn-block']) ?>
                 </div>
             </div>
 

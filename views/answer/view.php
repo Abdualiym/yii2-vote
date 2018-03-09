@@ -13,8 +13,8 @@ $langList = \abdualiym\languageClass\Language::langList(Yii::$app->params['langu
 <div class="vote-view">
 
     <p>
-        <?= Html::a('Изменить', ['update', 'id' => $answer->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Удалить', ['delete', 'id' => $answer->id], [
+        <?php echo Html::a('Изменить', ['update', 'id' => $answer->id], ['class' => 'btn btn-primary']) ?>
+        <?php echo Html::a('Удалить', ['delete', 'id' => $answer->id], [
             'class' => 'btn btn-danger pull-right',
             'data' => [
                 'confirm' => 'Вы хотите удалить?',
@@ -22,9 +22,9 @@ $langList = \abdualiym\languageClass\Language::langList(Yii::$app->params['langu
             ]
         ]) ?>
         <?php if ($answer->isActive()): ?>
-            <?= Html::a(Yii::t('app', 'Draft'), ['draft', 'id' => $answer->id], ['class' => 'btn btn-default pull-right', 'data-method' => 'post']) ?>
+            <?php echo Html::a(Yii::t('app', 'Draft'), ['draft', 'id' => $answer->id], ['class' => 'btn btn-default pull-right', 'data-method' => 'post']) ?>
         <?php else: ?>
-            <?= Html::a(Yii::t('app', 'Activate'), ['activate', 'id' => $answer->id], ['class' => 'btn btn-success', 'data-method' => 'post']) ?>
+            <?php echo Html::a(Yii::t('app', 'Activate'), ['activate', 'id' => $answer->id], ['class' => 'btn btn-success', 'data-method' => 'post']) ?>
         <?php endif; ?>
     </p>
 
@@ -34,7 +34,7 @@ $langList = \abdualiym\languageClass\Language::langList(Yii::$app->params['langu
             <div class="box">
                 <div class="box-header with-border">Vote</div>
                 <div class="box-body">
-                    <?= DetailView::widget([
+                    <?php echo DetailView::widget([
                         'model' => $answer,
                         'attributes' => [
                             'sort',
@@ -54,7 +54,7 @@ $langList = \abdualiym\languageClass\Language::langList(Yii::$app->params['langu
             <div class="box">
                 <div class="box-header with-border">Answer</div>
                 <div class="box-body">
-                    <?= DetailView::widget([
+                    <?php echo DetailView::widget([
                         'model' => $answer,
                         'attributes' => [
 //                            'id',
@@ -97,11 +97,11 @@ $langList = \abdualiym\languageClass\Language::langList(Yii::$app->params['langu
                     if (isset($langList[$translation->lang_id])) {
                         $j++;
                         ?>
-                        <li role="presentation" <?= $j === 1 ? 'class="active"' : '' ?>>
-                            <a href="#<?= $langList[$translation->lang_id]['prefix'] ?>"
-                               aria-controls="<?= $langList[$translation->lang_id]['prefix'] ?>"
+                        <li role="presentation" <?php echo $j === 1 ? 'class="active"' : '' ?>>
+                            <a href="#<?php echo $langList[$translation->lang_id]['prefix'] ?>"
+                               aria-controls="<?php echo $langList[$translation->lang_id]['prefix'] ?>"
                                role="tab" data-toggle="tab">
-                                <?= '(' . $langList[$translation->lang_id]['prefix'] . ') ' . $langList[$translation->lang_id]['title'] ?>
+                                <?php echo '(' . $langList[$translation->lang_id]['prefix'] . ') ' . $langList[$translation->lang_id]['title'] ?>
                             </a>
                         </li>
                     <?php }
@@ -118,11 +118,11 @@ $langList = \abdualiym\languageClass\Language::langList(Yii::$app->params['langu
                     if (isset($langList[$translation->lang_id])) {
                         $j++;
                         ?>
-                        <div role="tabpanel" class="tab-pane <?= $j == 1 ? 'active' : '' ?>"
-                             id="<?= $langList[$translation->lang_id]['prefix'] ?>">
+                        <div role="tabpanel" class="tab-pane <?php echo $j == 1 ? 'active' : '' ?>"
+                             id="<?php echo $langList[$translation->lang_id]['prefix'] ?>">
 
 
-                            <?= DetailView::widget([
+                            <?php echo DetailView::widget([
                                 'model' => $translation,
                                 'attributes' => [
                                     'answer:html',

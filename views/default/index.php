@@ -9,7 +9,7 @@ $this->title = 'Голосования';
     <div class="body-content">
 
         <div class="row">
-            <?= \abdualiym\vote\widgets\vote\Vote::widget(); ?>
+            <?php echo \abdualiym\vote\widgets\vote\Vote::widget(); ?>
         </div>
 
     </div>
