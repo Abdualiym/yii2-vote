@@ -4,6 +4,7 @@ namespace abdualiym\vote\services;
 
 class TransactionManager
 {
+
     public function wrap(callable $function)
     {
         $transaction = \Yii::$app->db->beginTransaction();

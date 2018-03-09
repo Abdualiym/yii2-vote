@@ -2,15 +2,18 @@
 
 namespace abdualiym\vote\forms;
 
+use abdualiym\vote\entities\Answer;
 use abdualiym\vote\entities\Results;
 use Yii;
 use yii\base\Model;
+use yii\helpers\ArrayHelper;
 
 /**
  * @property AnswerTranslationForm $translations
  */
 class ResultsForm extends Model
 {
+
     public $answer_id;
     public $question_id;
     public $user_ip;

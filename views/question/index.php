@@ -5,7 +5,7 @@ use yii\helpers\Url;
 
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
-/* @var $model abdualiym\vote\forms\QuestionSearch */
+/* @var $model backend\modules\vote\forms\QuestionSearch */
 
 $this->title = 'Вопросы';
 
@@ -45,9 +45,7 @@ $this->registerCss("
     <a href="<?= Url::toRoute(['question/create'])?>" class="btn btn-default"><i class="fa fa-plus-circle"></i> Добавить вопрос</a>
     <br>
     </br>
-
     <div class="panel-group" id="accordion">
-
         <? foreach ($models  as $model):?>
         <div class="panel panel-default">
             <div class="panel-heading">

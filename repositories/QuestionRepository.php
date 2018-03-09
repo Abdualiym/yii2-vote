@@ -2,7 +2,6 @@
 
 namespace abdualiym\vote\repositories;
 
-
 use abdualiym\vote\entities\Question;
 
 class QuestionRepository

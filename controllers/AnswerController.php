@@ -12,6 +12,7 @@ use yii\filters\VerbFilter;
 use yii\web\Controller;
 
 /**
+ *
  * AnswerController implements the CRUD actions for Answer model.
  */
 class AnswerController extends Controller implements ViewContextInterface
@@ -29,7 +30,6 @@ class AnswerController extends Controller implements ViewContextInterface
         return Yii::getAlias('@vendor/abdualiym/yii2-vote/views/answer');
     }
 
-
     public function behaviors(): array
     {
         return [
@@ -43,7 +43,6 @@ class AnswerController extends Controller implements ViewContextInterface
             ],
         ];
     }
-
 
     public function actionIndex()
     {
@@ -62,7 +61,6 @@ class AnswerController extends Controller implements ViewContextInterface
             'answer' => $this->findModel($id),
         ]);
     }
-
 
     public function actionCreate($vote_id = null)
     {

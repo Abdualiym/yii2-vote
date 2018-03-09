@@ -7,6 +7,7 @@ use Yii;
 use yii\base\Model;
 
 /**
+ *
  */
 class AnswerTranslationForm extends Model
 {

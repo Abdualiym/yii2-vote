@@ -6,7 +6,7 @@ use yii\widgets\DetailView;
 //use shop\helpers\SliderHelper;
 
 /* @var $this yii\web\View */
-/* @var $model abdualiym\vote\entities\Question */
+/* @var $model backend\modules\vote\entities\Question */
 
 $langList = \abdualiym\languageClass\Language::langList(Yii::$app->params['languages'], true);
 ?>
@@ -37,7 +37,7 @@ $langList = \abdualiym\languageClass\Language::langList(Yii::$app->params['langu
                     <?= DetailView::widget([
                         'model' => $question,
                         'attributes' => [
-                            'sort',
+                            'type',
                             [
                                 'attribute' => 'status',
                                 'value' => \abdualiym\vote\helpers\QuestionHelper::statusLabel($question->status),
@@ -49,6 +49,7 @@ $langList = \abdualiym\languageClass\Language::langList(Yii::$app->params['langu
                 </div>
             </div>
         </div>
+
         <div class="col-md-6">
             <div class="box">
                 <div class="box-header with-border">Vote</div>

@@ -5,9 +5,10 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
+
 /* @var $form yii\widgets\ActiveForm */
-/* @var $model abdualiym\vote\forms\QuestionForm */
-/* @var $question abdualiym\vote\entities\Question */
+/* @var $model backend\modules\vote\forms\QuestionForm */
+/* @var $question backend\modules\vote\entities\Question */
 
 $langList = Language::langList(Yii::$app->params['languages'], true);
 foreach ($model->translations as $i => $translation) {
@@ -83,7 +84,7 @@ foreach ($model->translations as $i => $translation) {
             <div class="box box-default">
                 <div class="box-header with-border">Форма создания вопросов</div>
                 <div class="box-body">
-                    <?= $form->field($model, 'sort')->dropDownList([1 => 1, 2 => 2, 3 => 3, 4 => 4, 5 => 5, 6 => 6, 7 => 7, 8 => 8, 9 => 9, 10 => 10]) ?>
+                    <?= $form->field($model, 'type')->dropDownList([1 => 1, 2 => 2, 3 => 3, 4 => 4, 5 => 5, 6 => 6, 7 => 7, 8 => 8, 9 => 9, 10 => 10]) ?>
                     <?= Html::submitButton('Сохранить', ['class' => 'btn btn-success btn-block']) ?>
                 </div>
             </div>

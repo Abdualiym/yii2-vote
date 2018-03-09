@@ -9,6 +9,7 @@ use yii\base\Model;
  */
 class QuestionTranslationForm extends Model
 {
+
     public $lang_id;
     public $question;
 

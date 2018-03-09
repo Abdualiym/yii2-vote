@@ -1,7 +1,7 @@
 <?php
 
 /* @var $this yii\web\View */
-/* @var $model abdualiym\vote\forms\QuestionForm */
+/* @var $model backend\modules\vote\forms\QuestionForm */
 
 $this->title = 'Добавить';
 ?>

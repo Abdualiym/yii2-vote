@@ -60,9 +60,15 @@ $this->registerCss("
 
                 </div>
                 <div class="modal-footer">
-                    <button type="button" id="vote-submit" class="btn btn-success btn-vote">Vote!</button>
-                    <span class="btn btn-primary dropdown-results btn-results" data-for=".results">View Results</span>
-                    <button type="button" class="btn btn-default btn-close" data-dismiss="modal">Close</button>
+                    <button type="button" id="vote-submit" class="btn btn-success btn-vote">
+                        <?= Yii::t('app', 'Vote')?>
+                    </button>
+                    <span class="btn btn-primary dropdown-results btn-results" data-for=".results">
+                        <?= Yii::t('app', 'View Results')?>
+                    </span>
+                    <button type="button" class="btn btn-default btn-close" data-dismiss="modal">
+                        Close
+                    </button>
 
                 </div>
                 </form>
@@ -131,14 +137,18 @@ $this->registerJs(
     });
     $(document).on('click', '#vote-button', function(e){
         $.ajax({
-            url: 'votes/question/listvote',
+            url: 'vote/request/listvote',
             type: 'get',
             dataType: 'json',
             success: function(data, response, textStatus, jqXHR) {
-                 
-                if (data.status === 1) {
-                var vote = data['vote'];
+                    var vote = data['vote'];
                    $('#voteLabel').html(vote);
+                   content = '<div class=\"text-center\"><a id=\"vote-change\" class=\"btn btn-warning\">Change</a></div>'
+                   $('#answers-variant').html(content);
+                 if (data.status === 3) {
+                  $('#vote-submit').remove();
+                 }
+                if (data.status === 1) {
                    var content = '';
                         for(var i in data['answers']){
                          var answer = data['answers'][i].answer;
@@ -147,32 +157,27 @@ $this->registerJs(
                         }
                         $('#answers-variant').html(content);
                 }else {
-                    
+                    $('#vote-submit').remove();
                 }
             }
         });
         return false;
     });
     $(document).on('click', '#vote-submit', function(e){
-        
         var form = $('.vote-check:checked').val();
         $.ajax({
-            url: 'votes/question/vote',
+            url: 'vote/request/vote',
             type: 'post',
             dataType: 'json',
             data: {'selected': form, 'param': token},
             success: function(data, response, textStatus, jqXHR) {
            if(data['status'] === 1){
-           $('#answers-variant').html(' ');
-           $('#vote-accept').show();
-              
-           }else{
-           alert('Your vote not accepted!');
+               $('#answers-variant').html('');
+               $('#vote-accept').show();
+            }else{
+                     $('#vote-submit').remove();
+                }           
            }
-           
-           
-           
-            }
         });
         return false;
     });

@@ -2,7 +2,7 @@
 
 namespace abdualiym\vote\entities;
 
-use common\models\User;
+use backend\models\User;
 use abdualiym\vote\entities\queries\VotesQuery;
 use lhs\Yii2SaveRelationsBehavior\SaveRelationsBehavior;
 use yii\behaviors\BlameableBehavior;
@@ -12,7 +12,6 @@ use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "vote_answers".
- *
  * @property integer $id
  * @property integer $vote_id
  * @property boolean $status

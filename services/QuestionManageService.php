@@ -2,7 +2,6 @@
 
 namespace abdualiym\vote\services;
 
-
 use abdualiym\vote\entities\Question;
 use abdualiym\vote\forms\QuestionForm;
 use abdualiym\vote\repositories\QuestionRepository;
@@ -27,7 +26,7 @@ class QuestionManageService
      */
     public function create(QuestionForm $form): Question
     {
-        $question = Question::create($form->sort);
+        $question = Question::create($form->type);
 
         foreach ($form->translations as $translation) {
             $question->setTranslation($translation->lang_id, $translation->question);
@@ -42,7 +41,7 @@ class QuestionManageService
     {
         $question = $this->questions->get($id);
 
-        $question->edit($form->sort);
+        $question->edit($form->type);
 
         foreach ($form->translations as $translation) {
             $question->setTranslation($translation->lang_id, $translation->question);

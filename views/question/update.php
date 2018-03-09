@@ -1,8 +1,8 @@
 <?php
 
 /* @var $this yii\web\View */
-/* @var $model abdualiym\vote\entities\Question */
-/* @var $question abdualiym\vote\forms\QuestionForm */
+/* @var $model backend\modules\vote\entities\Question */
+/* @var $question backend\modules\vote\forms\QuestionForm */
 
 
 $this->title = 'Update: №-' . $_GET['id'];

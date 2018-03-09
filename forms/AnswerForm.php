@@ -8,6 +8,7 @@ use elisdn\compositeForm\CompositeForm;
 use yii\helpers\ArrayHelper;
 
 /**
+ *
  * @property AnswerTranslationForm $translations
  */
 class AnswerForm extends CompositeForm

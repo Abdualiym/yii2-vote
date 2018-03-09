@@ -58,4 +58,5 @@ Once the extension is installed, simply use it in your code by  :
 
 ```
      <?= \abdualiym\vote\widgets\vote\Vote::widget(); ?>
-```# yii2-vote
+```
+# yii2-vote

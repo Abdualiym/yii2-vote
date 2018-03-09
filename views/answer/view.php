@@ -6,7 +6,7 @@ use yii\widgets\DetailView;
 //use shop\helpers\AnswerHelper;
 
 /* @var $this yii\web\View */
-/* @var $model abdualiym\vote\entities\Answer */
+/* @var $model backend\modules\vote\entities\Answer */
 
 $langList = \abdualiym\languageClass\Language::langList(Yii::$app->params['languages'], true);
 ?>

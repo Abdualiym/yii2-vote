@@ -2,7 +2,6 @@
 
 namespace abdualiym\vote\services;
 
-
 use abdualiym\vote\entities\Answer;
 use abdualiym\vote\forms\AnswerForm;
 use abdualiym\vote\repositories\AnswerRepository;

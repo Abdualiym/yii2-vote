@@ -2,8 +2,8 @@
 
 namespace abdualiym\vote\entities;
 
-use common\models\User;
 use abdualiym\vote\entities\queries\VotesQuery;
+use backend\entities\User;
 use lhs\Yii2SaveRelationsBehavior\SaveRelationsBehavior;
 use yii\behaviors\BlameableBehavior;
 use yii\behaviors\TimestampBehavior;
@@ -12,11 +12,10 @@ use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "vote_votes".
- *
  * @property integer $id
  * @property boolean $created_by
  * @property boolean $updated_by
- * @property integer $sort
+ * @property integer $type
  * @property boolean $created_at
  * @property boolean $updated_at
  * @property QuestionTranslation[] $translations
@@ -26,17 +25,17 @@ class Question extends ActiveRecord
     const STATUS_DRAFT = 0;
     const STATUS_ACTIVE = 1;
 
-    public static function create($sort): self
+    public static function create($type): self
     {
         $question = new static();
-        $question->sort = $sort;
+        $question->type = $type;
         $question->status = self::STATUS_ACTIVE;
         return $question;
     }
 
-    public function edit($sort)
+    public function edit($type)
     {
-        $this->sort = $sort;
+        $this->type = $type;
     }
 
     // Status

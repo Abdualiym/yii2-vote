@@ -5,6 +5,7 @@ use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use abdualiym\vote\entities\Question;
 /**
+ *
  * SlideSearch represents the model behind the search form about `abdualiym\slider\entities\Slide`.
  */
 class QuestionSearch extends Question {
@@ -13,7 +14,7 @@ class QuestionSearch extends Question {
      */
     public function rules() {
         return [
-            [['id', 'sort'], 'integer'],
+            [['id', 'type'], 'integer'],
         ];
     }
     /**
@@ -43,7 +44,7 @@ class QuestionSearch extends Question {
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'sort' => $this->sort,
+            'type' => $this->type,
         ]);
         return $dataProvider;
     }
