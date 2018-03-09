@@ -21,15 +21,9 @@ class RequestController extends Controller
     public function actionIndex()
     {
         return $this->render('index');
-    }/**
- * Logs in a user.
- *
- * @return mixed
- */
-    /**
-     * @param integer $id
-     * @return mixed
-     */
+    }
+
+
     public function actionListvote()
     {
         \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;

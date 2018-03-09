@@ -14,7 +14,7 @@ class m180301_133724_create_vote_answers_table extends Migration
     {
         $this->createTable('vote_answers', [
             'id' => $this->primaryKey(),
-            'vote_id' => $this->integer()->notNull(),
+            'question_id' => $this->integer()->notNull(),
             'status' => $this->integer()->notNull(),
             'sort' => $this->integer()->notNull(),
             'created_by' => $this->integer()->notNull(),
@@ -22,7 +22,7 @@ class m180301_133724_create_vote_answers_table extends Migration
             'created_at' => $this->integer()->notNull(),
             'updated_at' => $this->integer()->notNull(),
         ]);
-        $this->addForeignKey('fk-votes_answers-id', 'vote_answers', 'vote_id', 'vote_votes', 'id', 'CASCADE', 'CASCADE');
+        $this->addForeignKey('fk-votes_answers-id', 'vote_answers', 'question_id', 'vote_questions', 'id', 'CASCADE', 'CASCADE');
     }
 
     /**
