@@ -14,7 +14,7 @@ class QuestionSearch extends Question {
      */
     public function rules() {
         return [
-            [['id', 'sort'], 'integer'],
+            [['id', 'type'], 'integer'],
         ];
     }
     /**
@@ -44,7 +44,7 @@ class QuestionSearch extends Question {
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'sort' => $this->sort,
+            'type' => $this->type,
         ]);
         return $dataProvider;
     }
