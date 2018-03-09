@@ -26,7 +26,7 @@ class AnswerController extends Controller implements ViewContextInterface
 
     public function getViewPath()
     {
-        return Yii::getAlias('@vendor/abdualiym/vote/views/answer');
+        return Yii::getAlias('@vendor/abdualiym/yii2-vote/views/answer');
     }
 
 
