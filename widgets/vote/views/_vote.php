@@ -141,7 +141,10 @@ $this->registerJs(
             type: 'get',
             dataType: 'json',
             success: function(data, response, textStatus, jqXHR) {
-                 
+                  if (data.status === 5) {
+                  var message = data.status;
+                    $('#answers-variant').html('<div class=\"text-center alert-danger\"><h3>'+message+'</h3></div>');
+                  }
                 if (data.status === 1) {
                 var vote = data['vote'];
                    $('#voteLabel').html(vote);

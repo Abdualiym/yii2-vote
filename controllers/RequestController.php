@@ -35,7 +35,7 @@ class RequestController extends Controller
         $vote = Question::find()->active()->one();
         if(!$vote){
             $response['status'] = 5;
-            $response['status'] = Yii::t('app', 'Not detected database or values!');
+            $response['message'] = Yii::t('app', 'Not detected database or values!');
             return $response;
         }
         $response['vote'] = $vote->translations['1']->question; // question text
