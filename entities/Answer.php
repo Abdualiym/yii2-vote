@@ -2,7 +2,7 @@
 
 namespace abdualiym\vote\entities;
 
-use backend\models\User;
+use backend\entity\User;
 use abdualiym\vote\entities\queries\VotesQuery;
 use lhs\Yii2SaveRelationsBehavior\SaveRelationsBehavior;
 use yii\behaviors\BlameableBehavior;
