@@ -1,5 +1,4 @@
 <?php
-
 namespace abdualiym\vote\controllers;
 use Yii;
 use abdualiym\vote\entities\Answer;
@@ -7,7 +6,6 @@ use abdualiym\vote\entities\Question;
 use abdualiym\vote\entities\Results;
 use abdualiym\vote\forms\ResultsForm;
 use yii\web\Controller;
-
 /**
  * Default controller for the `news` module
  */
@@ -32,15 +30,11 @@ class RequestController extends Controller
     public function actionListvote()
     {
         \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
-        if(!$vote = Question::find()->active()->one()){
-            $response['status'] = 5;
-            $response['message'] = Yii::t('app', 'Not detected database or values!');
-            return $response;
-        }
+        $vote = Question::find()->active()->one();
         $response['vote'] = $vote->translations['1']->question; // question text
         $response['vote_id'] = $vote->id; // vote id
         if($vote->resultsUserVote->id){
-            $response['status'] = 1;
+            $response['status'] = 3;
             return $response;
         }
         // cikl all question and compressed to array
@@ -89,5 +83,4 @@ class RequestController extends Controller
             }
         }
     }
-
 }

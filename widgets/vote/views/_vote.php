@@ -67,7 +67,7 @@ $this->registerCss("
                         <?= Yii::t('app', 'View Results')?>
                     </span>
                     <button type="button" class="btn btn-default btn-close" data-dismiss="modal">
-                        <?= Yii::t('app', 'Close')?>
+                        Close
                     </button>
 
                 </div>
@@ -141,13 +141,14 @@ $this->registerJs(
             type: 'get',
             dataType: 'json',
             success: function(data, response, textStatus, jqXHR) {
-                  if (data.status === 5) {
-                  var message = data.status;
-                    $('#answers-variant').html('<div class=\"text-center alert-danger\"><h3>'+message+'</h3></div>');
-                  }
-                if (data.status === 1) {
-                var vote = data['vote'];
+                    var vote = data['vote'];
                    $('#voteLabel').html(vote);
+                   content = '<div class=\"text-center\"><a id=\"vote-change\" class=\"btn btn-warning\">Change</a></div>'
+                   $('#answers-variant').html(content);
+                 if (data.status === 3) {
+                  $('#vote-submit').remove();
+                 }
+                if (data.status === 1) {
                    var content = '';
                         for(var i in data['answers']){
                          var answer = data['answers'][i].answer;
@@ -156,7 +157,7 @@ $this->registerJs(
                         }
                         $('#answers-variant').html(content);
                 }else {
-                    
+                    $('#vote-submit').remove();
                 }
             }
         });
@@ -171,10 +172,10 @@ $this->registerJs(
             data: {'selected': form, 'param': token},
             success: function(data, response, textStatus, jqXHR) {
            if(data['status'] === 1){
-               $('#answers-variant').html(' ');
+               $('#answers-variant').html('');
                $('#vote-accept').show();
-           }else{
-                    alert('Your vote not accepted!');
+            }else{
+                     $('#vote-submit').remove();
                 }           
            }
         });
