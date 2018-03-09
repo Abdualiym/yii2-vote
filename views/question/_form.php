@@ -84,7 +84,7 @@ foreach ($model->translations as $i => $translation) {
             <div class="box box-default">
                 <div class="box-header with-border">Форма создания вопросов</div>
                 <div class="box-body">
-                    <?= $form->field($model, 'sort')->dropDownList([1 => 1, 2 => 2, 3 => 3, 4 => 4, 5 => 5, 6 => 6, 7 => 7, 8 => 8, 9 => 9, 10 => 10]) ?>
+                    <?= $form->field($model, 'type')->dropDownList([1 => 1, 2 => 2, 3 => 3, 4 => 4, 5 => 5, 6 => 6, 7 => 7, 8 => 8, 9 => 9, 10 => 10]) ?>
                     <?= Html::submitButton('Сохранить', ['class' => 'btn btn-success btn-block']) ?>
                 </div>
             </div>
