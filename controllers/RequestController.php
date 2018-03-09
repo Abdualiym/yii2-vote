@@ -32,8 +32,7 @@ class RequestController extends Controller
     public function actionListvote()
     {
         \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
-        $vote = Question::find()->active()->one();
-        if(!$vote){
+        if(!$vote = Question::find()->active()->one()){
             $response['status'] = 5;
             $response['message'] = Yii::t('app', 'Not detected database or values!');
             return $response;
