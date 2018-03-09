@@ -7,6 +7,7 @@ use yii\base\Widget;
 
 class Vote extends Widget
 {
+
     public function run()
     {
         return $this->render('_vote');

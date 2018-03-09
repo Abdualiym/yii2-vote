@@ -131,7 +131,7 @@ $this->registerJs(
     });
     $(document).on('click', '#vote-button', function(e){
         $.ajax({
-            url: 'votes/question/listvote',
+            url: 'vote/request/listvote',
             type: 'get',
             dataType: 'json',
             success: function(data, response, textStatus, jqXHR) {
@@ -157,7 +157,7 @@ $this->registerJs(
         
         var form = $('.vote-check:checked').val();
         $.ajax({
-            url: 'votes/question/vote',
+            url: 'vote/request/vote',
             type: 'post',
             dataType: 'json',
             data: {'selected': form, 'param': token},
@@ -167,12 +167,9 @@ $this->registerJs(
            $('#vote-accept').show();
               
            }else{
-           alert('Your vote not accepted!');
+                    alert('Your vote not accepted!');
+                }           
            }
-           
-           
-           
-            }
         });
         return false;
     });

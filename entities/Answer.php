@@ -12,7 +12,6 @@ use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "vote_answers".
- *
  * @property integer $id
  * @property integer $vote_id
  * @property boolean $status

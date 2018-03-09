@@ -5,6 +5,7 @@ use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use abdualiym\vote\entities\Question;
 /**
+ *
  * SlideSearch represents the model behind the search form about `abdualiym\slider\entities\Slide`.
  */
 class QuestionSearch extends Question {

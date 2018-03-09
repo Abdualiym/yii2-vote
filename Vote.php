@@ -3,7 +3,7 @@
 namespace abdualiym\vote;
 
 /**
- * news module definition class
+ * vote module definition class
  */
 class Vote extends \yii\base\Module
 {

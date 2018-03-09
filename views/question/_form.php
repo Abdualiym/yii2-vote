@@ -5,9 +5,10 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
+
 /* @var $form yii\widgets\ActiveForm */
-/* @var $model abdualiym\vote\forms\QuestionForm */
-/* @var $question abdualiym\vote\entities\Question */
+/* @var $model backend\modules\vote\forms\QuestionForm */
+/* @var $question backend\modules\vote\entities\Question */
 
 $langList = Language::langList(Yii::$app->params['languages'], true);
 foreach ($model->translations as $i => $translation) {

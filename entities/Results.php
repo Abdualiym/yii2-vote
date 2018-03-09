@@ -8,7 +8,9 @@ use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveQuery;
 
 /**
+ *
  * This is the model class for table "vote_results".
+ *
  *
  * @property int $id
  * @property int $answer_id

@@ -7,6 +7,7 @@ use abdualiym\vote\entities\Question;
 use elisdn\compositeForm\CompositeForm;
 
 /**
+ *
  * @property QuestionTranslationForm $translations
  */
 class QuestionForm extends CompositeForm

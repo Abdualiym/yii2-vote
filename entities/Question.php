@@ -12,7 +12,6 @@ use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "vote_votes".
- *
  * @property integer $id
  * @property boolean $created_by
  * @property boolean $updated_by

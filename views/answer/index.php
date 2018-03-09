@@ -5,7 +5,7 @@ use yii\helpers\Html;
 
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
-/* @var $model abdualiym\vote\forms\QuestionSearch */
+/* @var $model backend\modules\vote\forms\QuestionSearch */
 
 $this->title = 'Answer';
 ?>
@@ -23,7 +23,7 @@ $this->title = 'Answer';
             'vote_id',
             [
                 'attribute' => 'id',
-                'value' => function (\abdualiym\vote\entities\Answer $model) {
+                'value' => function (\backend\modules\vote\entities\Answer $model) {
                     return $model->translations[1]->answer;
                 },
                 'label' => 'Name',

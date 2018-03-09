@@ -7,8 +7,8 @@ use yii\helpers\Url;
 
 /* @var $this yii\web\View */
 /* @var $form yii\widgets\ActiveForm */
-/* @var $model abdualiym\vote\forms\AnswerForm */
-/* @var $question abdualiym\vote\entities\Answer */
+/* @var $model backend\modules\vote\forms\AnswerForm */
+/* @var $question backend\modules\vote\entities\Answer */
 
 $langList = Language::langList(Yii::$app->params['languages'], true);
 foreach ($model->translations as $i => $translation) {

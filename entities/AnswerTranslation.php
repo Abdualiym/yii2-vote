@@ -5,10 +5,10 @@ namespace abdualiym\vote\entities;
 use yii\db\ActiveRecord;
 
 /**
+ *
  * @property integer $id
  * @property integer $lang_id
  * @property string $answer
- *
  */
 class AnswerTranslation extends ActiveRecord
 {

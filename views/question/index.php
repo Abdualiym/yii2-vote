@@ -5,7 +5,7 @@ use yii\helpers\Url;
 
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
-/* @var $model abdualiym\vote\forms\QuestionSearch */
+/* @var $model backend\modules\vote\forms\QuestionSearch */
 
 $this->title = 'Вопросы';
 

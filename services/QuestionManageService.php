@@ -2,7 +2,6 @@
 
 namespace abdualiym\vote\services;
 
-
 use abdualiym\vote\entities\Question;
 use abdualiym\vote\forms\QuestionForm;
 use abdualiym\vote\repositories\QuestionRepository;
