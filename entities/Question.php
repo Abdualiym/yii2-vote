@@ -15,7 +15,7 @@ use yii\db\ActiveRecord;
  * @property integer $id
  * @property boolean $created_by
  * @property boolean $updated_by
- * @property integer $sort
+ * @property integer $type
  * @property boolean $created_at
  * @property boolean $updated_at
  * @property QuestionTranslation[] $translations

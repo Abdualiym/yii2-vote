@@ -37,7 +37,7 @@ $langList = \abdualiym\languageClass\Language::langList(Yii::$app->params['langu
                     <?= DetailView::widget([
                         'model' => $question,
                         'attributes' => [
-                            'sort',
+                            'type',
                             [
                                 'attribute' => 'status',
                                 'value' => \abdualiym\vote\helpers\QuestionHelper::statusLabel($question->status),
