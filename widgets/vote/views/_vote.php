@@ -1,5 +1,4 @@
-<?
-$this->registerCss("
+<?php $this->registerCss("
 .modal-body:not(.two-col) { padding:0px }
 .glyphicon { margin-right:5px; }
 .glyphicon-new-window { margin-left:5px; }
@@ -61,10 +60,10 @@ $this->registerCss("
                 </div>
                 <div class="modal-footer">
                     <button type="button" id="vote-submit" class="btn btn-success btn-vote">
-                        <?= Yii::t('app', 'Vote')?>
+                        <?php echo Yii::t('app', 'Vote')?>
                     </button>
                     <span class="btn btn-primary dropdown-results btn-results" data-for=".results">
-                        <?= Yii::t('app', 'View Results')?>
+                        <?php echo Yii::t('app', 'View Results')?>
                     </span>
                     <button type="button" class="btn btn-default btn-close" data-dismiss="modal">
                         Close
@@ -105,8 +104,7 @@ $this->registerCss("
         </div>
     </div>
 </div>
-<?
-$this->registerJs(
+<?php $this->registerJs(
     "$(document).ready(function() {
     var param = $('meta[name=csrf-param]').attr('content');
     var token = $('meta[name=csrf-token]').attr('content');
@@ -167,6 +165,24 @@ $this->registerJs(
         var form = $('.vote-check:checked').val();
         $.ajax({
             url: 'vote/request/vote',
+            type: 'post',
+            dataType: 'json',
+            data: {'selected': form, 'param': token},
+            success: function(data, response, textStatus, jqXHR) {
+           if(data['status'] === 1){
+               $('#answers-variant').html('');
+               $('#vote-accept').show();
+            }else{
+                     $('#vote-submit').remove();
+                }           
+           }
+        });
+        return false;
+    });
+    $(document).on('click', '#vote-change', function(e){
+        var form = $('.vote-check:checked').val();
+        $.ajax({
+            url: 'vote/request/changeVote',
             type: 'post',
             dataType: 'json',
             data: {'selected': form, 'param': token},

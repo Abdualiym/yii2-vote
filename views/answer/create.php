@@ -42,11 +42,11 @@ foreach ($model->translations as $i => $translation) {
                             if (isset($langList[$translation->lang_id])) {
                                 $j++;
                                 ?>
-                                <li role="presentation" <?= $j === 1 ? 'class="active"' : '' ?>>
-                                    <a href="#<?= $langList[$translation->lang_id]['prefix'] ?>"
-                                       aria-controls="<?= $langList[$translation->lang_id]['prefix'] ?>"
+                                <li role="presentation" <?php echo $j === 1 ? 'class="active"' : '' ?>>
+                                    <a href="#<?php echo $langList[$translation->lang_id]['prefix'] ?>"
+                                       aria-controls="<?php echo $langList[$translation->lang_id]['prefix'] ?>"
                                        role="tab" data-toggle="tab">
-                                        <?= '(' . $langList[$translation->lang_id]['prefix'] . ') ' . $langList[$translation->lang_id]['title'] ?>
+                                        <?php echo '(' . $langList[$translation->lang_id]['prefix'] . ') ' . $langList[$translation->lang_id]['title'] ?>
                                     </a>
                                 </li>
                             <?php }
@@ -63,11 +63,11 @@ foreach ($model->translations as $i => $translation) {
                             if (isset($langList[$translation->lang_id])) {
                                 $j++;
                                 ?>
-                                <div role="tabpanel" class="tab-pane <?= $j == 1 ? 'active' : '' ?>"
-                                     id="<?= $langList[$translation->lang_id]['prefix'] ?>">
+                                <div role="tabpanel" class="tab-pane <?php echo $j == 1 ? 'active' : '' ?>"
+                                     id="<?php echo $langList[$translation->lang_id]['prefix'] ?>">
 
-                                    <?= $form->field($translation, '[' . $i . ']answer')->textarea(); ?>
-                                    <?= $form->field($translation, '[' . $i . ']lang_id')->hiddenInput(['value' => $translation->lang_id])->label(false) ?>
+                                    <?php echo $form->field($translation, '[' . $i . ']answer')->textarea(); ?>
+                                    <?php echo $form->field($translation, '[' . $i . ']lang_id')->hiddenInput(['value' => $translation->lang_id])->label(false) ?>
                                 </div>
                             <?php }
                         } ?>
@@ -79,9 +79,9 @@ foreach ($model->translations as $i => $translation) {
             <div class="box box-default">
                 <div class="box-header with-border">Vote</div>
                 <div class="box-body">
-                    <?= $form->field($model, 'vote_id')->hiddenInput(['value'=> $model->vote_id])->label(false); ?>
-                    <?= $form->field($model, 'sort')->dropDownList([1 => 1, 2 => 2, 3 => 3, 4 => 4, 5 => 5, 6 => 6, 7 => 7, 8 => 8, 9 => 9, 10 => 10]) ?>
-                    <?= Html::submitButton('<i class="fa fa-plus-circle"></i> Добавить ещё', ['class' => 'btn btn-success btn-block']) ?>
+                    <?php echo $form->field($model, 'vote_id')->hiddenInput(['value'=> $model->vote_id])->label(false); ?>
+                    <?php echo $form->field($model, 'sort')->dropDownList([1 => 1, 2 => 2, 3 => 3, 4 => 4, 5 => 5, 6 => 6, 7 => 7, 8 => 8, 9 => 9, 10 => 10]) ?>
+                    <?php echo Html::submitButton('<i class="fa fa-plus-circle"></i> Добавить ещё', ['class' => 'btn btn-success btn-block']) ?>
                 </div>
             </div>
 
@@ -101,14 +101,14 @@ foreach ($model->translations as $i => $translation) {
             </tr>
             </thead>
             <tbody>
-            <? foreach ($answers as $item_answers):?>
+            <?php foreach ($answers as $item_answers):?>
                 <tr>
-                    <td><?= $item_answers->id; ?></td>
-                    <td><?= $item_answers->translations[1]->answer; ?></td>
-                    <td><?= $item_answers->sort; ?></td>
+                    <td><?php echo $item_answers->id; ?></td>
+                    <td><?php echo $item_answers->translations[1]->answer; ?></td>
+                    <td><?php echo $item_answers->sort; ?></td>
                     <td>
-                        <a href="<?= Url::toRoute(['view', 'id' => $item_answers->id])?>" class="btn btn-info"><i class="fa fa-eye"></i></a> |
-                        <a href="<?= Url::toRoute(['update', 'id' => $item_answers->id])?>" class="btn btn-warning"><i class="fa fa-edit"></i></a> |
+                        <a href="<?php echo Url::toRoute(['view', 'id' => $item_answers->id])?>" class="btn btn-info"><i class="fa fa-eye"></i></a> |
+                        <a href="<?php echo Url::toRoute(['update', 'id' => $item_answers->id])?>" class="btn btn-warning"><i class="fa fa-edit"></i></a> |
 
                         <?=Html::a('delete', 'delete?id='.$item_answers->id, [
                             'class' => 'btn btn-danger',
@@ -121,7 +121,7 @@ foreach ($model->translations as $i => $translation) {
 
                     </td>
                 </tr>
-            <? endforeach; ?>
+            <?php endforeach; ?>
 
             </tbody>
         </table>

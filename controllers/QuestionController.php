@@ -49,8 +49,7 @@ class QuestionController extends Controller implements ViewContextInterface
             ],
         ];
     }
-
-
+    
     public function actionIndex()
     {
         $query = Question::find()->orderBy(['created_at' => SORT_DESC]);

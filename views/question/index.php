@@ -39,30 +39,29 @@ $this->registerCss("
     transform: rotate(90deg); */
     color: #454444;
 }");
-
 ?>
 <div class="col-md-6">
-    <a href="<?= Url::toRoute(['question/create'])?>" class="btn btn-default"><i class="fa fa-plus-circle"></i> Добавить вопрос</a>
+    <a href="<?php echo Url::toRoute(['question/create'])?>" class="btn btn-default"><i class="fa fa-plus-circle"></i> Добавить вопрос</a>
     <br>
     </br>
     <div class="panel-group" id="accordion">
-        <? foreach ($models  as $model):?>
+        <?php foreach ($models  as $model):?>
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h2 class="panel-title">
-                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseFour<?= $model->id; ?>">
-                        <?= $model->id; ?> | <?= $model->translations['1']->question; ?>
+                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseFour<?php echo $model->id; ?>">
+                        <?php echo $model->id; ?> | <?php echo $model->translations['1']->question; ?>
                     </a>
                 </h2>
             </div>
-            <div id="collapseFour<?= $model->id; ?>" class="panel-collapse collapse">
+            <div id="collapseFour<?php echo $model->id; ?>" class="panel-collapse collapse">
                 <div class="panel-body">
 
-                    <? foreach ($model->voteAnswers as $items):?>
-                        <h3 style="font-size: 16px" ><?= $items->id; ?> | <?= $items->translations[1]->answer; ?>
+                    <?php foreach ($model->voteAnswers as $items):?>
+                        <h3 style="font-size: 16px" ><?php echo $items->id; ?> | <?php echo $items->translations[1]->answer; ?>
                             <span class="pull-right">
-                            <a href="<?= Url::toRoute(['answer/view', 'id' => $items->id])?>" class="btn btn-info"><i class="fa fa-eye"></i></a> |
-                            <a href="<?= Url::toRoute(['answer/update', 'id' => $items->id])?>" class="btn btn-warning"><i class="fa fa-edit"></i></a> |
+                            <a href="<?php echo Url::toRoute(['answer/view', 'id' => $items->id])?>" class="btn btn-info"><i class="fa fa-eye"></i></a> |
+                            <a href="<?php echo Url::toRoute(['answer/update', 'id' => $items->id])?>" class="btn btn-warning"><i class="fa fa-edit"></i></a> |
                                 <?=Html::a('delete', 'answer/delete?id='.$items->id, [
                                     'class' => 'btn btn-danger',
                                     'data' => [
@@ -74,15 +73,15 @@ $this->registerCss("
                             </span>
                         </h3>
                         <hr>
-                    <? endforeach; ?>
-                    <? if($model->voteAnswers == null):?>
+                    <?php endforeach; ?>
+                    <?php if($model->voteAnswers == null):?>
                         <span>Нет ответов!</span><hr>
-                   <? endif; ?>
-                    <a href="<?= Url::toRoute(['answer/create', 'vote_id' => $model->id])?>" class="btn btn-info"><i class="fa fa-plus-circle"></i> Добавить ответ</a>
+                   <?php endif; ?>
+                    <a href="<?php echo Url::toRoute(['answer/create', 'vote_id' => $model->id])?>" class="btn btn-info"><i class="fa fa-plus-circle"></i> Добавить ответ</a>
                 </div>
             </div>
         </div>
-        <? endforeach; ?>
+        <?php endforeach; ?>
 
     </div>
 </div>

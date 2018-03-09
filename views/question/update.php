@@ -9,7 +9,7 @@ $this->title = 'Update: №-' . $_GET['id'];
 ?>
 <div class="vote-update">
 
-    <?= $this->render('_form', [
+    <?php echo $this->render('_form', [
         'model' => $model,
         'question' => $question,
     ]) ?>
