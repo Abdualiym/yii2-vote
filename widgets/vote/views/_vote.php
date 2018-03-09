@@ -154,7 +154,6 @@ $this->registerJs(
         return false;
     });
     $(document).on('click', '#vote-submit', function(e){
-        
         var form = $('.vote-check:checked').val();
         $.ajax({
             url: 'vote/request/vote',
@@ -163,9 +162,8 @@ $this->registerJs(
             data: {'selected': form, 'param': token},
             success: function(data, response, textStatus, jqXHR) {
            if(data['status'] === 1){
-           $('#answers-variant').html(' ');
-           $('#vote-accept').show();
-              
+               $('#answers-variant').html(' ');
+               $('#vote-accept').show();
            }else{
                     alert('Your vote not accepted!');
                 }           
