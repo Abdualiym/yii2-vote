@@ -30,7 +30,7 @@ class AnswerSearch extends Answer {
      * @return ActiveDataProvider
      */
     public function search($params) {
-        $query = Answer::find()->groupBy('vote_id');
+        $query = Answer::find()->groupBy('question_id');
         // add conditions that should always apply here
         $dataProvider = new ActiveDataProvider([
             'query' => $query,

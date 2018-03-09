@@ -7,7 +7,7 @@ use yii\db\ActiveRecord;
 /**
  * @property integer $id
  * @property integer $lang_id
- * @property string $vote_id
+ * @property string $question_id
  * @property string $question
  *
  */
@@ -43,6 +43,6 @@ class QuestionTranslation extends ActiveRecord
     // this table
     public static function tableName(): string
     {
-        return '{{%vote_questions}}';
+        return '{{%vote_question_translations}}';
     }
 }

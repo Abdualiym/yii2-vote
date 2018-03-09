@@ -14,14 +14,14 @@ use yii\helpers\ArrayHelper;
 class AnswerForm extends CompositeForm
 {
     public $sort;
-    public $vote_id;
+    public $question_id;
     private $_answer;
 
     public function __construct(Answer $answer = null, $config = [])
     {
         if ($answer) {
             $this->sort = $answer->sort;
-            $this->vote_id = $answer->vote_id;
+            $this->question_id = $answer->question_id;
             $this->translations = array_map(function (array $language) use ($answer) {
                 return new AnswerTranslationForm($answer->getTranslation($language['id']));
             }, Language::langList(\Yii::$app->params['languages']));
@@ -38,7 +38,7 @@ class AnswerForm extends CompositeForm
     {
         return [
             [['sort'], 'required'],
-            [['sort', 'vote_id'], 'integer'],
+            [['sort', 'question_id'], 'integer'],
         ];
     }
 
@@ -55,7 +55,7 @@ class AnswerForm extends CompositeForm
         return [
             'sort' => 'Порядок',
             'status' => 'Статус',
-            'vote_id' => 'Вопрос',
+            'question_id' => 'Вопрос',
             'created_at' => 'Дата добавления',
             'updated_at' => 'Дата обновления',
             'created_by' => 'Добавил',

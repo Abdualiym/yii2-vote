@@ -1,6 +1,5 @@
 <?php
-namespace backend\entities;
-
+namespace abdualiym\vote\entities\entities;
 use Yii;
 use yii\base\NotSupportedException;
 use yii\behaviors\TimestampBehavior;
@@ -50,7 +49,7 @@ class User extends ActiveRecord implements IdentityInterface
      */
     public static function tableName()
     {
-        return '{{%users}}';
+        return '{{%user}}';
     }
 
     /**

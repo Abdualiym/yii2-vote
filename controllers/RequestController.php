@@ -10,7 +10,9 @@ use Yii;
 use yii\web\Controller;
 
 /**
+ *
  * Default controller for the `news` module
+ *
  */
 class RequestController extends Controller
 {
@@ -29,7 +31,7 @@ class RequestController extends Controller
         \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
         $vote = Question::find()->active()->one();
         $response['vote'] = $vote->translations['1']->question; // question text
-        $response['vote_id'] = $vote->id; // vote id
+        $response['question_id'] = $vote->id; // vote id
         if (isset($vote->resultsUserVote) && $vote->resultsUserVote->id) {
             $response['status'] = 3;
             return $response;
@@ -56,8 +58,8 @@ class RequestController extends Controller
         if (Yii::$app->request->isAjax) {
             $selected_id = Yii::$app->request->post('selected');
             if (isset($selected_id) || !empty($selected_id)) {
-                $vote = Answer::findOne($selected_id)->vote_id;
-                $answers = Answer::find()->select('id')->where(['vote_id' => $vote])->all();
+                $vote = Answer::findOne($selected_id)->question_id;
+                $answers = Answer::find()->select('id')->where(['question_id' => $vote])->all();
                 foreach ($answers as $items) {
                     $item['id'] = $items->id;
                     $item['count'] = Results::find()->where(['answer_id' => $items->id])->count();

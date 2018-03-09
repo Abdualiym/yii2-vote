@@ -20,7 +20,7 @@ $this->title = 'Answer';
         'columns' => [
 //            ['class' => 'yii\grid\SerialColumn'],
             'id',
-            'vote_id',
+            'question_id',
             [
                 'attribute' => 'id',
                 'value' => function (\backend\modules\vote\entities\Answer $model) {

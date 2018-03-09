@@ -2,7 +2,7 @@
 
 namespace abdualiym\vote\entities;
 
-use backend\entities\User;
+use abdualiym\vote\entities\entities\User;
 use abdualiym\vote\entities\queries\VotesQuery;
 use lhs\Yii2SaveRelationsBehavior\SaveRelationsBehavior;
 use yii\behaviors\BlameableBehavior;
@@ -13,7 +13,7 @@ use yii\db\ActiveRecord;
 /**
  * This is the model class for table "vote_answers".
  * @property integer $id
- * @property integer $vote_id
+ * @property integer $question_id
  * @property boolean $status
  * @property boolean $sort
  * @property boolean $created_by
@@ -28,11 +28,11 @@ class Answer extends ActiveRecord
     const STATUS_ACTIVE = 1;
     const STATUS_ARCHIVE = 2;
 
-    public static function create($sort, $vote_id): self
+    public static function create($sort, $question_id): self
     {
         $answer = new static();
         $answer->sort = $sort;
-        $answer->vote_id = $vote_id;
+        $answer->question_id = $question_id;
         $answer->status = self::STATUS_ACTIVE;
         return $answer;
     }

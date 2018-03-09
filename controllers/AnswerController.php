@@ -54,7 +54,6 @@ class AnswerController extends Controller implements ViewContextInterface
         ]);
     }
 
-
     public function actionView($id)
     {
         return $this->render('view', [
@@ -62,11 +61,11 @@ class AnswerController extends Controller implements ViewContextInterface
         ]);
     }
 
-    public function actionCreate($vote_id = null)
+    public function actionCreate($question_id)
     {
         $form = new AnswerForm();
-        $answers = Answer::find()->where(['vote_id' => $vote_id])->all();
-        $form->vote_id = $vote_id;
+        $answers = Answer::find()->where(['question_id' => $question_id])->all();
+        $form->question_id = $question_id;
         if ($form->load(Yii::$app->request->post()) && $form->validate()) {
             try {
                 $this->service->create($form);

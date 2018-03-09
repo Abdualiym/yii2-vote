@@ -77,7 +77,7 @@ $this->registerCss("
                     <?php if($model->voteAnswers == null):?>
                         <span>Нет ответов!</span><hr>
                    <?php endif; ?>
-                    <a href="<?php echo Url::toRoute(['answer/create', 'vote_id' => $model->id])?>" class="btn btn-info"><i class="fa fa-plus-circle"></i> Добавить ответ</a>
+                    <a href="<?php echo Url::toRoute(['answer/create', 'question_id' => $model->id])?>" class="btn btn-info"><i class="fa fa-plus-circle"></i> Добавить ответ</a>
                 </div>
             </div>
         </div>
