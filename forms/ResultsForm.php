@@ -24,7 +24,7 @@ class ResultsForm extends Model
     public function rules()
     {
         return [
-            [['answer_id', 'user_ip', 'created_at', 'updated_at'], 'required'],
+            [['answer_id', 'user_ip'], 'required'],
             [['user_ip'], 'ip'],
         ];
     }
