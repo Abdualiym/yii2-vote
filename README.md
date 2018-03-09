@@ -10,13 +10,13 @@ The preferred way to install this extension is through [composer](http://getcomp
 Either run
 
 ```
-php composer.phar require --prefer-dist abdualiym/yii2-vote "dev-master"
+php composer.phar require --prefer-dist abdualiym/yii2-vote "*"
 ```
 
 or add
 
 ```
-"abdualiym/yii2-vote": "dev-master"
+"abdualiym/yii2-vote": "*"
 ```
 
 to the require section of your `composer.json` file.
@@ -31,6 +31,21 @@ Config
     ],
     
 ```
+
+- add to backend config:
+```php
+'controllerMap' => [
+    'answer' => [
+        'class' => 'abdualiym\vote\controllers\AnswerController',
+    ],
+    'question' => [
+        'class' => 'abdualiym\vote\controllers\QuestionController',
+    ],
+],
+```
+
+
+
 Params
 ```
     'languages' => ['ru', 'en'],
