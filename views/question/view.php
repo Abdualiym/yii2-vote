@@ -49,7 +49,7 @@ $langList = \abdualiym\languageClass\Language::langList(Yii::$app->params['langu
                 </div>
             </div>
         </div>
-        
+
         <div class="col-md-6">
             <div class="box">
                 <div class="box-header with-border">Vote</div>

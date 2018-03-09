@@ -45,9 +45,7 @@ $this->registerCss("
     <a href="<?= Url::toRoute(['question/create'])?>" class="btn btn-default"><i class="fa fa-plus-circle"></i> Добавить вопрос</a>
     <br>
     </br>
-
     <div class="panel-group" id="accordion">
-
         <? foreach ($models  as $model):?>
         <div class="panel panel-default">
             <div class="panel-heading">
