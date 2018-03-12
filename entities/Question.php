@@ -25,6 +25,10 @@ class Question extends ActiveRecord
     const STATUS_DRAFT = 0;
     const STATUS_ACTIVE = 1;
 
+    const TYPE_STRING = 1;
+    const TYPE_INTEGER = 2;
+    const TYPE_FLOAT = 3;
+
     public static function create($type): self
     {
         $question = new static();
@@ -112,12 +116,12 @@ class Question extends ActiveRecord
 
     public function getTranslations(): ActiveQuery
     {
-        return $this->hasMany(QuestionTranslation::class, ['vote_id' => 'id']);
+        return $this->hasMany(QuestionTranslation::class, ['question_id' => 'id']);
     }
 
     public function getVoteAnswers(): ActiveQuery
     {
-        return $this->hasMany(Answer::class, ['vote_id' => 'id']);
+        return $this->hasMany(Answer::class, ['question_id' => 'id']);
     }
 
     public function getResultsUserVote(): ActiveQuery
@@ -133,14 +137,14 @@ class Question extends ActiveRecord
 
     public function VoteQuestion($id)
     {
-        return QuestionTranslation::find()->where(['vote_id' => $id, 'lang_id' => \Yii::$app->language])->one();
+        return QuestionTranslation::find()->where(['question_id' => $id, 'lang_id' => 1])->one();
     }
 
     // table name
 
     public static function tableName()
     {
-        return 'vote_votes';
+        return 'vote_questions';
     }
 
     //behaviors

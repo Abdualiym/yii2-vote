@@ -1,6 +1,5 @@
 <?php
-namespace backend\entities;
-
+namespace abdualiym\vote\entities\entities;
 use Yii;
 use yii\base\NotSupportedException;
 use yii\behaviors\TimestampBehavior;

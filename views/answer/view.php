@@ -6,9 +6,14 @@ use yii\widgets\DetailView;
 //use shop\helpers\AnswerHelper;
 
 /* @var $this yii\web\View */
-/* @var $model backend\modules\vote\entities\Answer */
+/* @var $model abdualiym\vote\entities\Answer */
 
 $langList = \abdualiym\languageClass\Language::langList(Yii::$app->params['languages'], true);
+
+$this->title = $answer->translations[1]->answer;
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Questions'), 'url' => ['/vote/question/index']];
+$this->params['breadcrumbs'][] = ['label' => $answer->question_id, 'url' => ['/vote/question/view', 'id' => $answer->question_id]];
+$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="vote-view">
 
@@ -38,7 +43,14 @@ $langList = \abdualiym\languageClass\Language::langList(Yii::$app->params['langu
                         'model' => $answer,
                         'attributes' => [
                             'sort',
-                            'vote_id',
+                            [
+                                'attribute' => 'question_id',
+                                'value' => function ($model) {
+                                    return $model->question->translations[1]->question;
+                                },
+                                'format' => 'raw',
+                                'label' => Yii::t('app', 'Question'),
+                            ],
                             [
                                 'attribute' => 'status',
                                 'value' => \abdualiym\vote\helpers\AnswerHelper::statusLabel($answer->status),

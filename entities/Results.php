@@ -51,14 +51,21 @@ class Results extends \yii\db\ActiveRecord
         return $this->hasOne(Question::className(), ['id' => 'question_id']);
     }
 
-    public function create($answer_id, $vote): self
+    public function create($answer_id, $question_id): self
     {
-        $this->user_ip = Yii::$app->getRequest()->getUserIP();
-        $this->answer_id = $answer_id;
-        $this->question_id = $vote;
-        $this->user_id = Yii::$app->user->id;
-        return $this->save() ? $this : null;
+        $result = new static();
+        $result->answer_id = $answer_id;
+        $result->question_id = $question_id;
+        $result->user_ip = Yii::$app->getRequest()->getUserIP();
+        $result->user_id = Yii::$app->user->id;
+        return $result;
     }
+
+    public function edit($answer_id)
+    {
+        $this->answer_id = $answer_id;
+    }
+
     // behaviors
     public function behaviors(): array
     {

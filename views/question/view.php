@@ -9,11 +9,17 @@ use yii\widgets\DetailView;
 /* @var $model backend\modules\vote\entities\Question */
 
 $langList = \abdualiym\languageClass\Language::langList(Yii::$app->params['languages'], true);
+
+
+$this->title = $question->translations[1]->question;
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Question'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="vote-view">
 
     <p>
         <?php echo Html::a('Изменить', ['update', 'id' => $question->id], ['class' => 'btn btn-primary']) ?>
+        <?php echo Html::a('Добавить ответ', ['answer/create', 'question_id' => $question->id], ['class' => 'btn btn-default']) ?>
         <?php echo Html::a('Удалить', ['delete', 'id' => $question->id], [
             'class' => 'btn btn-danger pull-right',
             'data' => [
@@ -32,7 +38,7 @@ $langList = \abdualiym\languageClass\Language::langList(Yii::$app->params['langu
     <div class="row">
         <div class="col-md-6">
             <div class="box">
-                <div class="box-header with-border">Vote</div>
+                <div class="box-header with-border"><?= Yii::t('app', 'Question')?></div>
                 <div class="box-body">
                     <?php echo DetailView::widget([
                         'model' => $question,
@@ -52,7 +58,7 @@ $langList = \abdualiym\languageClass\Language::langList(Yii::$app->params['langu
 
         <div class="col-md-6">
             <div class="box">
-                <div class="box-header with-border">Vote</div>
+                <div class="box-header with-border"><?= Yii::t('app', 'Question')?></div>
                 <div class="box-body">
                     <?php echo DetailView::widget([
                         'model' => $question,

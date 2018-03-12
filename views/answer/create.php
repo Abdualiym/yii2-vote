@@ -23,6 +23,10 @@ foreach ($model->translations as $i => $translation) {
         }
     }
 }
+
+$this->title = 'Create answer';
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Answer'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = $this->title;
 ?>
 
 <div class="slide-form">
@@ -79,7 +83,7 @@ foreach ($model->translations as $i => $translation) {
             <div class="box box-default">
                 <div class="box-header with-border">Vote</div>
                 <div class="box-body">
-                    <?php echo $form->field($model, 'vote_id')->hiddenInput(['value'=> $model->vote_id])->label(false); ?>
+                    <?php echo $form->field($model, 'question_id')->hiddenInput(['value'=> $model->question_id])->label(false); ?>
                     <?php echo $form->field($model, 'sort')->dropDownList([1 => 1, 2 => 2, 3 => 3, 4 => 4, 5 => 5, 6 => 6, 7 => 7, 8 => 8, 9 => 9, 10 => 10]) ?>
                     <?php echo Html::submitButton('<i class="fa fa-plus-circle"></i> Добавить ещё', ['class' => 'btn btn-success btn-block']) ?>
                 </div>

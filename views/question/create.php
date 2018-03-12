@@ -3,7 +3,10 @@
 /* @var $this yii\web\View */
 /* @var $model backend\modules\vote\forms\QuestionForm */
 
-$this->title = 'Добавить';
+
+$this->title = 'Create question';
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Question'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="question-create">
 

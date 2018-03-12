@@ -7,7 +7,10 @@ use yii\helpers\Html;
 /* @var $dataProvider yii\data\ActiveDataProvider */
 /* @var $model backend\modules\vote\forms\QuestionSearch */
 
-$this->title = 'Answer';
+
+$this->title = Yii::t('app', 'Answers');
+
+$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="answer-index">
 
@@ -20,10 +23,10 @@ $this->title = 'Answer';
         'columns' => [
 //            ['class' => 'yii\grid\SerialColumn'],
             'id',
-            'vote_id',
+            'question_id',
             [
                 'attribute' => 'id',
-                'value' => function (\backend\modules\vote\entities\Answer $model) {
+                'value' => function (\abdualiym\vote\entities\Answer $model) {
                     return $model->translations[1]->answer;
                 },
                 'label' => 'Name',
