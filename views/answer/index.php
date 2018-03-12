@@ -7,7 +7,10 @@ use yii\helpers\Html;
 /* @var $dataProvider yii\data\ActiveDataProvider */
 /* @var $model backend\modules\vote\forms\QuestionSearch */
 
-$this->title = 'Answer';
+
+$this->title = Yii::t('app', 'Answers');
+
+$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="answer-index">
 

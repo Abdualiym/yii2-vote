@@ -42,7 +42,7 @@ class QuestionForm extends CompositeForm
     public function attributeLabels()
     {
         return [
-            'type' => 'Порядок',
+            'type' => 'Тип запроса',
             'status' => 'Статус',
             'created_at' => 'Дата добавления',
             'updated_at' => 'Дата обновления',

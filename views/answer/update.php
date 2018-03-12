@@ -22,6 +22,10 @@ foreach ($model->translations as $i => $translation) {
         }
     }
 }
+
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Answer'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => $answer->translations[1]->question, 'url' => ['view', 'id' => $answer->id]];
+$this->params['breadcrumbs'][] = 'Update';
 ?>
 
 <div class="slide-form">

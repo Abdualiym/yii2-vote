@@ -9,6 +9,10 @@ use yii\widgets\DetailView;
 /* @var $model backend\modules\vote\entities\Answer */
 
 $langList = \abdualiym\languageClass\Language::langList(Yii::$app->params['languages'], true);
+
+$this->title = $model->translations[1]->question;
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Answer'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="vote-view">
 

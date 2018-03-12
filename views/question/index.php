@@ -51,7 +51,7 @@ $this->registerCss("
 
 ");
 ?>
-<div class="col-md-7">
+<div class="col-md-8">
     <a href="<?php echo Url::toRoute(['question/create'])?>" class="btn btn-default"><i class="fa fa-plus-circle"></i> Добавить вопрос</a>
     <br>
     </br>
