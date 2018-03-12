@@ -5,6 +5,7 @@ namespace abdualiym\vote\forms;
 use abdualiym\languageClass\Language;
 use abdualiym\vote\entities\Question;
 use elisdn\compositeForm\CompositeForm;
+use abdualiym\vote\helpers\QuestionHelper;
 
 /**
  *
@@ -35,7 +36,6 @@ class QuestionForm extends CompositeForm
     {
         return [
             [['type'], 'required'],
-            [['type'], 'integer'],
         ];
     }
 
@@ -49,6 +49,12 @@ class QuestionForm extends CompositeForm
             'created_by' => 'Добавил',
             'updated_by' => 'Обновил',
         ];
+    }
+
+
+    public function typesList(): array
+    {
+        return QuestionHelper::typeList();
     }
 
     public function internalForms()

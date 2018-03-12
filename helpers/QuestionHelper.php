@@ -17,6 +17,20 @@ class QuestionHelper
         ];
     }
 
+    public static function typeList(): array
+    {
+        return [
+            Question::TYPE_STRING => \Yii::t('app', 'Simple'),
+            Question::TYPE_INTEGER => \Yii::t('app', 'Private'),
+            Question::TYPE_FLOAT => \Yii::t('app', 'Public'),
+        ];
+    }
+
+    public static function typeName($type): string
+    {
+        return ArrayHelper::getValue(self::typeList(), $type);
+    }
+
     public static function statusName($status): string
     {
         return ArrayHelper::getValue(self::statusList(), $status);

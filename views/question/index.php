@@ -2,7 +2,6 @@
 
 use yii\helpers\Html;
 use yii\helpers\Url;
-
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 /* @var $model backend\modules\vote\forms\QuestionSearch */
@@ -10,7 +9,6 @@ use yii\helpers\Url;
 $this->title = Yii::t('app', 'Questions');
 
 $this->params['breadcrumbs'][] = $this->title;
-
 $this->registerCss("
 .faqHeader {
     font-size: 27px;
@@ -50,6 +48,7 @@ $this->registerCss("
 }
 
 ");
+
 ?>
 <div class="col-md-8">
     <a href="<?php echo Url::toRoute(['question/create'])?>" class="btn btn-default"><i class="fa fa-plus-circle"></i> Добавить вопрос</a>
