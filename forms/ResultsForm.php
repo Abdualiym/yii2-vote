@@ -31,21 +31,11 @@ class ResultsForm extends Model
 
     public function validateDuplicate($answer_id)
     {
-
         $result = Results::find()->where(['answer_id' => $answer_id, 'user_ip' => Yii::$app->getRequest()->getUserIP()])->count();
-        if($result < 1){
-            return true;
-        }else{
-            return null;
-        }
+        return $result == 0 ? true : null;
+
     }
 
-
-    public function validateForm($resultForm): self
-    {
-        $result = new Results();
-        $result->create($resultForm) ? $result : null;
-    }
 
     /**
      * @inheritdoc
