@@ -6,6 +6,7 @@ use abdualiym\vote\entities\Answer;
 use abdualiym\vote\entities\Question;
 use abdualiym\vote\entities\Results;
 use abdualiym\vote\forms\ResultsForm;
+use abdualiym\vote\services\ResultsManageService;
 use Yii;
 use yii\web\Controller;
 
@@ -14,8 +15,17 @@ use yii\web\Controller;
  * Default controller for the `news` module
  *
  */
-class FrontendController extends Controller
+class VotesController extends Controller
 {
+
+    private $service;
+
+    public function __construct($id, $module, ResultsManageService $service, $config = [])
+    {
+        parent::__construct($id, $module, $config);
+        $this->service = $service;
+    }
+
     /**
      * Renders the index view for the module
      * @return string
@@ -25,7 +35,7 @@ class FrontendController extends Controller
         return $this->render('index');
     }
 
-
+//generate one question and list answers
     public function actionListvote()
     {
         \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
@@ -50,6 +60,7 @@ class FrontendController extends Controller
     /**
      * @param integer $id
      * @return mixed
+     * save user answer and reponse results
      */
     public function actionVote()
     {
@@ -65,16 +76,24 @@ class FrontendController extends Controller
                     $item['count'] = Results::find()->where(['answer_id' => $items->id])->count();
                     $res[] = $item;
                 }
+
                 if ($form->validateDuplicate($selected_id)) {
-                    $result = new Results();
-                    if ($result->create($selected_id, $vote)) {
-                        $response[] = $res;
+                    $resultForm = new ResultsForm();
+                    $resultForm->question_id = $vote;
+                    $resultForm->answer_id = $selected_id;
+                    $resultForm->user_ip = Yii::$app->getRequest()->getUserIP();
+                    $resultForm->user_id = Yii::$app->user->id;
+                    try {
+                        $this->service->create($resultForm);
                         $response['status'] = 1;
+                        $response['message'] = Yii::t('app', 'Vote successfully accept!');
                         return $response;
-                    } else {
+                    } catch (\DomainException $e) {
                         $response['status'] = 0;
+                        $response['message'] = Yii::t('app', 'Vote successfully accept!');
                         return $response;
                     }
+
                 } else {
                     $response['count'] = $res;
                     $response['status'] = "duplicate";

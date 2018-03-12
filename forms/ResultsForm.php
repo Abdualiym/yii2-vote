@@ -24,19 +24,27 @@ class ResultsForm extends Model
     public function rules()
     {
         return [
-            [['answer_id', 'user_ip'], 'required'],
+            [['answer_id', 'user_ip', 'question_id'], 'required'],
             [['user_ip'], 'ip'],
         ];
     }
 
     public function validateDuplicate($answer_id)
     {
+
         $result = Results::find()->where(['answer_id' => $answer_id, 'user_ip' => Yii::$app->getRequest()->getUserIP()])->count();
         if($result < 1){
             return true;
         }else{
             return null;
         }
+    }
+
+
+    public function validateForm($resultForm): self
+    {
+        $result = new Results();
+        $result->create($resultForm) ? $result : null;
     }
 
     /**
