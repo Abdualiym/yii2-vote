@@ -14,7 +14,7 @@ use yii\web\Controller;
  * Default controller for the `news` module
  *
  */
-class RequestController extends Controller
+class FrontendController extends Controller
 {
     /**
      * Renders the index view for the module

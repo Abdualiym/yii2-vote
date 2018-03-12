@@ -135,7 +135,7 @@
     });
     $(document).on('click', '#vote-button', function(e){
         $.ajax({
-            url: 'vote/request/listvote',
+            url: 'vote/frontend/listvote',
             type: 'get',
             dataType: 'json',
             success: function(data, response, textStatus, jqXHR) {
@@ -164,7 +164,7 @@
     $(document).on('click', '#vote-submit', function(e){
         var form = $('.vote-check:checked').val();
         $.ajax({
-            url: 'vote/request/vote',
+            url: 'vote/frontend/vote',
             type: 'post',
             dataType: 'json',
             data: {'selected': form, 'param': token},
@@ -182,7 +182,7 @@
     $(document).on('click', '#vote-change', function(e){
         var form = $('.vote-check:checked').val();
         $.ajax({
-            url: 'vote/request/changeVote',
+            url: 'vote/frontend/changeVote',
             type: 'post',
             dataType: 'json',
             data: {'selected': form, 'param': token},
