@@ -3,7 +3,7 @@
 namespace abdualiym\vote\entities;
 
 use abdualiym\vote\entities\queries\VotesQuery;
-use backend\entities\User;
+use abdualiym\vote\entities\entities\User;
 use lhs\Yii2SaveRelationsBehavior\SaveRelationsBehavior;
 use yii\behaviors\BlameableBehavior;
 use yii\behaviors\TimestampBehavior;
