@@ -69,8 +69,8 @@ class VotesController extends Controller
         if (Yii::$app->request->isAjax) {
             $selected_id = Yii::$app->request->post('selected');
             if (isset($selected_id) || !empty($selected_id)) {
-                $vote = Answer::findOne($selected_id)->question_id;
-                $answers = Answer::find()->select('id')->where(['question_id' => $vote])->all();
+                $question_id = Answer::findOne($selected_id)->question_id;
+                $answers = Answer::find()->select('id')->where(['question_id' => $question_id])->all();
                 foreach ($answers as $items) {
                     $item['id'] = $items->id;
                     $item['count'] = Results::find()->where(['answer_id' => $items->id])->count();
@@ -79,10 +79,8 @@ class VotesController extends Controller
 
                 if ($form->validateDuplicate($selected_id)) {
                     $resultForm = new ResultsForm();
-                    $resultForm->question_id = $vote;
+                    $resultForm->question_id = $question_id;
                     $resultForm->answer_id = $selected_id;
-                    $resultForm->user_ip = Yii::$app->getRequest()->getUserIP();
-                    $resultForm->user_id = Yii::$app->user->id;
                     try {
                         $this->service->create($resultForm);
                         $response['status'] = 1;
