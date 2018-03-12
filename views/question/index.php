@@ -23,7 +23,7 @@ $this->registerCss("
     float: right;
     color: #F58723;
     font-size: 18px;
-    line-height: 22px;
+    line-height: 32px;
     /* rotate \"play\" icon from > (right arrow) to down arrow */
 /*    -webkit-transform: rotate(-90deg);
     -moz-transform: rotate(-90deg);
@@ -40,7 +40,9 @@ $this->registerCss("
     -o-transform: rotate(90deg);
     transform: rotate(90deg); */
     color: #454444;
-}");
+}
+
+");
 ?>
 <div class="col-md-7">
     <a href="<?php echo Url::toRoute(['question/create'])?>" class="btn btn-default"><i class="fa fa-plus-circle"></i> Добавить вопрос</a>
@@ -48,15 +50,14 @@ $this->registerCss("
     </br>
     <div class="panel-group" id="accordion">
         <?php foreach ($models  as $model):?>
-        <div class="panel panel-default" style="height: 20%">
+        <div class="panel panel-default">
             <div class="panel-heading">
-                <h2 class="panel-title">
+
                     <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseFour<?php echo $model->id; ?>">
                         <?php echo $model->id; ?> | <?php echo $model->translations['1']->question; ?>
                     </a>
-
-<span class="pull-right"><a href="<?php echo Url::toRoute(['question/view', 'id' => $model->id])?>" class="btn btn-info"><i class="fa fa-eye"></i></a> |
-                            <a href="<?php echo Url::toRoute(['question/update', 'id' => $model->id])?>" class="btn btn-warning"><i class="fa fa-edit"></i></a> |
+<span class="pull-right"><a href="<?php echo Url::toRoute(['question/view', 'id' => $model->id])?>" class="btn btn-info"><i class="fa fa-eye"></i></a>
+                            <a href="<?php echo Url::toRoute(['question/update', 'id' => $model->id])?>" class="btn btn-warning"><i class="fa fa-edit"></i></a>
     <?=Html::a('delete', 'question/delete?id='.$model->id, [
         'class' => 'btn btn-danger',
         'data' => [
@@ -65,7 +66,7 @@ $this->registerCss("
         ],
 
     ])?></span>
-                            </h2>
+
             </div>
             <div id="collapseFour<?php echo $model->id; ?>" class="panel-collapse collapse">
                 <div class="panel-body">
