@@ -90,6 +90,11 @@ class VoteController extends Controller
                     $resultForm = new ResultsForm();
                     $resultForm->question_id = $question_id;
                     $resultForm->answer_id = $selected_id;
+                    if($resultForm->validate()){
+                        $response['status'] = 0;
+                        $response['message'] = Yii::t('app', 'No validate');
+                        return $response;
+                    }
                     try {
                         $this->service->create($resultForm);
                         $response['status'] = 1;
