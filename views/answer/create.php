@@ -24,7 +24,7 @@ foreach ($model->translations as $i => $translation) {
     }
 }
 
-$this->title = 'Create answer';
+$this->title = Yii::t('app', 'Create answer');
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Answer'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
@@ -37,7 +37,9 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="col-md-8">
             <div class="box box-default">
                 <div class="box-body">
-                    Форма создания ответов
+                    <?= Yii::t('app', 'Create answer')?>
+
+
                     <!-- Nav tabs -->
                     <ul class="nav nav-tabs" role="tablist">
                         <?php
@@ -117,7 +119,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         <?=Html::a('delete', 'delete?id='.$item_answers->id, [
                             'class' => 'btn btn-danger',
                             'data' => [
-                                'confirm' => 'Are you sure you want to delete the campaign?',
+                                'confirm' => Yii::t('app', 'Are you sure you want to delete the element?'),
                                 'method' => 'post',
                             ],
 
