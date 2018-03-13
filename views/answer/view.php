@@ -135,8 +135,6 @@ $this->params['breadcrumbs'][] = $this->title;
                         ?>
                         <div role="tabpanel" class="tab-pane <?php echo $j == 1 ? 'active' : '' ?>"
                              id="<?php echo $langList[$translation->lang_id]['prefix'] ?>">
-
-
                             <?php echo DetailView::widget([
                                 'model' => $translation,
                                 'attributes' => [

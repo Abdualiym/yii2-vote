@@ -96,14 +96,14 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php ActiveForm::end(); ?>
 
     <div class="col-md-12">
-        <h2>Список ответов</h2>
+        <h3><?= Yii::t('app', 'The list of answers associated with this question')?></h3>
         <table class="table">
             <thead>
             <tr>
                 <th>№</th>
-                <th>Названия</th>
-                <th>Сортировка</th>
-                <th>Действие</th>
+                <th><?= Yii::t('app', 'Name')?></th>
+                <th><?= Yii::t('app', 'Order of')?></th>
+                <th><?= Yii::t('app', 'Actions')?></th>
             </tr>
             </thead>
             <tbody>
