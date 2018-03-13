@@ -15,7 +15,7 @@ use yii\web\Controller;
  * Default controller for the `news` module
  *
  */
-class VotesController extends Controller
+class VoteController extends Controller
 {
 
     private $service;

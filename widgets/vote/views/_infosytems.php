@@ -27,7 +27,7 @@
     var param = $('meta[name=csrf-param]').attr('content');
     var token = $('meta[name=csrf-token]').attr('content');
     $.ajax({
-            url: 'vote/votes/list',
+            url: 'vote/vote/list',
             type: 'get',
             dataType: 'json',
             success: function(data, response, textStatus, jqXHR) {
@@ -53,7 +53,7 @@
     $(document).on('click', '#vote-submit', function(e){
         var form = $('.vote-check:checked').val();
         $.ajax({
-            url: 'vote/votes/add',
+            url: 'vote/vote/add',
             type: 'post',
             dataType: 'json',
             data: {'selected': form, 'param': token},
