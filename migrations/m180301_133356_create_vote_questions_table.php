@@ -20,7 +20,7 @@ class m180301_133356_create_vote_questions_table extends Migration
             'updated_by' => $this->integer()->notNull(),
             'created_at' => $this->integer()->notNull(),
             'updated_at' => $this->integer()->notNull(),
-        ], 'CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE=InnoDB');
+        ]);
     }
 
     /**

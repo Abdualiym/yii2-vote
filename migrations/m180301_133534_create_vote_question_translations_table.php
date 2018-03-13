@@ -17,7 +17,7 @@ class m180301_133534_create_vote_question_translations_table extends Migration
             'question_id' => $this->integer()->notNull(),
             'lang_id' => $this->integer()->notNull(),
             'question' => $this->text()->notNull(),
-        ],'CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE=InnoDB');
+        ]);
         $this->addForeignKey('fk-vote_question_translations-vote_vote_id', 'vote_question_translations', 'question_id', 'vote_questions', 'id', 'CASCADE', 'CASCADE');
     }
 

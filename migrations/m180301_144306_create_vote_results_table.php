@@ -20,7 +20,7 @@ class m180301_144306_create_vote_results_table extends Migration
             'user_id'=> $this->integer()->defaultValue(null),
             'created_at' => $this->integer()->notNull(),
             'updated_at' => $this->integer()->notNull(),
-        ],'CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE=InnoDB');
+        ]);
         $this->addForeignKey('fk-votes_results-vote_answers_id', 'vote_results', 'answer_id', 'vote_answers', 'id', 'CASCADE', 'CASCADE');
         $this->addForeignKey('fk_vote_results_vote_questions_id', 'vote_results', 'question_id', 'vote_questions', 'id', 'CASCADE', 'CASCADE');
     }
