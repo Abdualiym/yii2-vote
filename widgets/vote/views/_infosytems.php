@@ -8,7 +8,7 @@
 ?>
 <div class="votes-block">
     <div class="title-cont">
-        <h3 class="title"><?= Yii::t('app', 'Your voice');?></h3>
+        <h3 class="title"><?= Yii::t('app', 'Your Vote');?></h3>
     </div>
     <div class="vote-question" id="vote-question-id"></div>
     <ul class="vote-choise" id="vote-choise-id">

@@ -25,7 +25,7 @@ class VotesController extends Controller
         parent::__construct($id, $module, $config);
         $this->service = $service;
     }
-
+//need enable
     public function beforeAction($action)
     {
         if ($action->id == 'vote') {
@@ -44,7 +44,7 @@ class VotesController extends Controller
     }
 
 //generate one question and list answers
-    public function actionListvote()
+    public function actionList()
     {
         \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
         $vote = Question::find()->active()->one();
@@ -52,7 +52,7 @@ class VotesController extends Controller
         $response['question_id'] = $vote->id; // vote id
         if (isset($vote->resultsUserVote) && $vote->resultsUserVote->id) {
             $response['status'] = 3;
-            $response['message'] = Yii::t('app', 'Your vote already accept!');
+            $response['message'] = Yii::t('app', 'Your vote has been received!');
             return $response;
         }
         // cikl all question and compressed to array
@@ -93,18 +93,18 @@ class VotesController extends Controller
                     try {
                         $this->service->create($resultForm);
                         $response['status'] = 1;
-                        $response['message'] = Yii::t('app', 'Vote successfully accept!');
+                        $response['message'] = Yii::t('app', 'Voting successfully received!');
                         return $response;
                     } catch (\DomainException $e) {
                         $response['status'] = 0;
-                        $response['message'] = Yii::t('app', 'Vote successfully accept!');
+                        $response['message'] = Yii::t('app', 'Something is wrong!');
                         return $response;
                     }
 
                 } else {
                     $response['count'] = $res;
-                    $response['status'] = 0;
-                    $response['message'] = Yii::t('app', 'Vote already accept!');
+                    $response['status'] = 3;
+                    $response['message'] = Yii::t('app', 'Voting was received!');
                     return $response;
                 }
             }
