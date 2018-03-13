@@ -17,7 +17,7 @@ class m180301_135028_create_vote_answer_translations_table extends Migration
             'answer_id' => $this->integer()->notNull(),
             'lang_id' => $this->integer()->notNull(),
             'answer' => $this->text()->notNull()
-        ]);
+        ],'CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE=InnoDB');
         $this->addForeignKey('fk-vote_answer_questions-vote_answers_id', 'vote_answer_translations', 'answer_id', 'vote_answers', 'id', 'CASCADE', 'CASCADE');
     }
 

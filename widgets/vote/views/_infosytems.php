@@ -10,7 +10,7 @@
     <div class="title-cont">
         <h3 class="title"><?= Yii::t('app', 'Your voice');?></h3>
     </div>
-    <div class="vote-question" id="vote-question-id">Какими услугами Вы пользуетесь больше всего?</div>
+    <div class="vote-question" id="vote-question-id"></div>
     <ul class="vote-choise" id="vote-choise-id">
 
     </ul>
@@ -31,9 +31,7 @@
             dataType: 'json',
             success: function(data, response, textStatus, jqXHR) {
                     var vote = data['vote'];
-                    var message = data['message'];
-                   $('#vote-question-id').remove();
-                   $('#vote-res-message').html(message);
+                    $('#vote-question-id').html(vote);
                 if (data.status === 1) {
                    var content = '';
                         for(var i in data['answers']){
@@ -43,6 +41,9 @@
                         }
                         $('#vote-choise-id').html(content);
                 }else {
+                    var message = data['message'];
+                    $('#vote-submit').remove();
+                    $('#vote-res-message').html(message);
                     $('#vote-submit').remove();
                 }
             }

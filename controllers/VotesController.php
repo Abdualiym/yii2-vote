@@ -52,7 +52,7 @@ class VotesController extends Controller
         $response['question_id'] = $vote->id; // vote id
         if (isset($vote->resultsUserVote) && $vote->resultsUserVote->id) {
             $response['status'] = 3;
-            $response['message'] = Yii::t('app', 'Vote already accept!');
+            $response['message'] = Yii::t('app', 'Your vote already accept!');
             return $response;
         }
         // cikl all question and compressed to array
