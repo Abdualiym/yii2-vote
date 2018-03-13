@@ -10,14 +10,18 @@ use yii\widgets\DetailView;
 
 $langList = \abdualiym\languageClass\Language::langList(Yii::$app->params['languages'], true);
 
+
 $this->title = $model->translations[1]->question;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Answer'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Questions'), 'url' => ['/vote/question/index']];
+$this->params['breadcrumbs'][] = ['label' => $answer->question->translations[1]->question, 'url' => ['/vote/question/view', 'id' => $answer->question_id]];
+$this->params['breadcrumbs'][] = $answer->id;
 $this->params['breadcrumbs'][] = $this->title;
+
 ?>
 <div class="vote-view">
 
     <p>
-        <?php echo Html::a(Yii::t('app', 'Vote'), ['update', 'id' => $answer->id], ['class' => 'btn btn-primary']) ?>
+        <?php echo Html::a(Yii::t('app', 'Update'), ['update', 'id' => $answer->id], ['class' => 'btn btn-primary']) ?>
         <?php echo Html::a(Yii::t('app', 'Delete'), ['delete', 'id' => $answer->id], [
             'class' => 'btn btn-danger pull-right',
             'data' => [

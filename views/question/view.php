@@ -92,7 +92,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <div class="box box-default">
 
-        <div class="box-header with-border"><?= Yii::t('app', 'Content')?></div>
+        <div class="box-header with-border">Контент<?= ?></div>
 
         <div class="box-body">
             <!-- Nav tabs -->
