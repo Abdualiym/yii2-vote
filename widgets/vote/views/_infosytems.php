@@ -17,6 +17,7 @@
     <div class="text-center">
         <span id="vote-res-icon"></span><br>
         <span id="vote-res-message"></span><br>
+        <span id="vote-empty" style="display: none"><?= Yii::t('app', 'Please choose one of the answers.');?></span></br>
         <a href="<?= \yii\helpers\Url::toRoute('#')?>" id="view-results" style="display: none" class="btn btn-primary vote-btn"><?= Yii::t('app', 'View results')?></a>
     </div>
     <a id="vote-submit" class="btn btn-primary vote-btn"><?= Yii::t('app', 'Vote');?></a>
@@ -52,6 +53,10 @@
         });
     $(document).on('click', '#vote-submit', function(e){
         var form = $('.vote-check:checked').val();
+        if(form==null){
+            $('#vote-empty').show();
+            setTimeout(function() { $('#vote-empty').hide(); }, 4000);
+            }  
         $.ajax({
             url: 'vote/vote/add',
             type: 'post',
