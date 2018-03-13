@@ -15,8 +15,9 @@
 
     </ul>
     <div class="text-center">
-        <span id="vote-res-message"></span>
-        <span id="vote-res-icon"></span>
+        <span id="vote-res-icon"></span><br>
+        <span id="vote-res-message"></span><br>
+        <a href="<?= \yii\helpers\Url::toRoute('#')?>" id="view-results" style="display: none" class="btn btn-primary vote-btn"><?= Yii::t('app', 'View results')?></a>
     </div>
     <a id="vote-submit" class="btn btn-primary vote-btn"><?= Yii::t('app', 'Vote');?></a>
 </div>
@@ -42,9 +43,10 @@
                         $('#vote-choise-id').html(content);
                 }else {
                     var message = data['message'];
-                    $('#vote-submit').remove();
                     $('#vote-res-message').html(message);
+                    $('#view-results').show();
                     $('#vote-submit').remove();
+                    $('#vote-choise-id').remove();
                 }
             }
         });
@@ -61,6 +63,8 @@
                
                $('#vote-choise-id').html('');
                $('#vote-res-message').html(message);
+               $('#vote-res-icon').html('<i class=\"fa fa-check\"></i>');
+               $('#view-results').show();
                $('#vote-choise-id').remove();
                $('#vote-submit').remove();
             }else{

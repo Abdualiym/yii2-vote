@@ -28,7 +28,7 @@ class VotesController extends Controller
 //need enable
     public function beforeAction($action)
     {
-        if ($action->id == 'vote') {
+        if ($action->id == 'add') {
             $this->enableCsrfValidation = false;
         }
 

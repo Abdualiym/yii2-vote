@@ -6,6 +6,7 @@ return [
     'Create answer' => 'Создать ответ',
     'Are you sure you want to delete the element?' => 'Вы действительно хотите удалить элемент?',
     'Question' => 'Вопрос',
+    'View results' => 'Посмотреть результаты',
     'Your Vote' => 'Ваш голос',
     'Voting was received!' => 'Голосование было получено!',
     'Something is wrong!' => 'Что-то не так!',
