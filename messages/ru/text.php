@@ -4,6 +4,7 @@ return [
     # site helpers
     'Your vote already accept!' => 'Ваш голос уже принят!',
     'Create answer' => 'Создать ответ',
+    'The form of creating question' => 'Форма создания вопрос',
     'Are you sure you want to delete the element?' => 'Вы действительно хотите удалить элемент?',
     'Question' => 'Вопрос',
     'View results' => 'Посмотреть результаты',

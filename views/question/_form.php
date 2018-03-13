@@ -38,7 +38,7 @@ foreach ($model->translations as $i => $translation) {
 
             <div class="box box-default">
                 <div class="box-body">
-                    Форма создания вопросов
+                    <?= Yii::t('app', 'The form of creating question')?>
                     <!-- Nav tabs -->
                     <ul class="nav nav-tabs" role="tablist">
                         <?php
@@ -82,7 +82,7 @@ foreach ($model->translations as $i => $translation) {
         </div>
         <div class="col-md-4">
             <div class="box box-default">
-                <div class="box-header with-border">Форма создания вопросов</div>
+                <div class="box-header with-border"><?= Yii::t('app', 'The form of creating question')?></div>
                 <div class="box-body">
                     <?= $form->field($model, 'type')->dropDownList($model->typesList()) ?>
                     <?php echo Html::submitButton('Сохранить', ['class' => 'btn btn-success btn-block']) ?>

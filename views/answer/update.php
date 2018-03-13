@@ -81,7 +81,7 @@ $this->params['breadcrumbs'][] = Yii::t('app','Update');
         </div>
         <div class="col-md-4">
             <div class="box box-default">
-                <div class="box-header with-border">Vote</div>
+                <div class="box-header with-border"><?= Yii::t('app', 'Vote')?></div>
                 <div class="box-body">
                     <?php echo $form->field($model, 'question_id')->hiddenInput(['value'=> $model->question_id])->label(false); ?>
                     <?php echo $form->field($model, 'sort')->dropDownList([1 => 1, 2 => 2, 3 => 3, 4 => 4, 5 => 5, 6 => 6, 7 => 7, 8 => 8, 9 => 9, 10 => 10]) ?>
