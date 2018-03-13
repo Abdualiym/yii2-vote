@@ -18,12 +18,12 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="vote-view">
 
     <p>
-        <?php echo Html::a('Изменить', ['update', 'id' => $question->id], ['class' => 'btn btn-primary']) ?>
-        <?php echo Html::a('Добавить ответ', ['answer/create', 'question_id' => $question->id], ['class' => 'btn btn-default']) ?>
-        <?php echo Html::a('Удалить', ['delete', 'id' => $question->id], [
+        <?php echo Html::a(Yii::t('app', 'Update'), ['update', 'id' => $question->id], ['class' => 'btn btn-primary']) ?>
+        <?php echo Html::a(Yii::t('app', 'Create answer'), ['answer/create', 'question_id' => $question->id], ['class' => 'btn btn-default']) ?>
+        <?php echo Html::a(Yii::t('app', 'Delete'), ['delete', 'id' => $question->id], [
             'class' => 'btn btn-danger pull-right',
             'data' => [
-                'confirm' => 'Вы хотите удалить?',
+                'confirm' => Yii::t('app', 'Are you sure you want to delete the element?'),
                 'method' => 'post',
             ]
         ]) ?>
@@ -92,7 +92,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <div class="box box-default">
 
-        <div class="box-header with-border">Контент</div>
+        <div class="box-header with-border"><?= Yii::t('app', 'Content')?></div>
 
         <div class="box-body">
             <!-- Nav tabs -->

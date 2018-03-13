@@ -51,7 +51,7 @@ $this->registerCss("
 
 ?>
 <div class="col-md-8">
-    <a href="<?php echo Url::toRoute(['question/create'])?>" class="btn btn-default"><i class="fa fa-plus-circle"></i> Добавить вопрос</a>
+    <a href="<?php echo Url::toRoute(['question/create'])?>" class="btn btn-default"><i class="fa fa-plus-circle"></i> <?= Yii::t('app', 'Create question')?></a>
     <br>
     </br>
     <div class="panel-group" id="accordion">
@@ -67,7 +67,7 @@ $this->registerCss("
     <?=Html::a('', 'question/delete?id='.$model->id, [
         'class' => 'fa fa-trash',
         'data' => [
-            'confirm' => 'Are you sure you want to delete the campaign?',
+            'confirm' => Yii::t('app', 'Are you sure you want to delete the element?'),
             'method' => 'post',
         ],
 
@@ -85,7 +85,7 @@ $this->registerCss("
                                 <?=Html::a('delete', 'answer/delete?id='.$items->id, [
                                     'class' => 'btn btn-danger',
                                     'data' => [
-                                        'confirm' => 'Are you sure you want to delete the campaign?',
+                                        'confirm' => Yii::t('app', 'Are you sure you want to delete the element?'),
                                         'method' => 'post',
                                     ],
 
@@ -95,9 +95,9 @@ $this->registerCss("
                         <hr>
                     <?php endforeach; ?>
                     <?php if($model->voteAnswers == null):?>
-                        <span>Нет ответов!</span><hr>
+                        <span><?= Yii::t('app', 'There are no answers!')?></span><hr>
                    <?php endif; ?>
-                    <a href="<?php echo Url::toRoute(['answer/create', 'question_id' => $model->id])?>" class="btn btn-info"><i class="fa fa-plus-circle"></i> Добавить ответ</a>
+                    <a href="<?php echo Url::toRoute(['answer/create', 'question_id' => $model->id])?>" class="btn btn-info"><i class="fa fa-plus-circle"></i> <?= Yii::t('app', 'Create answer')?></a>
                 </div>
             </div>
 

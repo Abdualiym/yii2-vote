@@ -4,7 +4,7 @@
 /* @var $model backend\modules\vote\forms\QuestionForm */
 
 
-$this->title = 'Create question';
+$this->title = Yii::t('app', 'Create question');
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Question'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>

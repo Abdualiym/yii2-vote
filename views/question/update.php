@@ -9,7 +9,7 @@ $this->title = Yii::t('app', 'Question').': '.$question->translations[1]->questi
 
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Question'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $question->translations[1]->question, 'url' => ['view', 'id' => $question->id]];
-$this->params['breadcrumbs'][] = 'Update';
+$this->params['breadcrumbs'][] = Yii::t('app', 'Update');
 ?>
 <div class="vote-update">
 
