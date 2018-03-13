@@ -26,6 +26,14 @@ class VotesController extends Controller
         $this->service = $service;
     }
 
+    public function beforeAction($action)
+    {
+        if ($action->id == 'vote') {
+            $this->enableCsrfValidation = false;
+        }
+
+        return parent::beforeAction($action);
+    }
     /**
      * Renders the index view for the module
      * @return string
@@ -44,6 +52,7 @@ class VotesController extends Controller
         $response['question_id'] = $vote->id; // vote id
         if (isset($vote->resultsUserVote) && $vote->resultsUserVote->id) {
             $response['status'] = 3;
+            $response['message'] = Yii::t('app', 'Vote already accept!');
             return $response;
         }
         // cikl all question and compressed to array
@@ -94,7 +103,8 @@ class VotesController extends Controller
 
                 } else {
                     $response['count'] = $res;
-                    $response['status'] = "duplicate";
+                    $response['status'] = 0;
+                    $response['message'] = Yii::t('app', 'Vote already accept!');
                     return $response;
                 }
             }
