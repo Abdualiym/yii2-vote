@@ -71,7 +71,7 @@ class VotesController extends Controller
      * @return mixed
      * save user answer and reponse results
      */
-    public function actionVote()
+    public function actionAdd()
     {
         \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
         $form = new ResultsForm();
