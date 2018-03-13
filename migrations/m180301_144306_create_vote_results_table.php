@@ -12,7 +12,7 @@ class m180301_144306_create_vote_results_table extends Migration
      */
     public function safeUp()
     {
-        $this->createTable('vote_answer_translations', [
+        $this->createTable('vote_results', [
             'id' => $this->primaryKey(),
             'answer_id' => $this->integer()->notNull(),
             'question_id' => $this->integer()->notNull(),
