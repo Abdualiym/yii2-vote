@@ -5,6 +5,8 @@
  * Date: 13.03.2018
  * Time: 1:56
  */
+
+$urlsite = Yii::getAlias('@web');
 ?>
 <div class="votes-block">
     <div class="title-cont">
@@ -18,7 +20,7 @@
         <span id="vote-res-icon"></span><br>
         <span id="vote-res-message"></span><br>
         <span id="vote-empty" style="display: none"><?= Yii::t('app', 'Please choose one of the answers.');?></span></br>
-        <a href="<?= \yii\helpers\Url::toRoute('#')?>" id="view-results" style="display: none" class="btn btn-primary vote-btn"><?= Yii::t('app', 'View results')?></a>
+        <a href="#" id="view-results" style="display: none" class="btn btn-primary vote-btn"><?= Yii::t('app', 'View results')?></a>
     </div>
     <a id="vote-submit" class="btn btn-primary vote-btn"><?= Yii::t('app', 'Vote');?></a>
 </div>
@@ -28,7 +30,7 @@
     var param = $('meta[name=csrf-param]').attr('content');
     var token = $('meta[name=csrf-token]').attr('content');
     $.ajax({
-            url: 'vote/vote/list',
+            url: '$urlsite/vote/vote/list',
             type: 'get',
             dataType: 'json',
             success: function(data, response, textStatus, jqXHR) {
@@ -58,7 +60,7 @@
             setTimeout(function() { $('#vote-empty').hide(); }, 4000);
             }  
         $.ajax({
-            url: 'vote/vote/add',
+            url: '$urlsite/vote/vote/add',
             type: 'post',
             dataType: 'json',
             data: {'selected': form, 'param': token},
