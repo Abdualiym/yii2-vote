@@ -1,10 +1,10 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: User
+ * User:
+ * User
  * Date: 13.03.2018
  * Time: 1:56
- *
  */
 
 $hostInfo = Yii::$app->params['frontendHostInfo'];
