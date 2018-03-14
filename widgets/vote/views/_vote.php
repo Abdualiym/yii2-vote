@@ -5,46 +5,17 @@
         <?= $question->id; ?>
 
             <ul class="list-group">
+                <h2><?= $question->translations[1]->question; ?></h2>
+                <?php foreach ($question->voteAnswers as $answer):?>
                 <li class="list-group-item">
                     <div class="radio">
                         <label>
                             <input type="radio" name="optionsRadios">
-                            Excellent
+                            <?= $answer->id; ?>
                         </label>
                     </div>
                 </li>
-                <li class="list-group-item">
-                    <div class="radio">
-                        <label>
-                            <input type="radio" name="optionsRadios">
-                            Good
-                        </label>
-                    </div>
-                </li>
-                <li class="list-group-item">
-                    <div class="radio">
-                        <label>
-                            <input type="radio" name="optionsRadios">
-                            Can Be Improved
-                        </label>
-                    </div>
-                </li>
-                <li class="list-group-item">
-                    <div class="radio">
-                        <label>
-                            <input type="radio" name="optionsRadios">
-                            Bad
-                        </label>
-                    </div>
-                </li>
-                <li class="list-group-item">
-                    <div class="radio">
-                        <label>
-                            <input type="radio" name="optionsRadios">
-                            No Comment
-                        </label>
-                    </div>
-                </li>
+                <?php endforeach; ?>
             </ul>
         <?php endforeach; ?>
         </div>
