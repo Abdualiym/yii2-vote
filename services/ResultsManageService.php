@@ -26,7 +26,7 @@ class ResultsManageService
      */
     public function create(ResultsForm $form): Results
     {
-        $results = Results::create($form->answer_id, $form->question_id);
+        $results = Results::create($form->answer_id);
         $this->results->save($results);
         return $results;
     }

@@ -15,6 +15,7 @@ use yii\db\ActiveQuery;
  * @property int $id
  * @property int $answer_id
  * @property string $user_ip
+ * @property string $question_id
  * @property int $user_id
  * @property int $created_at
  * @property int $updated_at
@@ -51,11 +52,11 @@ class Results extends \yii\db\ActiveRecord
         return $this->hasOne(Question::className(), ['id' => 'question_id']);
     }
 
-    public function create($answer_id, $question_id): self
+    public function create($answer_id): self
     {
         $result = new static();
         $result->answer_id = $answer_id;
-        $result->question_id = $question_id;
+        $result->question_id = Answer::findOne($answer_id)->question_id;
         $result->user_ip = Yii::$app->getRequest()->getUserIP();
         $result->user_id = Yii::$app->user->id;
         return $result;
@@ -64,6 +65,31 @@ class Results extends \yii\db\ActiveRecord
     public function edit($answer_id)
     {
         $this->answer_id = $answer_id;
+    }
+
+    public function listAnswersResult($question_id){
+         $answers = Answer::find()->select('id')->where(['question_id' => $question_id])->all();
+           foreach ($answers as $items) {
+               $item['id'] = $items->id;
+               $item['count'] = $this->find()->where(['answer_id' => $items->id])->count();
+               $res[] = $item;
+           }
+          return $item;
+    }
+
+    public function selectQuestion(){
+        $question = Question::find()->active()->one();
+        return isset($question)? $question : null;
+    }
+
+    public function listAnswers($question_id){
+         $answers = Answer::find()->select('id')->where(['question_id' => 1])->all();
+           foreach ($answers as $items) {
+               $item['id'] = $items->id;
+               $item['answer'] = $items->translations['1']->answer;
+               $response[] = $item;
+           }
+          return $response;
     }
 
     // behaviors

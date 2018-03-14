@@ -34,23 +34,20 @@ $urlsite = Yii::getAlias('@web');
             type: 'get',
             dataType: 'json',
             success: function(data, response, textStatus, jqXHR) {
-                    var vote = data['vote'];
-                    $('#vote-question-id').html(vote);
-                if (data.status === 1) {
-                   var content = '';
+                    var question = data['question'];
+                    $('#vote-question-id').html(question);
+                    var content = '';
                         for(var i in data['answers']){
                          var answer = data['answers'][i].answer;
                          var id = data['answers'][i].id;
                         content += '<li><label><input class=\"vote-check\" type=\"radio\" name=\"vote-radio\" value=\"'+id+'\">'+answer+'</label></li>'
                         }
                         $('#vote-choise-id').html(content);
-                }else {
-                    var message = data['message'];
-                    $('#vote-res-message').html(message);
-                    $('#view-results').show();
-                    $('#vote-submit').remove();
-                    $('#vote-choise-id').remove();
-                }
+                
+                    //var message = data['message'];
+                    //$('#vote-res-message').html(message);
+                    //$('#view-results').show();
+                
             }
         });
     $(document).on('click', '#vote-submit', function(e){
@@ -63,21 +60,15 @@ $urlsite = Yii::getAlias('@web');
             url: '$urlsite/vote/vote/add',
             type: 'post',
             dataType: 'json',
-            data: {'selected': form, 'param': token},
+            data: {'ResultsForm[answer_id]': form},
             success: function(data, response, textStatus, jqXHR) {
                 var message = data['message'];
-           if(data['status'] === 1){
-               
-               $('#vote-choise-id').html('');
                $('#vote-res-message').html(message);
-               $('#vote-res-icon').html('<i class=\"fa fa-check\"></i>');
-               $('#view-results').show();
-               $('#vote-choise-id').remove();
-               $('#vote-submit').remove();
-            }else{
-                    
-                    $('#vote-res-message').html(message);
-                }           
+                       window.location.href = '/voteresult'; 
+               //$('#vote-res-icon').html('<i class=\"fa fa-check\"></i>');
+               //$('#view-results').show();
+               //$('#vote-submit').remove();
+                     
            }
         });
         return false;

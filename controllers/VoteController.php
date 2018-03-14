@@ -6,8 +6,11 @@ use abdualiym\vote\entities\Answer;
 use abdualiym\vote\entities\Question;
 use abdualiym\vote\entities\Results;
 use abdualiym\vote\forms\ResultsForm;
+use abdualiym\vote\forms\ResultsSaveForm;
 use abdualiym\vote\services\ResultsManageService;
+use phpDocumentor\Reflection\DocBlock\Tags\Return_;
 use Yii;
+use yii\helpers\VarDumper;
 use yii\web\Controller;
 
 /**
@@ -25,6 +28,7 @@ class VoteController extends Controller
         parent::__construct($id, $module, $config);
         $this->service = $service;
     }
+
 //need enable
     public function beforeAction($action)
     {
@@ -34,6 +38,7 @@ class VoteController extends Controller
 
         return parent::beforeAction($action);
     }
+
     /**
      * Renders the index view for the module
      * @return string
@@ -47,23 +52,18 @@ class VoteController extends Controller
     public function actionList()
     {
         \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
-        $vote = Question::find()->active()->one();
-        $response['vote'] = $vote->translations['1']->question; // question text
-        $response['question_id'] = $vote->id; // vote id
-        if (isset($vote->resultsUserVote) && $vote->resultsUserVote->id) {
-            $response['status'] = 3;
+        $result = new Results();
+        $question = $result->selectQuestion();
+        $response['question'] = $question->translations['1']->question; // question text
+        $response['question_id'] = $question->id; // vote id
+        /*if (isset($question->resultsUserVote) && $question->resultsUserVote->id) {
+            $response['status'] = 1;
             $response['message'] = Yii::t('app', 'Your vote has been received!');
             return $response;
-        }
-        // cikl all question and compressed to array
-        foreach ($vote->voteAnswers as $item) {
-            $items['id'] = $item->id;
-            $items['answer'] = $item->translations['1']->answer;
-            $result[] = $items;
-        }
-        $response['answers'] = $result; // array answers
+        }*/
+        $response['answers'] = $result->listAnswers($question); // array answers
         $response['status'] = 1; //status protsess
-        return $response;
+        return $response ;
     }
 
     /**
@@ -75,44 +75,24 @@ class VoteController extends Controller
     {
         \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
         $form = new ResultsForm();
-        if (Yii::$app->request->isAjax) {
-            $selected_id = Yii::$app->request->post('selected');
-            if (isset($selected_id) || !empty($selected_id)) {
-                $question_id = Answer::findOne($selected_id)->question_id;
-                $answers = Answer::find()->select('id')->where(['question_id' => $question_id])->all();
-                foreach ($answers as $items) {
-                    $item['id'] = $items->id;
-                    $item['count'] = Results::find()->where(['answer_id' => $items->id])->count();
-                    $res[] = $item;
-                }
 
-                if ($form->validateDuplicate($selected_id)) {
-                    $resultForm = new ResultsForm();
-                    $resultForm->question_id = $question_id;
-                    $resultForm->answer_id = $selected_id;
-                    if($resultForm->validate()){
-                        $response['status'] = 0;
-                        $response['message'] = Yii::t('app', 'No validate');
-                        return $response;
-                    }
-                    try {
-                        $this->service->create($resultForm);
-                        $response['status'] = 1;
-                        $response['message'] = Yii::t('app', 'Voting successfully received!');
-                        return $response;
-                    } catch (\DomainException $e) {
-                        $response['status'] = 0;
-                        $response['message'] = Yii::t('app', 'Something is wrong!');
-                        return $response;
-                    }
-
-                } else {
-                    $response['count'] = $res;
-                    $response['status'] = 3;
-                    $response['message'] = Yii::t('app', 'Voting was received!');
+        if ($form->load(Yii::$app->request->post())) {
+            if($form->validateDuplicate($form->answer_id)){
+                $response['status'] = 0;
+                $response['message'] = Yii::t('app', 'Your vote has been received!');
+                return $response;
+            }
+                try {
+                    $this->service->create($form);
+                    $response['status'] = 1;
+                    $response['message'] = Yii::t('app', 'Voting successfully received!');
+                    return $response;
+                } catch (\DomainException $e) {
+                    $response['status'] = 0;
+                    $response['message'] = Yii::t('app', 'Something is wrong!');
                     return $response;
                 }
-            }
         }
     }
+
 }

@@ -11,23 +11,18 @@ use yii\helpers\ArrayHelper;
 /**
  * @property AnswerTranslationForm $translations
  */
-class ResultsForm extends Model
+class ResultsSaveForm extends Model
 {
 
     public $question_id;
     public $user_ip;
     public $user_id;
-    public $answer_id;
     /**
      * @inheritdoc
      */
     public function rules()
     {
         return [
-            [['answer_id'], 'required'],
-            [['answer_id'], 'integer'],
-            [['user_ip', 'user_id', 'question_id'], 'required'],
-            [['user_ip'], 'ip'],
         ];
     }
 
@@ -38,6 +33,13 @@ class ResultsForm extends Model
 
     }
 
+    public function loadForm($question_id):self
+    {
+        $this->question_id = $question;
+        $this->user_ip = $question;
+        $this->user_id = $question;
+        $this->validate()? $this : null;
+    }
 
     /**
      * @inheritdoc
@@ -45,7 +47,10 @@ class ResultsForm extends Model
     public function attributeLabels()
     {
         return [
-            'answer_id' => Yii::t('app', 'Answer ID')
+            'user_ip' => Yii::t('app', 'User Ip'),
+            'user_id' => Yii::t('app', 'User ID'),
+            'created_at' => Yii::t('app', 'Created At'),
+            'updated_at' => Yii::t('app', 'Updated At'),
         ];
     }
 

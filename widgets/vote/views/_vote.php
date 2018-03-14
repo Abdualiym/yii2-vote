@@ -1,5 +1,9 @@
 <div class="ut-wrong-grid-cut">
-    <ul id="ut-breadcrumbs"><li><a href="../ru_5.html" title="Главная" id="ut-breadcrumbs-main">Главная</a></li><li class="ut-nav-current-page">Ваше мнение</li></ul>										<h1>Ваше мнение</h1>
+    <ul id="ut-breadcrumbs">
+        <li><a href="../ru_5.html" title="Главная" id="ut-breadcrumbs-main">Главная</a></li>
+        <li class="ut-nav-current-page">Ваше мнение</li>
+    </ul>
+    <h1>Ваше мнение</h1>
     <div id="ut-questionnaires" class="ut-article">
         <ul class="ut-accordion">
             <li class="ut-accordion-expanded">
@@ -43,7 +47,7 @@
                     <input name="VOTE_ID" value="8" type="hidden">
                     <input name="sessid" id="sessid" value="da602f0b162fccbf6b150cfcfc7a7379" type="hidden">
 
-                    <h3>Удовлетворяет Вас или нет качество услуг UZONLINE, предоставляемых  АК «Узбектелеком»?</h3>
+                    <h3>Удовлетворяет Вас или нет качество услуг UZONLINE, предоставляемых АК «Узбектелеком»?</h3>
 
                     <ul>
                         <li>
