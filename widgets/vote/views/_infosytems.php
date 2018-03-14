@@ -7,6 +7,7 @@
  */
 
 $urlsite = Yii::$app->params['frontendHostInfo'];
+$lang = Yii::$app->language;
 ?>
 <div class="votes-block">
     <div class="title-cont">
@@ -29,7 +30,7 @@ $urlsite = Yii::$app->params['frontendHostInfo'];
     "$(document).ready(function() {
     var param = $('meta[name=csrf-param]').attr('content');
     var token = $('meta[name=csrf-token]').attr('content');
-    var url = '$hostInfo';
+    var url = '$hostInfo/$lang';
     $.ajax({
             url: url+'/vote/vote/list',
             type: 'get',
