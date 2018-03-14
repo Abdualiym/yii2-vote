@@ -6,6 +6,7 @@ use lhs\Yii2SaveRelationsBehavior\SaveRelationsBehavior;
 use Yii;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveQuery;
+use yii\helpers\ArrayHelper;
 
 /**
  *
@@ -77,21 +78,22 @@ class Results extends \yii\db\ActiveRecord
           return $item;
     }
 
+
+
     public function selectQuestion(){
         $question = Question::find()->active()->one();
         return isset($question)? $question : null;
     }
 
-    public function listAnswers($question_id){
-         $answers = Answer::find()->select('id')->where(['question_id' => 1])->all();
-           foreach ($answers as $items) {
-               $item['id'] = $items->id;
-               $item['answer'] = $items->translations['1']->answer;
-               $response[] = $item;
-           }
-          return $response;
+    public function listAnswers($question_id,$lang_id = 1){
+        $answers = Answer::find()->select('id')->where(['question_id' => $question_id])->all();
+        foreach ($answers as $items) {
+            $item['id'] = $items->id;
+            $item['answer'] = (ArrayHelper::map($items->translations,'lang_id','answer'))[$lang_id];
+            $response[] = $item;
+        }
+        return $response;
     }
-
     // behaviors
     public function behaviors(): array
     {

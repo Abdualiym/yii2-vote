@@ -6,7 +6,7 @@
  * Time: 1:56
  */
 
-$urlsite = Yii::getAlias('@web');
+$urlsite = Yii::$app->params['frontendHostInfo'];
 ?>
 <div class="votes-block">
     <div class="title-cont">
@@ -29,8 +29,9 @@ $urlsite = Yii::getAlias('@web');
     "$(document).ready(function() {
     var param = $('meta[name=csrf-param]').attr('content');
     var token = $('meta[name=csrf-token]').attr('content');
+    var url = '$hostInfo';
     $.ajax({
-            url: '$urlsite/vote/vote/list',
+            url: url+'/vote/vote/list',
             type: 'get',
             dataType: 'json',
             success: function(data, response, textStatus, jqXHR) {
@@ -50,6 +51,7 @@ $urlsite = Yii::getAlias('@web');
                 
             }
         });
+        
     $(document).on('click', '#vote-submit', function(e){
         var form = $('.vote-check:checked').val();
         if(form==null){
@@ -57,15 +59,17 @@ $urlsite = Yii::getAlias('@web');
             setTimeout(function() { $('#vote-empty').hide(); }, 4000);
             }  
         $.ajax({
-            url: '$urlsite/vote/vote/add',
+            url: url+'/vote/vote/add',
             type: 'post',
             dataType: 'json',
             data: {'ResultsForm[answer_id]': form},
             success: function(data, response, textStatus, jqXHR) {
                 var message = data['message'];
                $('#vote-res-message').html(message);
-                       window.location.href = '/voteresult'; 
-               //$('#vote-res-icon').html('<i class=\"fa fa-check\"></i>');
+               
+              //$('#vote-res-icon').html('<span class=\"glyphicon glyphicon-ok\"></span>');
+               setTimeout(function() { window.location.href = '/voteresult';  }, 4000);
+                       
                //$('#view-results').show();
                //$('#vote-submit').remove();
                      
