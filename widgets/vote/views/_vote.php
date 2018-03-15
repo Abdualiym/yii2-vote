@@ -5,8 +5,10 @@ $lang = Yii::$app->language;
 
 ?>
 <div class="content-section">
-    <div class="title-cont">
-        <h3 class="title"><?= Yii::t('app', 'Your Vote')?></h3>
+    <div class="votes-block">
+        <div class="title-cont">
+            <h3 class="title"><?= Yii::t('app', 'Your Vote')?></h3>
+        </div>
     </div>
     <?php foreach ($questions as $question):?>
     <div class="votes-block">
@@ -24,7 +26,7 @@ $lang = Yii::$app->language;
 
                     <div class="vote-question"><?= $question->translate($question->id); ?></div>
                     <?php foreach ($question->voteAnswers as $answer):?>
-                        <li id="<?= $question->id; ?>" class="list-group-item">
+                        <li id="<?= $question->id; ?>">
                             <div class="radio">
                                 <label>
                                     <input class="<?= $question->id; ?>-vote-check" type="radio" name="vote-radio" value="<?= $answer->id; ?>">
