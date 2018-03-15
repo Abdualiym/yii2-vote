@@ -80,6 +80,7 @@ class VoteController extends Controller
         $form = new ResultsForm();
 
         if ($form->load(Yii::$app->request->post())) {
+
             if($form->validateDuplicate($form->answer_id)){
                 $response['status'] = 0;
                 $response['message'] = Yii::t('app', 'Your vote has been received!');

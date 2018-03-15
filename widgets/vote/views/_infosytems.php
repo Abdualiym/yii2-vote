@@ -58,7 +58,7 @@ $lang = Yii::$app->language;
         var form = $('.vote-check:checked').val();
         if(form==null){
             $('#vote-empty').show();
-            setTimeout(function() { $('#vote-empty').hide(); }, 4000);
+            setTimeout(function() { $('#vote-empty').hide(); }, 1000);
             }  
         $.ajax({
             url: url+'/vote/vote/add',
@@ -70,7 +70,7 @@ $lang = Yii::$app->language;
                $('#vote-res-message').html(message);
                
               //$('#vote-res-icon').html('<span class=\"glyphicon glyphicon-ok\"></span>');
-               setTimeout(function() { window.location.href = '/voteresult';  }, 4000);
+               setTimeout(function() { window.location.href = '/voteresult';  }, 1000);
                        
                //$('#view-results').show();
                //$('#vote-submit').remove();

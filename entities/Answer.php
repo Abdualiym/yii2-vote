@@ -111,6 +111,13 @@ class Answer extends ActiveRecord
         return AnswerTranslation::blank($id);
     }
 
+
+    public function CountResult($id)
+    {
+        return Results::find()->where(['answer_id' => $id])->count();
+
+    }
+
     // relations
 
     public function getCreatedBy(): ActiveQuery
