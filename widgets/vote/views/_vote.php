@@ -48,7 +48,7 @@ $this->registerCss("
                     ?>
                     <div class="vote-question"><?= $question->translate($question->id); ?></div>
                     <?php foreach ($question->voteAnswers as $answer_res):?>
-                                <div class="progress-title"><?= $answer_res->translate($answer->id); ?> : <strong><?= $answer_res->countResult($answer_res->id); ?> голосов</strong></div>
+                                <div class="progress-title"><?= $answer_res->translate($answer->id); ?> : <strong><?= $answer_res->countResult($answer_res->id); ?> <?= Yii::t('app', 'votes')?></strong></div>
                                 <div class="progress">
                                     <div class="progress-bar" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="<?= $result['all'];?>" style="width: <?= $answer_res->countResult($answer_res->id); ?>%;"><?= $answer_res->countResult($answer_res->id); ?>%</div>
                                 </div>
