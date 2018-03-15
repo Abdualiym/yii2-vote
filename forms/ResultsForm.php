@@ -33,9 +33,7 @@ class ResultsForm extends Model
 
     public function validateDuplicate($answer_id)
     {
-        $result = Results::find()->where(['answer_id' => $answer_id, 'user_ip' => Yii::$app->getRequest()->getUserIP()])->count();
-        return $result == null ? true : null;
-
+        return Results::findOne(['answer_id' => $answer_id, 'user_ip' => Yii::$app->request->getUserIP()]);
     }
 
 
