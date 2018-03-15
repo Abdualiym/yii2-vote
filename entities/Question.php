@@ -71,7 +71,10 @@ class Question extends ActiveRecord
         return $this->status == self::STATUS_DRAFT;
     }
 
-
+    public function isVoted()
+    {
+        return Results::findOne(['question_id' => $this->id, 'user_ip' => Yii::$app->request->getUserIP()]);
+    }
     // translations
 
     public function setTranslation($lang_id, $question)
@@ -148,10 +151,10 @@ class Question extends ActiveRecord
         return $this->hasMany(Results::class, ['answer_id' => 'id']);
     }
 
-    public function getResultInfo(): ActiveQuery
+    public function getResultInfo()
     {
-        $ip = \Yii::$app->getRequest()->getUserIP();
-        return $this->hasOne(Results::class, ['question_id' => 'id'])->where(['user_ip' => $ip]);
+        return $this->hasOne(Results::class, ['question_id' => 'id']);
+
     }
 
 
