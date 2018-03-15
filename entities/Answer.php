@@ -146,7 +146,7 @@ class Answer extends ActiveRecord
         if ($question == null){
             return null;
         }else{
-            return $question->question;
+            return $question->answer;
         }
 
     }
