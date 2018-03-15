@@ -8,6 +8,7 @@ use abdualiym\vote\forms\AnswerSearch;
 use abdualiym\vote\services\AnswerManageService;
 use Yii;
 use yii\base\ViewContextInterface;
+use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
 use yii\web\Controller;
 
@@ -30,9 +31,20 @@ class AnswerController extends Controller implements ViewContextInterface
         return Yii::getAlias('@vendor/abdualiym/yii2-vote/views/answer');
     }
 
+
     public function behaviors(): array
     {
         return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'actions' => ['index', 'create', 'view', 'update', 'activate', 'draft', 'delete'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                ],
+            ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
@@ -43,7 +55,6 @@ class AnswerController extends Controller implements ViewContextInterface
             ],
         ];
     }
-
     public function actionIndex()
     {
         $searchModel = new AnswerSearch();
