@@ -72,10 +72,12 @@ class Results extends \yii\db\ActiveRecord
          $answers = Answer::find()->select('id')->where(['question_id' => $question_id])->all();
            foreach ($answers as $items) {
                $item['id'] = $items->id;
-               $item['count'] = $this->find()->where(['answer_id' => $items->id])->count();
+               $item['count'] = Results::find()->where(['answer_id' => $items->id])->count();
                $res[] = $item;
            }
-          return $item;
+           $response['all'] = Results::find()->where(['question_id' => $question_id])->count();
+           $response['items'] = $res;
+          return $response;
     }
 
 

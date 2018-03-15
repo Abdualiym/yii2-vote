@@ -11,7 +11,7 @@ use yii\widgets\DetailView;
 $langList = \abdualiym\languageClass\Language::langList(Yii::$app->params['languages'], true);
 
 
-$this->title = $model->translations[1]->question;
+$this->title = $answer->translations[1]->answer;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Questions'), 'url' => ['/vote/question/index']];
 $this->params['breadcrumbs'][] = ['label' => $answer->question->translations[1]->question, 'url' => ['/vote/question/view', 'id' => $answer->question_id]];
 $this->params['breadcrumbs'][] = $answer->id;

@@ -134,6 +134,11 @@ class Question extends ActiveRecord
         return $this->hasMany(Results::class, ['answer_id' => 'id']);
     }
 
+    public function getResultInfo(): ActiveQuery
+    {
+        return $this->hasOne(Results::class, ['question_id' => 'id']);
+    }
+
 
     public function VoteQuestion($id)
     {
