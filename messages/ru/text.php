@@ -14,6 +14,7 @@ return [
     'The list of answers associated with this question' => 'Список ответов, связанный с этим вопросом',
     'View results' => 'Посмотреть результаты',
     'Your Vote' => 'Ваш голос',
+    'votes' => 'голосов',
     'Voting was received!' => 'Голосование было получено!',
     'Something is wrong!' => 'Что-то не так!',
     'Voting successfully received!' => 'Голосование успешно получено!',
