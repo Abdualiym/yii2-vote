@@ -57,6 +57,6 @@ Usage
 Once the extension is installed, simply use it in your code by  :
 
 ```
-     <?= \abdualiym\vote\widgets\vote\Vote::widget(); ?>
+     <? echo \frontend\widgets\vote\Vote::widget(); ?>
 ```
 # yii2-vote
