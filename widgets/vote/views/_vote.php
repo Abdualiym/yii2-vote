@@ -5,11 +5,12 @@ $lang = Yii::$app->language;
 
 ?>
 <div class="content-section">
+    <?php foreach ($questions as $question):?>
     <div class="votes-block">
         <div class="title-cont">
             <h3 class="title"><?= Yii::t('app', 'Your Vote')?></h3>
         </div>
-        <?php foreach ($questions as $question):?>
+
             <hr>
             <?php if($question->isVoted()): ?>
                 <?php $result = \abdualiym\vote\entities\Results::listAnswersResult($question->id); ?>
@@ -43,8 +44,8 @@ $lang = Yii::$app->language;
                     <a id="<?= $question->id; ?>" class="vote-submit btn btn-info"><?= Yii::t('app', 'Vote')?></a>
                 </ul>
             <?php endif; ?>
-        <?php endforeach; ?>
     </div>
+    <?php endforeach; ?>
 </div>
 
 <script>
