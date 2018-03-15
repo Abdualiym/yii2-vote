@@ -142,7 +142,7 @@ class Answer extends ActiveRecord
     {
         $lang = Language::getLangByPrefix(\Yii::$app->language);
         $lang_id = $lang['id'];
-        $question = AnswerTranslation::find()->where(['answer_id' => $id, 'lang_id' => 1])->one();
+        $question = AnswerTranslation::find()->where(['answer_id' => $id, 'lang_id' => $lang_id])->one();
         if ($question == null){
             return null;
         }else{
