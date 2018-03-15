@@ -74,7 +74,7 @@ $this->registerCss("
                         <span id="<?= $question->id; ?>-vote-res-message"></span><br>
                         <span id="vote-empty" style="display: none"><?= Yii::t('app', 'Please choose one of the answers.');?></span></br>
 
-                        <input id="<?= $question->id; ?>" class="vote-submit btn btn-info" value="Голосовать" />
+                        <input id="<?= $question->id; ?>" class="vote-submit btn btn-info" value="<?= Yii::t('app', 'Vote')?>" />
                     </ul>
                 <? } ?>
             <?php endforeach; ?>
