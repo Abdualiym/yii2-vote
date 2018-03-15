@@ -158,7 +158,7 @@ class QuestionController extends Controller implements ViewContextInterface
             Yii::$app->errorHandler->logException($e);
             Yii::$app->session->setFlash('error', $e->getMessage());
         }
-        return $this->goBack((!empty(Yii::$app->request->referrer) ? Yii::$app->request->referrer : null));
+        return $this->redirect(['index']);
     }
 
 

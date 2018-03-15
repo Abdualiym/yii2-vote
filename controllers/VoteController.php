@@ -30,17 +30,6 @@ class VoteController extends Controller
         parent::__construct($id, $module, $config);
         $this->service = $service;
     }
-
-//need enable
-    public function beforeAction($action)
-    {
-        if ($action->id == 'add') {
-            $this->enableCsrfValidation = false;
-        }
-
-        return parent::beforeAction($action);
-    }
-
     /**
      * Renders the index view for the module
      * @return string
