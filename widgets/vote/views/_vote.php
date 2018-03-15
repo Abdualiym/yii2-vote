@@ -38,7 +38,7 @@ $this->registerCss("
     <div class="content-section">
         <div class="votes-block">
             <div class="title-cont">
-                <h3 class="title">Ваш голос</h3>
+                <h3 class="title"><?= Yii::t('app', 'Your Vote')?></h3>
             </div>
             <?php foreach ($questions as $question):?>
 <hr>
@@ -46,9 +46,9 @@ $this->registerCss("
                     <? $result = $question->resultInfo->listAnswersResult($question->id);
 
                     ?>
-                    <div class="vote-question">Какими услугами Вы пользуетесь больше всего?</div>
+                    <div class="vote-question"><?= $question->translate($question->id); ?></div>
                     <?php foreach ($question->voteAnswers as $answer_res):?>
-                                <div class="progress-title">Голосовые звонки : <strong><?= $answer_res->countResult($answer_res->id); ?> голосов</strong></div>
+                                <div class="progress-title"><?= $answer_res->translate($answer->id); ?> : <strong><?= $answer_res->countResult($answer_res->id); ?> голосов</strong></div>
                                 <div class="progress">
                                     <div class="progress-bar" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="<?= $result['all'];?>" style="width: <?= $answer_res->countResult($answer_res->id); ?>%;"><?= $answer_res->countResult($answer_res->id); ?>%</div>
                                 </div>
@@ -57,13 +57,13 @@ $this->registerCss("
                 <? }else{?>
                     <ul class="list-group">
 
-                        <div class="vote-question"><?= $question->translations[1]->question; ?></div>
+                        <div class="vote-question"><?= $question->translate($question->id); ?></div>
                         <?php foreach ($question->voteAnswers as $answer):?>
                             <li id="<?= $question->id; ?>" class="list-group-item">
                                 <div class="radio">
                                     <label>
                                         <input class="<?= $question->id; ?>-vote-check" type="radio" name="vote-radio" value="<?= $answer->id; ?>">
-                                        <?= $answer->translations[1]->answer; ?>
+                                        <?= $answer->translate($answer->id); ?>
 
                                     </label>
                                 </div>

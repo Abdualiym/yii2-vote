@@ -2,6 +2,7 @@
 
 namespace abdualiym\vote\entities;
 
+use abdualiym\languageClass\Language;
 use abdualiym\vote\entities\queries\VotesQuery;
 use abdualiym\vote\entities\entities\User;
 use lhs\Yii2SaveRelationsBehavior\SaveRelationsBehavior;
@@ -117,6 +118,19 @@ class Question extends ActiveRecord
     public function getTranslations(): ActiveQuery
     {
         return $this->hasMany(QuestionTranslation::class, ['question_id' => 'id']);
+    }
+
+    public function Translate($id)
+    {
+        $lang = Language::getLangByPrefix(\Yii::$app->language);
+        $lang_id = $lang['id'];
+        $question = QuestionTranslation::find()->where(['question_id' => $id, 'lang_id' => 1])->one();
+        if ($question == null){
+            return null;
+        }else{
+            return $question->question;
+        }
+
     }
 
     public function getVoteAnswers(): ActiveQuery
