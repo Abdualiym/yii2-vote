@@ -136,7 +136,8 @@ class Question extends ActiveRecord
 
     public function getResultInfo(): ActiveQuery
     {
-        return $this->hasOne(Results::class, ['question_id' => 'id']);
+        $ip = \Yii::$app->getRequest()->getUserIP();
+        return $this->hasOne(Results::class, ['question_id' => 'id'])->where(['user_ip' => $ip]);
     }
 
 

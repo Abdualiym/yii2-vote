@@ -34,24 +34,31 @@
     <div class="row">
         <div class="col-md-12">
             <?php foreach ($questions as $question):?>
-                <?= $question->id; ?>
-                <?php if($question->resultInfo->question_id == $question->id){
+                
+                <?php if($question->resultInfo->question_id == $question->id){?>
 
-                }
+                   <? print_r($question->resultInfo->listAnswersResult($question->id));?>
+                    <br>
+               <? }else{?>
+                    <ul class="list-group">
+                        <h2><?= $question->translations[1]->question; ?></h2>
+                        <?php foreach ($question->voteAnswers as $answer):?>
+                            <li id="<?= $question->id; ?>" class="list-group-item">
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" name="optionsRadios" value="<?= $answer->id; ?>">
+                                        <?= $answer->translations[1]->answer; ?>
+                                    </label>
+                                </div>
+                            </li>
+
+                        <?php endforeach; ?>
+
+                        <input id="<?= $question->id; ?>-vote-submit" class="btn btn-info" value="Голосовать"/>
+                    </ul>
+               <? }
                 ?>
-                <ul class="list-group">
-                    <h2><?= $question->translations[1]->question; ?></h2>
-                    <?php foreach ($question->voteAnswers as $answer):?>
-                        <li class="list-group-item">
-                            <div class="radio">
-                                <label>
-                                    <input type="radio" name="optionsRadios" value=""<?= $answer->id; ?>>
-                                    <?= $answer->id; ?>
-                                </label>
-                            </div>
-                        </li>
-                    <?php endforeach; ?>
-                </ul>
+
             <?php endforeach; ?>
         </div>
     </div>
