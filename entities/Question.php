@@ -1,7 +1,7 @@
 <?php
 
 namespace abdualiym\vote\entities;
-
+use Yii;
 use abdualiym\languageClass\Language;
 use abdualiym\vote\entities\queries\VotesQuery;
 use abdualiym\vote\entities\entities\User;
