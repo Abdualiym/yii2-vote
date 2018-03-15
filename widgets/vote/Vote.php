@@ -1,6 +1,6 @@
 <?php
 
-namespace abdualiym\vote\widgets\vote;
+namespace frontend\widgets\vote;
 
 use abdualiym\vote\entities\Question;
 use abdualiym\vote\entities\Results;

@@ -1,6 +1,6 @@
 <?php
 
-namespace abdualiym\vote\widgets\vote;
+namespace frontend\widgets\vote;
 
 use Yii;
 use yii\base\Widget;
