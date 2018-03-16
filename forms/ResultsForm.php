@@ -38,7 +38,6 @@ class ResultsForm extends Model
         }
         if($question = Answer::findOne(['id'=> $answer_id])->question_id){
             return Results::findOne(['question_id' => $question, 'user_ip' => Yii::$app->request->getUserIP()]);
-
         }
         return null;
     }
