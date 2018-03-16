@@ -31,11 +31,9 @@ class ResultsForm extends Model
         ];
     }
 
-
     public function validateDuplicate($answer_id)
     {
-        $mas = Results::findOne(['answer_id' => $answer_id]);
-        return Results::findOne(['question_id' => $mas->question_id, 'user_ip' => Yii::$app->request->getUserIP()]);
+        return Results::findOne(['answer_id' => $answer_id, 'user_ip' => Yii::$app->request->getUserIP()]);
     }
 
 
