@@ -39,7 +39,7 @@ $lang = Yii::$app->language;
                     <?php endforeach; ?>
                     <span id="vote-res-icon"></span><br>
                     <span id="<?= $question->id; ?>-vote-res-message"></span><br>
-                    <span id="vote-empty" style="display: none"><?= Yii::t('app', 'Please choose one of the answers.');?></span></br>
+                    <span id="<?= $question->id; ?>-vote-empty" style="display: none"><?= Yii::t('app', 'Please choose one of the answers.');?></span></br>
 
                     <a id="<?= $question->id; ?>" class="vote-submit btn btn-info"><?= Yii::t('app', 'Vote')?></a>
                 </ul>
@@ -59,7 +59,7 @@ $lang = Yii::$app->language;
             var id = $('.'+form+'-vote-check:checked').val();
             if(form==null){
                 $('#vote-empty').show();
-                setTimeout(function() { $('#vote-empty').hide(); }, 2000);
+                setTimeout(function() { $('#'+form+'vote-empty').hide(); }, 2000);
             }
             $.ajax({
                 url: url+'/vote/vote/add',
