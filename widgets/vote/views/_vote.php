@@ -5,11 +5,6 @@ $lang = Yii::$app->language;
 
 ?>
 <div class="content-section">
-    <div class="votes-block">
-        <div class="title-cont">
-            <h3 class="title"><?= Yii::t('app', 'Your Vote')?></h3>
-        </div>
-    </div>
     <?php foreach ($questions as $question):?>
     <div class="votes-block">
             <?php if($question->isVoted()): ?>
