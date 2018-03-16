@@ -31,11 +31,17 @@ class ResultsForm extends Model
         ];
     }
 
-    public function validateDuplicate($answer_id)
+    public function validateDuplicate($answer_id = null)
     {
-        return Results::findOne(['answer_id' => $answer_id, 'user_ip' => Yii::$app->request->getUserIP()]);
-    }
+        if($answer_id == null){
+            return null;
+        }
+        if($question = Answer::findOne(['id'=> $answer_id])->question_id){
+            return Results::findOne(['question_id' => $question, 'user_ip' => Yii::$app->request->getUserIP()]);
 
+        }
+        return null;
+    }
 
     /**
      * @inheritdoc
