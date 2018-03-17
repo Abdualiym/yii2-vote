@@ -39,6 +39,7 @@ foreach ($model->translations as $i => $translation) {
             <div class="box box-default">
                 <div class="box-body">
                     <?= Yii::t('app', 'The form of creating question')?>
+                    <?= $form->errorSummary($model) ?>
                     <!-- Nav tabs -->
                     <ul class="nav nav-tabs" role="tablist">
                         <?php
