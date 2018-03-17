@@ -32,21 +32,9 @@ Config
     
 ```
 
-- add to backend config:
-```php
-'controllerMap' => [
-    'answer' => [
-        'class' => 'abdualiym\vote\controllers\AnswerController',
-    ],
-    'question' => [
-        'class' => 'abdualiym\vote\controllers\QuestionController',
-    ],
-],
-```
 
 
-
-Params
+ common/config.php
 ```
     'languages' => ['ru', 'en'],
 ```
