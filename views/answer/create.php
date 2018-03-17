@@ -39,7 +39,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 <div class="box-body">
                     <?= Yii::t('app', 'Create answer')?>
 
-
+<?= $form->errorSummary($model) ?>
                     <!-- Nav tabs -->
                     <ul class="nav nav-tabs" role="tablist">
                         <?php
