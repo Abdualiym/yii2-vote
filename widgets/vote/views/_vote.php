@@ -6,16 +6,25 @@ $lang = Yii::$app->language;
 ?>
 <div class="content-section">
     <?php foreach ($questions as $question):?>
-    <div class="votes-block">
+
+        <div class="votes-block">
             <?php if($question->isVoted()): ?>
+
                 <?php $result = \abdualiym\vote\entities\Results::listAnswersResult($question->id); ?>
+
                 <div class="vote-question"><?= $question->translate($question->id); ?></div>
+
                 <?php foreach ($question->voteAnswers as $answer_res):?>
-                    <div class="progress-title"><?= $answer_res->translate($answer_res->id); ?> : <strong><?= $answer_res->countResult($answer_res->id); ?> <?= Yii::t('app', 'votes')?></strong></div>
+
+                    <div class="progress-title"><?= $answer_res->translate($answer_res->id); ?>: <strong><?= Yii::t('app', '{n,plural,=0{not voted} =1{# vote} =2{# votes} other{# votes}}', ['n' => $answer_res->countResult($answer_res->id)])?></strong></div>
                     <div class="progress">
-                        <div class="progress-bar" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="<?= $result['all'];?>" style="width: <?= $answer_res->countResult($answer_res->id); ?>%;"><?= $answer_res->countResult($answer_res->id); ?>%</div>
+                        <div class="progress-bar" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="<?= $result['all'];?>" style="width: <?php $present= $answer_res->countResult($answer_res->id)*100/$result['all'];
+                        echo round($present);?>%;">
+                            <?php echo round($present);?>%</div>
                     </div>
+
                 <?php endforeach; ?>
+
             <?php else:?>
                 <ul class="list-group">
 
@@ -26,7 +35,6 @@ $lang = Yii::$app->language;
                                 <label>
                                     <input class="<?= $question->id; ?>-vote-check" type="radio" name="vote-radio" value="<?= $answer->id; ?>">
                                     <?= $answer->translate($answer->id); ?>
-
                                 </label>
                             </div>
                         </li>
@@ -39,7 +47,8 @@ $lang = Yii::$app->language;
                     <a id="<?= $question->id; ?>" class="vote-submit btn btn-info"><?= Yii::t('app', 'Vote')?></a>
                 </ul>
             <?php endif; ?>
-    </div>
+        </div>
+
     <?php endforeach; ?>
 </div>
 
