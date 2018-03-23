@@ -126,14 +126,8 @@ class Question extends ActiveRecord
     public function Translate($id)
     {
         $lang = Language::getLangByPrefix(\Yii::$app->language);
-        $lang_id = $lang['id'];
-        $question = QuestionTranslation::find()->where(['question_id' => $id, 'lang_id' => $lang_id])->one();
-        if ($question == null){
-            return null;
-        }else{
-            return $question->question;
-        }
 
+        return QuestionTranslation::find()->where(['question_id' => $id, 'lang_id' => $lang['id']])->one()->question;
     }
 
     public function getVoteAnswers(): ActiveQuery
