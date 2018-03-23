@@ -158,6 +158,14 @@ class Answer extends ActiveRecord
     }
 
 
+    // count answer
+
+    public function getCountAnswers()
+    {
+        return $this->hasMany(Results::class, ['answer_id' => 'id'])->count();
+
+    }
+
 
     //table name
 

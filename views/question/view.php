@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+use yii\helpers\Url;
 
 //use shop\helpers\SliderHelper;
 
@@ -12,7 +13,7 @@ $langList = \abdualiym\languageClass\Language::langList(Yii::$app->params['langu
 
 
 $this->title = $question->translations[1]->question;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Question'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Questions'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="vote-view">
@@ -141,5 +142,51 @@ $this->params['breadcrumbs'][] = $this->title;
             </div>
         </div>
     </div>
+    <div class="box box-default">
+
+        <div class="box-header with-border"><?= Yii::t('app', 'Answers') ?></div>
+
+        <div class="box-body">
+            <!-- Nav tabs -->
+
+            <table class="table table-condensed">
+                <thead>
+                <tr>
+                    <th>№</th>
+                    <th><?= Yii::t('app', 'Answer')?></th>
+                    <th><?= Yii::t('app', 'Count Votes')?></th>
+                    <th><?= Yii::t('app', 'Actions')?></th>
+                </tr>
+                </thead>
+                <tbody>
+                <?php foreach ($question->voteAnswers as $items):?>
+                <tr>
+                    <td>
+                        <?php echo $items->id; ?>
+                    </td>
+                    <td>
+                        <?php echo $items->translations[1]->answer; ?>
+                    </td>
+                    <td>
+                        <?php echo $items->countAnswers; ?>
+                    </td>
+                    <td><a href="<?php echo Url::toRoute(['answer/view', 'id' => $items->id])?>" class="btn btn-info"><i class="fa fa-eye"></i></a>
+                        <a href="<?php echo Url::toRoute(['answer/update', 'id' => $items->id])?>" class="btn btn-warning"><i class="fa fa-edit"></i></a>
+                        <?=Html::a('<i class="fa fa-trash"></i>', 'answer/delete?id='.$items->id, [
+                            'class' => 'btn btn-danger',
+                            'data' => [
+                                'confirm' => Yii::t('app', 'Are you sure you want to delete the element?'),
+                                'method' => 'post',
+                            ],
+
+                        ])?></td>
+                </tr>
+                <?php endforeach; ?>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
 
 </div>

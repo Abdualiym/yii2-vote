@@ -150,6 +150,11 @@ class Question extends ActiveRecord
         return $this->hasOne(Results::class, ['question_id' => 'id']);
 
     }
+    public function getCountQuestions()
+    {
+        return $this->hasMany(Results::class, ['question_id' => 'id'])->count();
+
+    }
 
 
     public function VoteQuestion($id)
