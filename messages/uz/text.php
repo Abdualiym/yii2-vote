@@ -2,6 +2,7 @@
 
 return [
     // site helpers
+    'Select only one option' => 'Faqat bitta variantni tanlash',
     'Voting successfully received!' => 'Sizning ovozingiz qabul qilindi!',
     'Your vote already accept!' => 'Sizning ovozingiz qabul qilingan!',
     '{n,plural,=0{not voted} =1{# vote} =2{# votes} other{# votes}}' => '{n,plural,=0{ovoz berilmadi} =1{# ovoz} =2{# ovoz} other{# ovoz}}',

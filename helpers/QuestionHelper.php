@@ -20,9 +20,7 @@ class QuestionHelper
     public static function typeList(): array
     {
         return [
-            Question::TYPE_STRING => \Yii::t('app', 'Simple'),
-            Question::TYPE_INTEGER => \Yii::t('app', 'Private'),
-            Question::TYPE_FLOAT => \Yii::t('app', 'Public'),
+            Question::TYPE_ONE => \Yii::t('app', 'Select only one option'),
         ];
     }
 

@@ -26,9 +26,7 @@ class Question extends ActiveRecord
     const STATUS_DRAFT = 0;
     const STATUS_ACTIVE = 1;
 
-    const TYPE_STRING = 1;
-    const TYPE_INTEGER = 2;
-    const TYPE_FLOAT = 3;
+    const TYPE_ONE = 1;
 
     public static function create($type): self
     {
