@@ -1,12 +1,10 @@
 <?php
-
 use abdualiym\languageClass\Language;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\helpers\Url;
 
 /* @var $this yii\web\View */
-
 /* @var $form yii\widgets\ActiveForm */
 /* @var $model backend\modules\vote\forms\AnswerForm */
 /* @var $question backend\modules\vote\entities\Answer */
@@ -140,8 +138,4 @@ $this->params['breadcrumbs'][] = $this->title;
             </table>
         </div>
     </div>
-
-
-
-
 </div>
