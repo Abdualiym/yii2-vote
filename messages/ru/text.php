@@ -2,6 +2,7 @@
 
 return [
     # site helpers
+    '{n,plural,=0{not voted} =1{# vote} =2{# votes} other{# votes}}' => '{n,plural,=0{не проголосовано} =1{# голос} =2{# голоса} other{# голосов}}',
     'Your vote already accept!' => 'Ваш голос уже принят!',
     'Create answer' => 'Создать ответ',
     'Please choose one of the answers.' => 'Пожалуйста, выберите один из вариантов ответа.',
@@ -15,9 +16,9 @@ return [
     'View results' => 'Посмотреть результаты',
     'Your Vote' => 'Ваш голос',
     'votes' => 'голосов',
-    'Voting was received!' => 'Голосование было получено!',
+    'Voting was received!' => 'Ваш голос принят!',
     'Something is wrong!' => 'Что-то не так!',
-    'Voting successfully received!' => 'Голосование успешно получено!',
+    'Voting successfully received!' => 'Ваш голос успешно принят!',
     'Your vote has been received!' => 'Ваш голос принят!',
     'There are no answers!' => 'Нет ответов',
     'Questions' => 'Вопросы',
@@ -38,7 +39,6 @@ return [
     'Updated by' => 'Обновиль',
     'Category' => 'Категория',
     'Title' => 'Название',
-    'Slug' => 'Алиас',
     'Description' => 'Описание',
     'Photo' => 'Картинка',
     'Date' => 'Дата',
