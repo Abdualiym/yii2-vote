@@ -14,6 +14,7 @@ use yii\base\ViewContextInterface;
 use yii\data\Pagination;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
+use yii\helpers\VarDumper;
 use yii\web\Controller;
 
 /**

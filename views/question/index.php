@@ -63,9 +63,9 @@ $this->params['breadcrumbs'][] = $this->title;
                                         <td>
                                             <?php echo $items->countAnswers; ?>
                                         </td>
-                                        <td><a href="<?php echo Url::toRoute(['answer/view', 'id' => $items->id])?>" class="btn btn-info"><i class="fa fa-eye"></i></a>
-                                            <a href="<?php echo Url::toRoute(['answer/update', 'id' => $items->id])?>" class="btn btn-warning"><i class="fa fa-edit"></i></a>
-                                            <?=Html::a('<i class="fa fa-trash"></i>', 'answer/delete?id='.$items->id, [
+                                        <td><a href="<?php echo Url::toRoute(['/vote/answer/view', 'id' => $items->id])?>" class="btn btn-info"><i class="fa fa-eye"></i></a>
+                                            <a href="<?php echo Url::toRoute(['/vote/answer/update', 'id' => $items->id])?>" class="btn btn-warning"><i class="fa fa-edit"></i></a>
+                                            <?=Html::a('<i class="fa fa-trash"></i>', '/vote/answer/delete?id='.$items->id, [
                                                 'class' => 'btn btn-danger',
                                                 'data' => [
                                                     'confirm' => Yii::t('app', 'Are you sure you want to delete the element?'),

@@ -57,6 +57,7 @@ class QuestionForm extends CompositeForm
         return QuestionHelper::typeList();
     }
 
+
     public function internalForms()
     {
         return ['translations'];

@@ -10,6 +10,7 @@ use Yii;
 use yii\base\ViewContextInterface;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
+use yii\helpers\VarDumper;
 use yii\web\Controller;
 
 /**
@@ -77,10 +78,15 @@ class AnswerController extends Controller implements ViewContextInterface
         $form = new AnswerForm();
         $answers = Answer::find()->where(['question_id' => $question_id])->all();
         $form->question_id = $question_id;
+
         if ($form->load(Yii::$app->request->post()) && $form->validate()) {
             try {
                 $this->service->create($form);
                 Yii::$app->session->setFlash('success', Yii::t('app', 'Answer successfully added!'));
+
+                if(empty(Yii::$app->request->post('more'))){
+                    return $this->redirect('/vote/question/index');
+                }
                 return $this->goBack((!empty(Yii::$app->request->referrer) ? Yii::$app->request->referrer : null));
             } catch (\DomainException $e) {
                 Yii::$app->errorHandler->logException($e);
@@ -152,7 +158,7 @@ class AnswerController extends Controller implements ViewContextInterface
             Yii::$app->errorHandler->logException($e);
             Yii::$app->session->setFlash('error', $e->getMessage());
         }
-        return $this->redirect(['index']);
+        return $this->redirect(['/vote/question/index']);
     }
 
 

@@ -10,8 +10,10 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="question-create">
 
-    <?php echo $this->render('_form', [
-        'model' => $model
+    <?php
+
+    echo $this->render('_form', [
+        'model' => $model,
     ]) ?>
 
 </div>

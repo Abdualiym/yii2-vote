@@ -87,50 +87,61 @@ $this->params['breadcrumbs'][] = $this->title;
                 <div class="box-body">
                     <?php echo $form->field($model, 'question_id')->hiddenInput(['value'=> $model->question_id])->label(false); ?>
                     <?php echo $form->field($model, 'sort')->dropDownList([1 => 1, 2 => 2, 3 => 3, 4 => 4, 5 => 5, 6 => 6, 7 => 7, 8 => 8, 9 => 9, 10 => 10]) ?>
-                    <?php echo Html::submitButton('<i class="fa fa-plus-circle"></i> Добавить ещё', ['class' => 'btn btn-success btn-block']) ?>
+
+                    <button type="submit" class="btn btn-success btn-block"><i class="fa fa-file-archive-o"></i> <?= Yii::t('app', 'Create')?></button>
+                    <button value="more" name="more" type="submit" class="btn btn-success btn-block"><i class="fa fa-plus-circle"></i>  <?= Yii::t('app', 'Add More')?></button>
                 </div>
             </div>
 
         </div>
     </div>
     <?php ActiveForm::end(); ?>
+    <div class="box box-default">
 
-    <div class="col-md-12">
-        <h3><?= Yii::t('app', 'The list of answers associated with this question')?></h3>
-        <table class="table">
-            <thead>
-            <tr>
-                <th>№</th>
-                <th><?= Yii::t('app', 'Name')?></th>
-                <th><?= Yii::t('app', 'Order of')?></th>
-                <th><?= Yii::t('app', 'Actions')?></th>
-            </tr>
-            </thead>
-            <tbody>
-            <?php foreach ($answers as $item_answers):?>
+        <div class="box-header with-border"><?= Yii::t('app', 'Answers') ?></div>
+
+        <div class="box-body">
+            <!-- Nav tabs -->
+
+            <table class="table table-condensed">
+                <thead>
                 <tr>
-                    <td><?php echo $item_answers->id; ?></td>
-                    <td><?php echo $item_answers->translations[1]->answer; ?></td>
-                    <td><?php echo $item_answers->sort; ?></td>
-                    <td>
-                        <a href="<?php echo Url::toRoute(['view', 'id' => $item_answers->id])?>" class="btn btn-info"><i class="fa fa-eye"></i></a> |
-                        <a href="<?php echo Url::toRoute(['update', 'id' => $item_answers->id])?>" class="btn btn-warning"><i class="fa fa-edit"></i></a> |
-
-                        <?=Html::a('delete', 'delete?id='.$item_answers->id, [
-                            'class' => 'btn btn-danger',
-                            'data' => [
-                                'confirm' => Yii::t('app', 'Are you sure you want to delete the element?'),
-                                'method' => 'post',
-                            ],
-
-                        ])?>
-
-                    </td>
+                    <th>№</th>
+                    <th><?= Yii::t('app', 'Answer')?></th>
+                    <th><?= Yii::t('app', 'Count Votes')?></th>
+                    <th><?= Yii::t('app', 'Actions')?></th>
                 </tr>
-            <?php endforeach; ?>
+                </thead>
+                <tbody>
+                <?php foreach ($answers as $items):?>
+                    <tr>
+                        <td>
+                            <?php echo $items->id; ?>
+                        </td>
+                        <td>
+                            <?php echo $items->translations[1]->answer; ?>
+                        </td>
+                        <td>
+                            <?php echo $items->countAnswers; ?>
+                        </td>
+                        <td><a href="<?php echo Url::toRoute(['/vote/answer/view', 'id' => $items->id])?>" class="btn btn-info"><i class="fa fa-eye"></i></a>
+                            <a href="<?php echo Url::toRoute(['/vote/answer/update', 'id' => $items->id])?>" class="btn btn-warning"><i class="fa fa-edit"></i></a>
+                            <?=Html::a('<i class="fa fa-trash"></i>', '/vote/answer/delete?id='.$items->id, [
+                                'class' => 'btn btn-danger',
+                                'data' => [
+                                    'confirm' => Yii::t('app', 'Are you sure you want to delete the element?'),
+                                    'method' => 'post',
+                                ],
 
-            </tbody>
-        </table>
+                            ])?></td>
+                    </tr>
+                <?php endforeach; ?>
+                </tbody>
+            </table>
+        </div>
     </div>
+
+
+
 
 </div>
