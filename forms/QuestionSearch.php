@@ -14,7 +14,7 @@ class QuestionSearch extends Question {
      */
     public function rules() {
         return [
-            [['id', 'type'], 'integer'],
+            [['id', 'type', 'status'], 'integer'],
         ];
     }
     /**
@@ -45,6 +45,7 @@ class QuestionSearch extends Question {
         $query->andFilterWhere([
             'id' => $this->id,
             'type' => $this->type,
+            'status' => $this->status,
         ]);
         return $dataProvider;
     }

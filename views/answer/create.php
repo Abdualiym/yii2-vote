@@ -87,6 +87,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     <?php echo $form->field($model, 'question_id')->hiddenInput(['value'=> $model->question_id])->label(false); ?>
                     <?php echo $form->field($model, 'sort')->dropDownList([1 => 1, 2 => 2, 3 => 3, 4 => 4, 5 => 5, 6 => 6, 7 => 7, 8 => 8, 9 => 9, 10 => 10]) ?>
 
+                    <?= $form->field($model, 'status')->checkbox() ?>
                     <button type="submit" class="btn btn-success btn-block"><i class="fa fa-file-archive-o"></i> <?= Yii::t('app', 'Create')?></button>
                     <button value="more" name="more" type="submit" class="btn btn-success btn-block"><i class="fa fa-plus-circle"></i>  <?= Yii::t('app', 'Add More')?></button>
                 </div>
@@ -108,6 +109,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     <th>№</th>
                     <th><?= Yii::t('app', 'Answer')?></th>
                     <th><?= Yii::t('app', 'Count Votes')?></th>
+                    <th><?= Yii::t('app', 'Status')?></th>
                     <th><?= Yii::t('app', 'Actions')?></th>
                 </tr>
                 </thead>
@@ -122,6 +124,9 @@ $this->params['breadcrumbs'][] = $this->title;
                         </td>
                         <td>
                             <?php echo $items->countAnswers; ?>
+                        </td>
+                        <td>
+                            <?php echo \abdualiym\vote\helpers\QuestionHelper::statusLabel($items->status); ?>
                         </td>
                         <td><a href="<?php echo Url::toRoute(['/vote/answer/view', 'id' => $items->id])?>" class="btn btn-info"><i class="fa fa-eye"></i></a>
                             <a href="<?php echo Url::toRoute(['/vote/answer/update', 'id' => $items->id])?>" class="btn btn-warning"><i class="fa fa-edit"></i></a>

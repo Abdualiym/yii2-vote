@@ -86,6 +86,9 @@ foreach ($model->translations as $i => $translation) {
                 <div class="box-header with-border"><?= Yii::t('app', 'The form of creating question')?></div>
                 <div class="box-body">
                     <?= $form->field($model, 'type')->dropDownList($model->typesList()) ?>
+
+                    <?= $form->field($model, 'status')->checkbox() ?>
+
                     <?php echo Html::submitButton(Yii::t('app', $this->title), ['class' => 'btn btn-success btn-block']) ?>
 
                 </div>

@@ -14,7 +14,7 @@ class AnswerSearch extends Answer {
      */
     public function rules() {
         return [
-            [['id', 'sort'], 'integer'],
+            [['id', 'sort', 'status'], 'integer'],
         ];
     }
     /**

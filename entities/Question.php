@@ -17,6 +17,7 @@ use yii\db\ActiveRecord;
  * @property boolean $created_by
  * @property boolean $updated_by
  * @property integer $type
+ * @property integer $status
  * @property boolean $created_at
  * @property boolean $updated_at
  * @property QuestionTranslation[] $translations
@@ -28,17 +29,18 @@ class Question extends ActiveRecord
 
     const TYPE_ONE = 1;
 
-    public static function create($type): self
+    public static function create($type, $status): self
     {
         $question = new static();
         $question->type = $type;
-        $question->status = self::STATUS_ACTIVE;
+        $question->status = $status;
         return $question;
     }
 
-    public function edit($type)
+    public function edit($type, $status)
     {
         $this->type = $type;
+        $this->status = $status;
     }
 
     // Status

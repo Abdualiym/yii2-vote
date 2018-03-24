@@ -30,18 +30,19 @@ class Answer extends ActiveRecord
     const STATUS_ACTIVE = 1;
     const STATUS_ARCHIVE = 2;
 
-    public static function create($sort, $question_id): self
+    public static function create($sort, $status, $question_id): self
     {
         $answer = new static();
         $answer->sort = $sort;
         $answer->question_id = $question_id;
-        $answer->status = self::STATUS_ACTIVE;
+        $answer->status = $status;
         return $answer;
     }
 
-    public function edit($sort)
+    public function edit($sort, $status)
     {
         $this->sort = $sort;
+        $this->status = $status;
     }
 
     // status

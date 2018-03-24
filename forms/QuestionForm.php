@@ -14,12 +14,14 @@ use abdualiym\vote\helpers\QuestionHelper;
 class QuestionForm extends CompositeForm
 {
     public $type;
+    public $status;
     private $_question;
 
     public function __construct(Question $question = null, $config = [])
     {
         if ($question) {
             $this->type = $question->type;
+            $this->status = $question->status;
             $this->translations = array_map(function (array $language) use ($question) {
                 return new QuestionTranslationForm($question->getTranslation($language['id']));
             }, Language::langList(\Yii::$app->params['languages']));
@@ -36,6 +38,7 @@ class QuestionForm extends CompositeForm
     {
         return [
             [['type'], 'required'],
+            [['status'], 'integer'],
         ];
     }
 
