@@ -69,7 +69,7 @@ class Results extends \yii\db\ActiveRecord
     }
 
     public function listAnswersResult($question_id){
-        $answers = Answer::find()->select('id')->where(['question_id' => $question_id])->all();
+        $answers = Answer::find()->select('id')->where(['question_id' => $question_id])->orderBy(['sort' => SORT_DESC])->all();
         foreach ($answers as $items) {
             $item['id'] = $items->id;
             $item['count'] = Results::find()->where(['answer_id' => $items->id])->count();
@@ -87,7 +87,7 @@ class Results extends \yii\db\ActiveRecord
         return isset($question)? $question : null;
     }
 
-    public function listAnswers($question_id,$lang_id = 1){
+    public function listAnswers($question_id, $lang_id = 1){
         $answers = Answer::find()->select('id')->where(['question_id' => $question_id])->orderBy(['sort' => SORT_DESC])->all();
         foreach ($answers as $items) {
             $item['id'] = $items->id;
