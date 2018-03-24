@@ -4,7 +4,7 @@ namespace abdualiym\vote\entities\queries;
 
 use yii\db\ActiveQuery;
 
-class VotesQuery extends ActiveQuery
+class AnswerQuery extends ActiveQuery
 {
     public function active()
     {
@@ -13,7 +13,7 @@ class VotesQuery extends ActiveQuery
 
     /**
      * @inheritdoc
-     * @return \common\models\Foods[]|array
+     * @return abdualiym\vote\entities\Answer[]|array
      */
     public function all($db = null)
     {
@@ -22,7 +22,7 @@ class VotesQuery extends ActiveQuery
 
     /**
      * @inheritdoc
-     * @return \common\models\Foods|array|null
+     * @return abdualiym\vote\entities\Answer|array|null
      */
     public function one($db = null)
     {

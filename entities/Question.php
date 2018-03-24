@@ -3,7 +3,7 @@
 namespace abdualiym\vote\entities;
 use Yii;
 use abdualiym\languageClass\Language;
-use abdualiym\vote\entities\queries\VotesQuery;
+use abdualiym\vote\entities\queries\QuestionQuery;
 use abdualiym\vote\entities\entities\User;
 use lhs\Yii2SaveRelationsBehavior\SaveRelationsBehavior;
 use yii\behaviors\BlameableBehavior;
@@ -194,8 +194,8 @@ class Question extends ActiveRecord
 
     // query
 
-    public static function find(): VotesQuery
+    public static function find(): QuestionQuery
     {
-        return new VotesQuery(static::class);
+        return new QuestionQuery(static::class);
     }
 }

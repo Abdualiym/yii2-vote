@@ -5,7 +5,7 @@ namespace abdualiym\vote\entities;
 use abdualiym\languageClass\Language;
 use abdualiym\vote\entities\entities\User;
 //use backend\entities\User;
-use abdualiym\vote\entities\queries\VotesQuery;
+use abdualiym\vote\entities\queries\AnswerQuery;
 use lhs\Yii2SaveRelationsBehavior\SaveRelationsBehavior;
 use yii\behaviors\BlameableBehavior;
 use yii\behaviors\TimestampBehavior;
@@ -199,8 +199,8 @@ class Answer extends ActiveRecord
         ];
     }
     // Query
-    public static function find(): VotesQuery
+    public static function find(): AnswerQuery
     {
-        return new VotesQuery(static::class);
+        return new AnswerQuery(static::class);
     }
 }
