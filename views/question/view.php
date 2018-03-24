@@ -45,7 +45,11 @@ $this->params['breadcrumbs'][] = $this->title;
                     <?php echo DetailView::widget([
                         'model' => $question,
                         'attributes' => [
-                            'type',
+                            [
+                                'attribute' => 'type',
+                                'value' => \abdualiym\vote\helpers\QuestionHelper::typeLabel($question->type),
+                                'format' => 'raw',
+                            ],
                             [
                                 'attribute' => 'status',
                                 'value' => \abdualiym\vote\helpers\QuestionHelper::statusLabel($question->status),
@@ -155,6 +159,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 <tr>
                     <th>№</th>
                     <th><?= Yii::t('app', 'Answer')?></th>
+                    <th><?= Yii::t('app', 'Status')?></th>
                     <th><?= Yii::t('app', 'Count Votes')?></th>
                     <th><?= Yii::t('app', 'Actions')?></th>
                 </tr>
@@ -167,6 +172,9 @@ $this->params['breadcrumbs'][] = $this->title;
                     </td>
                     <td>
                         <?php echo $items->translations[1]->answer; ?>
+                    </td>
+                    <td>
+                        <?php echo \abdualiym\vote\helpers\QuestionHelper::statusLabel($items->status); ?>
                     </td>
                     <td>
                         <?php echo $items->countAnswers; ?>
