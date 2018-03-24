@@ -16,6 +16,7 @@ $this->title = $question->translations[1]->question;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Questions'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+
 <div class="vote-view">
 
     <p>

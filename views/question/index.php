@@ -12,83 +12,64 @@ $this->params['breadcrumbs'][] = $this->title;
 
 
 ?>
-<div class="col-md-8">
-    <a href="<?php echo Url::toRoute(['question/create'])?>" class="btn btn-default"><i class="fa fa-plus-circle"></i> <?= Yii::t('app', 'Create question')?></a>
-    <br>
-    </br>
+<a href="<?php echo Url::toRoute(['question/create'])?>" class="btn btn-success"><i class="fa fa-plus-circle"></i> <?= Yii::t('app', 'Create question')?></a>
+<br>
+<div class="panel">
+    <table class="table table-hover">
+        <thead>
+        <th>ID </th><th>&nbsp;<i aria-hidden="true"></i><?= Yii::t('app', 'Question'); ?></th>
+        <th><i class="fa fa-check" aria-hidden="true"></i>&nbsp;<?= Yii::t('app', 'Count Votes')?></th>
+        <th>&nbsp;<i class="fa fa-credit-card" aria-hidden="true"></i>&nbsp;<?= Yii::t('app', 'Actions')?></th>
+        </thead>
 
-
-    <div class="panel-group" id="accordion">
+        <tbody>
         <?php foreach ($models  as $model):?>
-        <div class="panel panel-default">
-            <div class="panel-heading">
+        <tr data-toggle="collapse" data-target="#accordion-<?php echo $model->id; ?>" class="clickable">
+            <td><?php echo $model->id; ?></td>
+            <td><?php echo $model->translations['1']->question; ?></td>
+            <td><?php echo $model->countQuestions; ?></td>
+            <td>
+                <a class="btn btn-info" href="<?php echo Url::toRoute(['question/view', 'id' => $model->id])?>" class=""><i class="fa fa-eye"></i></a>
+                <a class="btn btn-warning" href="<?php echo Url::toRoute(['question/update', 'id' => $model->id])?>" class=""><i class="fa fa-edit"></i></a>
+            </td>
 
-                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseFour<?php echo $model->id; ?>">
-                        №: <?php echo $model->id; ?>  <?= Yii::t('app', 'Name')?>: <?php echo $model->translations['1']->question; ?>
-                    </a>
-                <span  style="padding-left: 10px;"><?= Yii::t('app', 'Count Votes')?>: <?php echo $model->countQuestions; ?></span>
-                        <span class="col-md-3 pull-right"><a href="<?php echo Url::toRoute(['question/view', 'id' => $model->id])?>" class=""><i class="fa fa-eye"></i></a>
-                                                    <a href="<?php echo Url::toRoute(['question/update', 'id' => $model->id])?>" class=""><i class="fa fa-edit"></i></a>
-                           </span>
+        </tr>
+        <tr>
+            <td colspan="4">
 
-            </div>
-            <div id="collapseFour<?php echo $model->id; ?>" class="panel-collapse collapse">
-                <div class="panel-body">
-
-                    <div class="box box-default">
-
-                        <div class="box-header with-border"><?= Yii::t('app', 'Answers') ?></div>
-
-                        <div class="box-body">
-                            <!-- Nav tabs -->
-
-                            <table class="table table-condensed">
-                                <thead>
-                                <tr>
-                                    <th>№</th>
-                                    <th><?= Yii::t('app', 'Answer')?></th>
-                                    <th><?= Yii::t('app', 'Count Votes')?></th>
-                                    <th><?= Yii::t('app', 'Actions')?></th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <?php foreach ($model->voteAnswers as $items):?>
-                                    <tr>
-                                        <td>
-                                            <?php echo $items->id; ?>
-                                        </td>
-                                        <td>
-                                            <?php echo $items->translations[1]->answer; ?>
-                                        </td>
-                                        <td>
-                                            <?php echo $items->countAnswers; ?>
-                                        </td>
-                                        <td><a href="<?php echo Url::toRoute(['/vote/answer/view', 'id' => $items->id])?>" class="btn btn-info"><i class="fa fa-eye"></i></a>
-                                            <a href="<?php echo Url::toRoute(['/vote/answer/update', 'id' => $items->id])?>" class="btn btn-warning"><i class="fa fa-edit"></i></a>
-                                            <?=Html::a('<i class="fa fa-trash"></i>', '/vote/answer/delete?id='.$items->id, [
-                                                'class' => 'btn btn-danger',
-                                                'data' => [
-                                                    'confirm' => Yii::t('app', 'Are you sure you want to delete the element?'),
-                                                    'method' => 'post',
-                                                ],
-
-                                            ])?></td>
-                                    </tr>
-                                <?php endforeach; ?>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
+                <div id="accordion-<?php echo $model->id; ?>" class="collapse">
+                    <?= Yii::t('app', 'Answers') ?><br>
+                    <a href="<?php echo Url::toRoute(['answer/create', 'question_id' => $model->id])?>" class="btn btn-info"><i class="fa fa-plus-circle"></i> <?= Yii::t('app', 'Create answer')?></a>
+                    <br>
                     <?php if($model->voteAnswers == null):?>
                         <span><?= Yii::t('app', 'There are no answers!')?></span><hr>
-                   <?php endif; ?>
-                    <a href="<?php echo Url::toRoute(['answer/create', 'question_id' => $model->id])?>" class="btn btn-info"><i class="fa fa-plus-circle"></i> <?= Yii::t('app', 'Create answer')?></a>
+                    <?php endif; ?>
+
+                    <?php foreach ($model->voteAnswers as $items):?>
+                        <hr>
+                        <i class="fa fa-calendar" aria-hidden="true"></i>&nbsp;<b>ID:</b> <?php echo $items->id; ?><br>
+                        <i class="fa fa-clock-o" aria-hidden="true"></i>&nbsp;<b><?= Yii::t('app', 'Answers') ?>:</b> <?php echo $items->translations[1]->answer; ?><br>
+                        <i class="fa fa-calendar-check-o" aria-hidden="true"></i>&nbsp;<b><?= Yii::t('app', 'Count Votes')?>: </b><?php echo $items->countAnswers; ?><br>
+                        <i class="fa fa-credit-card" aria-hidden="true"></i>&nbsp;<b><?= Yii::t('app', 'Actions')?>: </b>
+                            <a href="<?php echo Url::toRoute(['/vote/answer/view', 'id' => $items->id])?>" class="btn btn-info"><i class="fa fa-eye"></i></a>
+                            <a href="<?php echo Url::toRoute(['/vote/answer/update', 'id' => $items->id])?>" class="btn btn-warning"><i class="fa fa-edit"></i></a>
+                            <?=Html::a('<i class="fa fa-trash"></i>', '/vote/answer/delete?id='.$items->id, [
+                                'class' => 'btn btn-danger',
+                                'data' => [
+                                    'confirm' => Yii::t('app', 'Are you sure you want to delete the element?'),
+                                    'method' => 'post',
+                                ],
+
+                            ])?><br>
+                    <?php endforeach; ?>
+
                 </div>
-            </div>
-
-        </div>
+            </td>
+        </tr>
         <?php endforeach; ?>
-
-    </div>
+        </tbody>
+    </table>
 </div>
+
+
 

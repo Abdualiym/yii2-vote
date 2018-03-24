@@ -23,7 +23,8 @@ foreach ($model->translations as $i => $translation) {
 }
 
 $this->title = Yii::t('app', 'Create answer');
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Answer'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Questions'), 'url' => ['/vote/question/index']];
+$this->params['breadcrumbs'][] = ['label' => $_GET['question_id'], 'url' => ['/vote/question/view', 'id' => $_GET['question_id']]];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
