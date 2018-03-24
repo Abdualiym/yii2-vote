@@ -85,7 +85,8 @@ $this->params['breadcrumbs'][] = Yii::t('app','Update');
                 <div class="box-body">
                     <?php echo $form->field($model, 'question_id')->hiddenInput(['value'=> $model->question_id])->label(false); ?>
                     <?php echo $form->field($model, 'sort')->dropDownList([1 => 1, 2 => 2, 3 => 3, 4 => 4, 5 => 5, 6 => 6, 7 => 7, 8 => 8, 9 => 9, 10 => 10]) ?>
-                    <?php echo Html::submitButton('<i class="fa fa-edit"></i> Изменить', ['class' => 'btn btn-success btn-block']) ?>
+                    <?= $form->field($model, 'status')->checkbox() ?>
+                    <?php echo Html::submitButton(Yii::t('app', 'Update'), ['class' => 'btn btn-success btn-block']) ?>
                 </div>
             </div>
 
