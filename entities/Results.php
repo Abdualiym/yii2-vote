@@ -88,7 +88,7 @@ class Results extends \yii\db\ActiveRecord
     }
 
     public function listAnswers($question_id,$lang_id = 1){
-        $answers = Answer::find()->select('id')->where(['question_id' => $question_id])->all();
+        $answers = Answer::find()->select('id')->where(['question_id' => $question_id])->orderBy(['sort' => SORT_DESC])->all();
         foreach ($answers as $items) {
             $item['id'] = $items->id;
             $item['answer'] = (ArrayHelper::map($items->translations,'lang_id','answer'))[$lang_id];
