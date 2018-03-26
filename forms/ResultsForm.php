@@ -40,7 +40,6 @@ class ResultsForm extends Model
             ->innerJoin('vote_questions', 'vote_answers.question_id = vote_questions.id')
             ->andWhere(['in', 'vote_questions.id', Answer::findOne($answer_id)->question_id])
             ->andWhere(['in', 'vote_results.user_ip', Yii::$app->request->getUserIP()])
-            ->having('COUNT(vote_results.id)>=1')
             ->asArray()
             ->one();
 

@@ -14,6 +14,8 @@ class AnswerHelper
         return [
             Answer::STATUS_DRAFT => \Yii::t('app', 'Draft'),
             Answer::STATUS_ACTIVE => \Yii::t('app', 'Active'),
+            Answer::STATUS_ARCHIVE => \Yii::t('app', 'Archive'),
+
         ];
     }
 
@@ -30,6 +32,9 @@ class AnswerHelper
                 break;
             case Answer::STATUS_ACTIVE:
                 $class = 'label label-success';
+                break;
+            case Answer::STATUS_ARCHIVE:
+                $class = 'label label-warning';
                 break;
             default:
                 $class = 'label label-default';

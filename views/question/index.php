@@ -17,7 +17,9 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="panel">
     <table class="table table-hover">
         <thead>
-        <th>ID </th><th>&nbsp;<i aria-hidden="true"></i><?= Yii::t('app', 'Question'); ?></th>
+        <th></th>
+        <th>ID </th>
+        <th>&nbsp;<i aria-hidden="true"></i><?= Yii::t('app', 'Question'); ?></th>
         <th><i class="fa fa-check" aria-hidden="true"></i>&nbsp;<?= Yii::t('app', 'Count Votes')?></th>
         <th><i class="fa fa-hourglass-o" aria-hidden="true"></i>&nbsp;<?= Yii::t('app', 'Status')?></th>
         <th><i class="fa fa-navicon" aria-hidden="true"></i>&nbsp;<?= Yii::t('app', 'Type')?></th>
@@ -26,9 +28,10 @@ $this->params['breadcrumbs'][] = $this->title;
 
         <tbody>
         <?php foreach ($models  as $model):?>
-        <tr data-toggle="collapse" data-target="#accordion-<?php echo $model->id; ?>" class="clickable">
-            <td><?php echo $model->id; ?></td>
-            <td><?php echo $model->translations['1']->question; ?></td>
+        <tr>
+            <td data-toggle="collapse" data-target="#accordion-<?php echo $model->id; ?>" class="clickable text-center" ><i class="fa fa-plus-circle"></i></td>
+            <td>   <?php echo $model->id; ?></td>
+            <td  data-toggle="collapse" data-target="#accordion-<?php echo $model->id; ?>" class="clickable"><?php echo $model->translations['1']->question; ?></td>
             <td><?php echo $model->countQuestions($model->id); ?></td>
             <td>
                 <?php echo \abdualiym\vote\helpers\QuestionHelper::statusLabel($model->status); ?>
@@ -46,7 +49,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
                 <div id="accordion-<?php echo $model->id; ?>" class="collapse">
                     <h5><?= Yii::t('app', 'Answer') ?> > <?= Yii::t('app', 'Question') ?> > <?php echo $model->id; ?></h5><br>
-                    <a href="<?php echo Url::toRoute(['answer/create', 'question_id' => $model->id])?>" class="btn btn-info"><i class="fa fa-plus-circle"></i> <?= Yii::t('app', 'Create answer')?></a>
+                    <a href="<?php echo Url::toRoute(['answer/create', 'question_id' => $model->id])?>" class="btn btn-info pull-right"><i class="fa fa-plus-circle"></i> <?= Yii::t('app', 'Create answer')?></a>
                     <br>
                     <?php if($model->voteAnswers == null):?>
                         <span><?= Yii::t('app', 'There are no answers!')?></span><hr>

@@ -113,6 +113,7 @@ class Answer extends ActiveRecord
     }
 
 
+
     public function CountResult($id)
     {
         return Results::find()->where(['answer_id' => $id])->count();

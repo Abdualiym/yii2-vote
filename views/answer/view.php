@@ -13,7 +13,7 @@ $langList = \abdualiym\languageClass\Language::langList(Yii::$app->params['langu
 
 $this->title = $answer->translations[1]->answer;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Questions'), 'url' => ['/vote/question/index']];
-$this->params['breadcrumbs'][] = ['label' => $answer->question->translations[1]->question, 'url' => ['/vote/question/view', 'id' => $answer->question_id]];
+$this->params['breadcrumbs'][] = ['label' => preg_replace("#(.{,10}).*#", "$1", $answer->question->id), 'url' => ['/vote/question/view', 'id' => $answer->question_id]];
 $this->params['breadcrumbs'][] = $this->title;
 
 ?>
@@ -45,14 +45,16 @@ $this->params['breadcrumbs'][] = $this->title;
                         'model' => $answer,
                         'attributes' => [
                             'sort',
+
                             [
-                                'attribute' => 'question_id',
-                                'value' => function ($model) {
-                                    return $model->question->translations[1]->question;
-                                },
-                                'format' => 'raw',
-                                'label' => Yii::t('app', 'Question'),
+                                'label' => Yii::t('app', 'Count Voted'),
+                                'value' => $answer->countAnswers
                             ],
+                            [
+                                'label' => Yii::t('app', 'Question'),
+                                'value' => $answer->question->translate($answer->question->id)
+                            ],
+
                             [
                                 'attribute' => 'status',
                                 'value' => \abdualiym\vote\helpers\AnswerHelper::statusLabel($answer->status),

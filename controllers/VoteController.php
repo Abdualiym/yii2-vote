@@ -17,8 +17,8 @@ use yii\web\Controller;
 
 /**
  *
- * Default controller for the `news` module
- *
+ * Vote controller for the `vote` module
+ * Used for response list and add vote
  */
 class VoteController extends Controller
 {
@@ -30,19 +30,16 @@ class VoteController extends Controller
         parent::__construct($id, $module, $config);
         $this->service = $service;
     }
-    /**
-     * Renders the index view for the module
-     * @return string
-     */
-    public function actionIndex()
-    {
-        return $this->render('index');
-    }
 
-//ajax generate one question and list answers
+    /**
+     * @param not
+     * @type request get
+     * @return json (question, question_id, answers list, status response)
+     */
     public function actionList()
     {
         \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        if (Yii::$app->request->isAjax) {
         $result = new Results();
         $question = $result->selectQuestion(); //select one active question
         $response = [
@@ -52,36 +49,32 @@ class VoteController extends Controller
             'status' => 1
             ];
         return $response ;
+        }
+        return ['message' => "The format does not fit request", 'status' => 0, 'ok' => false];
     }
 
     /**
-     * @param integer $id
-     * @return mixed
-     * save user answer and reponse results
+     * @param integer ResultsForm[answer_id]
+     * @return json
+     * @function save user vote
      */
     public function actionAdd()
     {
         \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
-        $form = new ResultsForm();
-
-        if ($form->load(Yii::$app->request->post())) {
-
-            if($form->validateDuplicate($form->answer_id)){
-                $response['status'] = 0;
-                $response['message'] = Yii::t('app', 'Your vote has been received!');
-                return $response;
+        if (Yii::$app->request->isAjax) {
+            $form = new ResultsForm();
+            if ($form->load(Yii::$app->request->post()) && !$form->validateDuplicate($form->answer_id)) {
+                    try {
+                        $this->service->create($form);
+                        $response = ["status" => 1, "message" => Yii::t('app', 'Voting successfully received!')];
+                    } catch (\DomainException $e) {
+                        $response = ["ok" => false, "status" => 0, "message" => Yii::t('app', 'Something is wrong! ')];
+                    }
+                    return $response;
             }
-                try {
-                    $this->service->create($form);
-                    $response['status'] = 1;
-                    $response['message'] = Yii::t('app', 'Voting successfully received!');
-                    return $response;
-                } catch (\DomainException $e) {
-                    $response['status'] = 0;
-                    $response['message'] = Yii::t('app', 'Something is wrong!');
-                    return $response;
-                }
+            return [ "ok" => false, "status" => 0, "message" => ""];
         }
+        return ['message' => "The format does not fit request", 'status' => 0, 'ok' => false];
     }
 
 }

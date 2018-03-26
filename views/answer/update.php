@@ -24,7 +24,7 @@ foreach ($model->translations as $i => $translation) {
 }
 
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Questions'), 'url' => ['/vote/question/index']];
-$this->params['breadcrumbs'][] = ['label' => $answer->question_id, 'url' => ['/vote/question/view', 'id' => $answer->question_id]];
+$this->params['breadcrumbs'][] = ['label' => $answer->question->translations[1]->question, 'url' => ['/vote/question/view', 'id' => $answer->question_id]];
 $this->params['breadcrumbs'][] = ['label' => $answer->translations[1]->answer, 'url' => ['view', 'id' => $answer->id]];
 $this->params['breadcrumbs'][] = Yii::t('app','Update');
 ?>

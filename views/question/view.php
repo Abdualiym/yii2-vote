@@ -75,6 +75,11 @@ $this->params['breadcrumbs'][] = $this->title;
                                 'label' => Yii::t('app', 'Created by')
                             ],
                             [
+                                'label' => Yii::t('app', 'Count Voted'),
+                                'value' => $question->countQuestions($question->id)
+                            ],
+
+                            [
                                 'attribute' => 'updatedBy.username',
                                 'label' => Yii::t('app', 'Updated by')
                             ],
@@ -150,10 +155,10 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="box box-default">
 
         <div class="box-header with-border"><?= Yii::t('app', 'Answers') ?></div>
-
+        <a href="<?php echo Url::toRoute(['answer/create', 'question_id' => $question->id])?>" class="btn btn-info pull-right" style="margin-right: 20px;"><i class="fa fa-plus-circle"></i> <?= Yii::t('app', 'Create answer')?></a>
+<br>
         <div class="box-body">
             <!-- Nav tabs -->
-
             <table class="table table-condensed">
                 <thead>
                 <tr>

@@ -14,6 +14,7 @@ class QuestionHelper
         return [
             Question::STATUS_DRAFT => \Yii::t('app', 'Draft'),
             Question::STATUS_ACTIVE => \Yii::t('app', 'Active'),
+            Question::STATUS_ARCHIVE => \Yii::t('app', 'Archive'),
         ];
     }
 
@@ -42,6 +43,9 @@ class QuestionHelper
                 break;
             case Question::STATUS_ACTIVE:
                 $class = 'label label-success';
+                break;
+            case Question::STATUS_ARCHIVE:
+                $class = 'label label-warning';
                 break;
             default:
                 $class = 'label label-default';
