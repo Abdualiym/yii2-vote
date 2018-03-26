@@ -39,22 +39,18 @@ class VoteController extends Controller
         return $this->render('index');
     }
 
-//generate one question and list answers
+//ajax generate one question and list answers
     public function actionList()
     {
-        $lang = Language::getLangByPrefix(Yii::$app->language);
         \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
         $result = new Results();
-        $question = $result->selectQuestion();
-        $response['question'] = (ArrayHelper::map($question->translations,'lang_id','question'))[$lang['id']]; // question text
-        $response['question_id'] = $question->id; // vote id
-        /*if (isset($question->resultsUserVote) && $question->resultsUserVote->id) {
-            $response['status'] = 1;
-            $response['message'] = Yii::t('app', 'Your vote has been received!');
-            return $response;
-        }*/
-        $response['answers'] = $result->listAnswers($question->id,$lang['id']); // array answers
-        $response['status'] = 1; //status protsess
+        $question = $result->selectQuestion(); //select one active question
+        $response = [
+            'question' =>  $question->translate($question->id),
+            'question_id' => $question->id,
+            'answers' => $result->listAnswers($question->id),
+            'status' => 1
+            ];
         return $response ;
     }
 

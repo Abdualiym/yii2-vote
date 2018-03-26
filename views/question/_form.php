@@ -87,7 +87,7 @@ foreach ($model->translations as $i => $translation) {
                 <div class="box-body">
                     <?= $form->field($model, 'type')->dropDownList($model->typesList()) ?>
 
-                    <?= $form->field($model, 'status')->checkbox() ?>
+
 
                     <?php echo Html::submitButton(Yii::t('app', $this->title), ['class' => 'btn btn-success btn-block']) ?>
 

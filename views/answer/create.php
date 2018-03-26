@@ -87,7 +87,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     <?php echo $form->field($model, 'question_id')->hiddenInput(['value'=> $model->question_id])->label(false); ?>
                     <?php echo $form->field($model, 'sort')->dropDownList([1 => 1, 2 => 2, 3 => 3, 4 => 4, 5 => 5, 6 => 6, 7 => 7, 8 => 8, 9 => 9, 10 => 10]) ?>
 
-                    <?= $form->field($model, 'status')->checkbox() ?>
+
                     <button type="submit" class="btn btn-success btn-block"><i class="fa fa-file-archive-o"></i> <?= Yii::t('app', 'Create')?></button>
                     <button value="more" name="more" type="submit" class="btn btn-success btn-block"><i class="fa fa-plus-circle"></i>  <?= Yii::t('app', 'Add More')?></button>
                 </div>

@@ -14,7 +14,6 @@ use yii\helpers\ArrayHelper;
 class ResultsForm extends Model
 {
 
-    public $question_id;
     public $user_ip;
     public $user_id;
     public $answer_id;
@@ -26,7 +25,7 @@ class ResultsForm extends Model
         return [
             [['answer_id'], 'required'],
             [['answer_id'], 'integer'],
-            [['user_ip', 'user_id', 'question_id'], 'required'],
+            [['user_ip', 'user_id'], 'required'],
             [['user_ip'], 'ip'],
         ];
     }
@@ -36,10 +35,16 @@ class ResultsForm extends Model
         if($answer_id == null){
             return null;
         }
-        if($question = Answer::findOne(['id'=> $answer_id])->question_id){
-            return Results::findOne(['question_id' => $question, 'user_ip' => Yii::$app->request->getUserIP()]);
-        }
-        return null;
+        return Results::find()
+            ->innerJoin('vote_answers', 'vote_results.answer_id = vote_answers.id')
+            ->innerJoin('vote_questions', 'vote_answers.question_id = vote_questions.id')
+            ->andWhere(['in', 'vote_questions.id', Answer::findOne($answer_id)->question_id])
+            ->andWhere(['in', 'vote_results.user_ip', Yii::$app->request->getUserIP()])
+            ->having('COUNT(vote_results.id)>=1')
+            ->asArray()
+            ->one();
+
+
     }
 
     /**

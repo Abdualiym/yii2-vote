@@ -24,23 +24,24 @@ use yii\db\ActiveRecord;
  */
 class Question extends ActiveRecord
 {
+
     const STATUS_DRAFT = 0;
     const STATUS_ACTIVE = 1;
+    const STATUS_ARCHIVE = 2;
 
     const TYPE_ONE = 1;
 
-    public static function create($type, $status): self
+    public static function create($type): self
     {
         $question = new static();
         $question->type = $type;
-        $question->status = $status;
+        $question->status = self::STATUS_ARCHIVE;
         return $question;
     }
 
-    public function edit($type, $status)
+    public function edit($type)
     {
         $this->type = $type;
-        $this->status = $status;
     }
 
     // Status
@@ -73,7 +74,15 @@ class Question extends ActiveRecord
 
     public function isVoted()
     {
-        return Results::findOne(['question_id' => $this->id, 'user_ip' => Yii::$app->request->getUserIP()]);
+        return Results::find()
+            ->innerJoin('vote_answers', 'vote_results.answer_id = vote_answers.id')
+            ->innerJoin('vote_questions', 'vote_answers.question_id = vote_questions.id')
+            ->andWhere(['in', 'vote_questions.id', $this->id])
+            ->andWhere(['in', 'vote_results.user_ip', Yii::$app->request->getUserIP()])
+            ->having('COUNT(vote_results.id)>=1')
+            ->asArray()
+            ->one();
+
     }
     // translations
 
@@ -150,9 +159,17 @@ class Question extends ActiveRecord
         return $this->hasOne(Results::class, ['question_id' => 'id']);
 
     }
-    public function getCountQuestions()
+    public function CountQuestions($id)
     {
-        return $this->hasMany(Results::class, ['question_id' => 'id'])->count();
+        $count = Results::find()
+            ->select(['vote_results.id', 'COUNT(vote_results.answer_id) as QuestionCount'])
+            ->innerJoin('vote_answers', 'vote_results.answer_id = vote_answers.id')
+            ->innerJoin('vote_questions', 'vote_answers.question_id = vote_questions.id')
+            ->andWhere(['in', 'vote_questions.id', $id])
+            ->having('COUNT(vote_results.id)>=1')
+            ->asArray()
+            ->one();
+        return $count['QuestionCount'];
 
     }
 

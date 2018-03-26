@@ -2,6 +2,7 @@
 
 namespace abdualiym\vote\entities;
 
+use abdualiym\languageClass\Language;
 use lhs\Yii2SaveRelationsBehavior\SaveRelationsBehavior;
 use Yii;
 use yii\behaviors\TimestampBehavior;
@@ -16,7 +17,6 @@ use yii\helpers\ArrayHelper;
  * @property int $id
  * @property int $answer_id
  * @property string $user_ip
- * @property string $question_id
  * @property int $user_id
  * @property int $created_at
  * @property int $updated_at
@@ -48,16 +48,11 @@ class Results extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getQuestion()
-    {
-        return $this->hasOne(Question::className(), ['id' => 'question_id']);
-    }
 
     public function create($answer_id): self
     {
         $result = new static();
         $result->answer_id = $answer_id;
-        $result->question_id = Answer::findOne($answer_id)->question_id;
         $result->user_ip = Yii::$app->getRequest()->getUserIP();
         $result->user_id = Yii::$app->user->id;
         return $result;
@@ -72,10 +67,27 @@ class Results extends \yii\db\ActiveRecord
         $answers = Answer::find()->select('id')->where(['question_id' => $question_id])->orderBy(['sort' => SORT_DESC])->all();
         foreach ($answers as $items) {
             $item['id'] = $items->id;
-            $item['count'] = Results::find()->where(['answer_id' => $items->id])->count();
+            $answerCount = Results::find()
+                ->select(['vote_results.id', 'COUNT(vote_results.answer_id) as AnswerCount'])
+                ->innerJoin('vote_answers', 'vote_results.answer_id = vote_answers.id')
+                ->innerJoin('vote_questions', 'vote_answers.question_id = vote_questions.id')
+                ->andWhere(['in', 'vote_results.answer_id', $items->id])
+                ->having('COUNT(vote_results.id)>=1')
+                ->asArray()
+                ->one();
+            $item['count'] = $answerCount['AnswerCount'];
             $res[] = $item;
         }
-        $response['all'] = Results::find()->where(['question_id' => $question_id])->count();
+        $questionCount = Results::find()
+            ->select(['vote_results.id', 'COUNT(vote_results.answer_id) as QuestionCount'])
+            ->innerJoin('vote_answers', 'vote_results.answer_id = vote_answers.id')
+            ->innerJoin('vote_questions', 'vote_answers.question_id = vote_questions.id')
+            ->andWhere(['in', 'vote_questions.id', $question_id])
+            ->having('COUNT(vote_results.id)>=1')
+            ->asArray()
+            ->one();
+
+        $response['all'] = $questionCount['QuestionCount'];
         $response['items'] = $res;
         return $response;
     }
@@ -87,7 +99,9 @@ class Results extends \yii\db\ActiveRecord
         return isset($question)? $question : null;
     }
 
-    public function listAnswers($question_id, $lang_id = 1){
+    public function listAnswers($question_id){
+        $lang = Language::getLangByPrefix(\Yii::$app->language);
+        $lang_id = $lang['id'];
         $answers = Answer::find()->select('id')->where(['question_id' => $question_id])->orderBy(['sort' => SORT_DESC])->all();
         foreach ($answers as $items) {
             $item['id'] = $items->id;

@@ -21,7 +21,6 @@ class QuestionForm extends CompositeForm
     {
         if ($question) {
             $this->type = $question->type;
-            $this->status = $question->status;
             $this->translations = array_map(function (array $language) use ($question) {
                 return new QuestionTranslationForm($question->getTranslation($language['id']));
             }, Language::langList(\Yii::$app->params['languages']));
@@ -38,7 +37,7 @@ class QuestionForm extends CompositeForm
     {
         return [
             [['type'], 'required'],
-            [['status'], 'integer'],
+            [['type'], 'integer'],
         ];
     }
 

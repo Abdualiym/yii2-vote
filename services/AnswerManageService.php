@@ -26,7 +26,7 @@ class AnswerManageService
      */
     public function create(AnswerForm $form): Answer
     {
-        $answer = Answer::create($form->sort, $form->status, $form->question_id);
+        $answer = Answer::create($form->sort, $form->question_id);
 
         foreach ($form->translations as $translation) {
             $answer->setTranslation($translation->lang_id, $translation->answer);
@@ -39,7 +39,7 @@ class AnswerManageService
     {
         $answer = $this->answers->get($id);
 
-        $answer->edit($form->sort, $form->status);
+        $answer->edit($form->sort);
 
         foreach ($form->translations as $translation) {
             $answer->setTranslation($translation->lang_id, $translation->answer);

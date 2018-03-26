@@ -26,7 +26,7 @@ class QuestionManageService
      */
     public function create(QuestionForm $form): Question
     {
-        $question = Question::create($form->type, $form->status);
+        $question = Question::create($form->type);
 
         foreach ($form->translations as $translation) {
             $question->setTranslation($translation->lang_id, $translation->question);
@@ -41,7 +41,7 @@ class QuestionManageService
     {
         $question = $this->questions->get($id);
 
-        $question->edit($form->type, $form->status);
+        $question->edit($form->type);
 
         foreach ($form->translations as $translation) {
             $question->setTranslation($translation->lang_id, $translation->question);

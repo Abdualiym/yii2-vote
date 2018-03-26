@@ -22,7 +22,6 @@ class AnswerForm extends CompositeForm
     {
         if ($answer) {
             $this->sort = $answer->sort;
-            $this->status = $answer->status;
             $this->question_id = $answer->question_id;
             $this->translations = array_map(function (array $language) use ($answer) {
                 return new AnswerTranslationForm($answer->getTranslation($language['id']));
@@ -40,7 +39,7 @@ class AnswerForm extends CompositeForm
     {
         return [
             [['sort'], 'required'],
-            [['sort', 'question_id', 'status'], 'integer'],
+            [['sort', 'question_id'], 'integer'],
         ];
     }
 

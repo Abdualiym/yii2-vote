@@ -29,7 +29,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <tr data-toggle="collapse" data-target="#accordion-<?php echo $model->id; ?>" class="clickable">
             <td><?php echo $model->id; ?></td>
             <td><?php echo $model->translations['1']->question; ?></td>
-            <td><?php echo $model->countQuestions; ?></td>
+            <td><?php echo $model->countQuestions($model->id); ?></td>
             <td>
                 <?php echo \abdualiym\vote\helpers\QuestionHelper::statusLabel($model->status); ?>
             </td>
