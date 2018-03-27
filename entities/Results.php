@@ -63,11 +63,14 @@ class Results extends \yii\db\ActiveRecord
         $this->answer_id = $answer_id;
     }
     /**
+     * for frontend
     * @return \yii\db\ActiveQuery
      * Response all count voted question and answers
     */
     public function listAnswersResult($question_id){
-        $answers = Answer::find()->select('id')->where(['question_id' => $question_id])->orderBy(['sort' => SORT_DESC])->all();
+        $answers = Answer::find()->select('id')
+            ->where(['question_id' => $question_id, 'status' =>1])
+            ->orderBy(['sort' => SORT_DESC])->all();
         foreach ($answers as $items) {
             $item['id'] = $items->id;
             $answerCount = Results::find()
@@ -75,7 +78,7 @@ class Results extends \yii\db\ActiveRecord
                 ->innerJoin('vote_answers', 'vote_results.answer_id = vote_answers.id')
                 ->innerJoin('vote_questions', 'vote_answers.question_id = vote_questions.id')
                 ->andWhere(['in', 'vote_results.answer_id', $items->id])
-                ->andWhere(['in', 'vote_answers.status', self::STATUS_ACTIVE])
+                ->andWhere(['in', 'vote_answers.status',self::STATUS_ACTIVE])
                 ->having('COUNT(vote_results.id)>=1')
                 ->asArray()
                 ->one();
@@ -99,6 +102,7 @@ class Results extends \yii\db\ActiveRecord
     }
 
     /**
+     * for frontend
      * @return \yii\db\ActiveQuery
      * select one active question for ajax widget
      */
@@ -108,12 +112,11 @@ class Results extends \yii\db\ActiveRecord
     }
 
     /**
+     * for frontend
      * @return \yii\db\ActiveQuery
      * list answers for ajax widget
      */
     public function listAnswers($question_id){
-        $lang = Language::getLangByPrefix(\Yii::$app->language);
-        $lang_id = $lang['id'];
         $answers = Answer::find()->select('id')
             ->where(['question_id' => $question_id, 'status' => self::STATUS_ACTIVE])
             ->orderBy(['sort' => SORT_DESC])

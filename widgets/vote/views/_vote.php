@@ -10,19 +10,28 @@ $lang = Yii::$app->language;
         <div class="votes-block">
             <?php if($question->isVoted()): ?>
 
-                <?php $result = \abdualiym\vote\entities\Results::listAnswersResult($question->id); ?>
+                <?php $result = \abdualiym\vote\entities\Results::listAnswersResult($question->id);
+                $qty = $result['all'];
+                ?>
 
                 <div class="vote-question"><?= $question->translate($question->id); ?></div>
 
-                <?php foreach ($question->voteAnswers as $answer_res):?>
+                <?php foreach ($question->activeAnswersList as $answer_res):
+
+                    $p=[];
+                    if($qty != 0 && $qty != NULL){
+                        $present = $answer_res->countResult($answer_res->id) * 100 / $qty;
+                        $p = round($present);
+                    }
+                    ?>
 
                     <div class="progress-title"><?= $answer_res->translate($answer_res->id); ?>:
                         <strong><?= Yii::t('app', '{n,plural,=0{not voted} =1{# vote} =2{# votes} other{# votes}}', ['n' => $answer_res->countResult($answer_res->id)])?></strong>
                     </div>
                     <div class="progress">
-                        <div class="progress-bar" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="<?= $result['all'];?>" style="width: <?php $present= $answer_res->countResult($answer_res->id)*100/$result['all'];
-                        echo round($present);?>%;">
-                            <?php echo round($present);?>%</div>
+                        <div class="progress-bar" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="<?= $result['all'];?>"
+                             style="width: <?=$p;?>%;">
+                            <?=$p;?>%</div>
                     </div>
 
                 <?php endforeach; ?>
@@ -31,7 +40,7 @@ $lang = Yii::$app->language;
                 <ul class="list-group">
 
                     <div class="vote-question"><?= $question->translate($question->id); ?></div>
-                    <?php foreach ($question->voteAnswers as $answer):?>
+                    <?php foreach ($question->activeAnswersList as $answer):?>
                         <li id="<?= $question->id; ?>">
                             <div class="radio">
                                 <label>
@@ -54,7 +63,9 @@ $lang = Yii::$app->language;
     <?php endforeach; ?>
 </div>
 
-<script>
+
+<?php ob_start(); ?>
+<script type="text/javascript" charset="utf-8">
     $(document).ready(function() {
 
         var param = $('meta[name=csrf-param]').attr('content');
@@ -88,3 +99,4 @@ $lang = Yii::$app->language;
 
     });
 </script>
+<?php $this->registerJs(preg_replace('~^\s*<script.*>|</script>\s*$~ U', '', ob_get_clean())) ?>

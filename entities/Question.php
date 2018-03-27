@@ -71,7 +71,11 @@ class Question extends ActiveRecord
     {
         return $this->status == self::STATUS_DRAFT;
     }
-
+    /**
+     * this method validate this user already voted
+     * only active answer
+     * if user voted return true
+     */
     public function isVoted()
     {
         return Results::find()
@@ -79,7 +83,6 @@ class Question extends ActiveRecord
             ->innerJoin('vote_questions', 'vote_answers.question_id = vote_questions.id')
             ->andWhere(['in', 'vote_questions.id', $this->id])
             ->andWhere(['in', 'vote_results.user_ip', Yii::$app->request->getUserIP()])
-            ->having('COUNT(vote_results.id)>=1')
             ->asArray()
             ->one();
 
@@ -136,7 +139,9 @@ class Question extends ActiveRecord
     {
         $lang = Language::getLangByPrefix(\Yii::$app->language);
 
-        return QuestionTranslation::find()->where(['question_id' => $id, 'lang_id' => $lang['id']])->one()->question;
+        return QuestionTranslation::find()
+            ->where(['question_id' => $id, 'lang_id' => $lang['id']])->one()
+            ->question;
     }
 
     public function getVoteAnswers(): ActiveQuery
@@ -152,7 +157,8 @@ class Question extends ActiveRecord
 
     public function getResultsUserVote(): ActiveQuery
     {
-        return $this->hasOne(Results::class, ['question_id' => 'id'])->where(['user_ip'=> \Yii::$app->getRequest()->getUserIP()]);
+        return $this->hasOne(Results::class, ['question_id' => 'id'])
+            ->where(['user_ip'=> \Yii::$app->getRequest()->getUserIP()]);
     }
 
     public function getResultsUserAnswer(): ActiveQuery
@@ -160,11 +166,10 @@ class Question extends ActiveRecord
         return $this->hasMany(Results::class, ['answer_id' => 'id']);
     }
 
-    public function getResultInfo()
-    {
-        return $this->hasOne(Results::class, ['question_id' => 'id']);
-
-    }
+    /**
+     * result count all answers
+     * not status
+     */
     public function CountQuestions($id)
     {
         $count = Results::find()
@@ -179,11 +184,6 @@ class Question extends ActiveRecord
 
     }
 
-
-    public function VoteQuestion($id)
-    {
-        return QuestionTranslation::find()->where(['question_id' => $id, 'lang_id' => 1])->one();
-    }
 
     // table name
 
