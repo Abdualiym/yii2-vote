@@ -63,7 +63,7 @@ class VoteController extends Controller
         \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
         if (Yii::$app->request->isAjax) {
             $form = new ResultsForm();
-            if ($form->load(Yii::$app->request->post()) && !$form->validateDuplicate($form->answer_id)) {
+            if ($form->load(Yii::$app->request->post()) && !Question::isVoted($form->answer_id)) {
                     try {
                         $this->service->create($form);
                         $response = ["status" => 1, "message" => Yii::t('app', 'Voting successfully received!')];

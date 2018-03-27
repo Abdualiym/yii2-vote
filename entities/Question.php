@@ -76,16 +76,19 @@ class Question extends ActiveRecord
      * only active answer
      * if user voted return true
      */
-    public function isVoted()
+    public function isVoted($id = null)
     {
+
+        if(isset($id)){ $id = Answer::findOne($id)->question_id; }else{ $id = $this->id;}
+
         return Results::find()
             ->innerJoin('vote_answers', 'vote_results.answer_id = vote_answers.id')
             ->innerJoin('vote_questions', 'vote_answers.question_id = vote_questions.id')
-            ->andWhere(['in', 'vote_questions.id', $this->id])
+            ->andWhere(['in', 'vote_answers.status', self::STATUS_ACTIVE])
+            ->andWhere(['in', 'vote_questions.id', $id])
             ->andWhere(['in', 'vote_results.user_ip', Yii::$app->request->getUserIP()])
             ->asArray()
             ->one();
-
     }
     // translations
 
