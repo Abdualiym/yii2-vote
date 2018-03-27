@@ -62,7 +62,10 @@ class Results extends \yii\db\ActiveRecord
     {
         $this->answer_id = $answer_id;
     }
-
+    /**
+    * @return \yii\db\ActiveQuery
+     * Response all count voted question and answers
+    */
     public function listAnswersResult($question_id){
         $answers = Answer::find()->select('id')->where(['question_id' => $question_id])->orderBy(['sort' => SORT_DESC])->all();
         foreach ($answers as $items) {
@@ -72,6 +75,7 @@ class Results extends \yii\db\ActiveRecord
                 ->innerJoin('vote_answers', 'vote_results.answer_id = vote_answers.id')
                 ->innerJoin('vote_questions', 'vote_answers.question_id = vote_questions.id')
                 ->andWhere(['in', 'vote_results.answer_id', $items->id])
+                ->andWhere(['in', 'vote_answers.status', self::STATUS_ACTIVE])
                 ->having('COUNT(vote_results.id)>=1')
                 ->asArray()
                 ->one();
@@ -83,6 +87,8 @@ class Results extends \yii\db\ActiveRecord
             ->innerJoin('vote_answers', 'vote_results.answer_id = vote_answers.id')
             ->innerJoin('vote_questions', 'vote_answers.question_id = vote_questions.id')
             ->andWhere(['in', 'vote_questions.id', $question_id])
+            ->andWhere(['in', 'vote_questions.status', self::STATUS_ACTIVE])
+            ->andWhere(['in', 'vote_answers.status', self::STATUS_ACTIVE])
             ->having('COUNT(vote_results.id)>=1')
             ->asArray()
             ->one();
@@ -92,21 +98,29 @@ class Results extends \yii\db\ActiveRecord
         return $response;
     }
 
-
-
+    /**
+     * @return \yii\db\ActiveQuery
+     * select one active question for ajax widget
+     */
     public function selectQuestion(){
         $question = Question::find()->active()->one();
         return isset($question)? $question : null;
     }
 
+    /**
+     * @return \yii\db\ActiveQuery
+     * list answers for ajax widget
+     */
     public function listAnswers($question_id){
         $lang = Language::getLangByPrefix(\Yii::$app->language);
         $lang_id = $lang['id'];
-        $answers = Answer::find()->select('id')->where(['question_id' => $question_id])->orderBy(['sort' => SORT_DESC])->all();
+        $answers = Answer::find()->select('id')
+            ->where(['question_id' => $question_id, 'status' => self::STATUS_ACTIVE])
+            ->orderBy(['sort' => SORT_DESC])
+            ->all();
         foreach ($answers as $items) {
-            $item['id'] = $items->id;
-            $item['answer'] = (ArrayHelper::map($items->translations,'lang_id','answer'))[$lang_id];
-            $response[] = $item;
+            $response[] = ['id' => $items->id,
+            'answer' => $items->translate($items->id)];
         }
         return $response;
     }

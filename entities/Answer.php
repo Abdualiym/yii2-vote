@@ -114,12 +114,6 @@ class Answer extends ActiveRecord
 
 
 
-    public function CountResult($id)
-    {
-        return Results::find()->where(['answer_id' => $id])->count();
-
-    }
-
     // relations
 
     public function getCreatedBy(): ActiveQuery
@@ -167,6 +161,19 @@ class Answer extends ActiveRecord
     }
 
 
+
+    public function CountResult($id)
+    {
+        $count = Results::find()
+            ->select(['vote_results.id', 'COUNT(vote_results.answer_id) as AnswerCount'])
+            ->innerJoin('vote_answers', 'vote_results.answer_id = vote_answers.id')
+            ->andWhere(['in', 'vote_results.answer_id', $id])
+            ->andWhere(['in', 'vote_answers.status', self::STATUS_ACTIVE])
+            ->asArray()
+            ->one();
+        return $count['AnswerCount'];
+
+    }
     //table name
 
 

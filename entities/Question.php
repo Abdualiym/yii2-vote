@@ -144,6 +144,12 @@ class Question extends ActiveRecord
         return $this->hasMany(Answer::class, ['question_id' => 'id']);
     }
 
+    //active answers to frontend(_vote.php widget)
+    public function getActiveAnswersList(): ActiveQuery
+    {
+        return $this->hasMany(Answer::class, ['question_id' => 'id'])->active();
+    }
+
     public function getResultsUserVote(): ActiveQuery
     {
         return $this->hasOne(Results::class, ['question_id' => 'id'])->where(['user_ip'=> \Yii::$app->getRequest()->getUserIP()]);

@@ -16,7 +16,9 @@ $lang = Yii::$app->language;
 
                 <?php foreach ($question->voteAnswers as $answer_res):?>
 
-                    <div class="progress-title"><?= $answer_res->translate($answer_res->id); ?>: <strong><?= Yii::t('app', '{n,plural,=0{not voted} =1{# vote} =2{# votes} other{# votes}}', ['n' => $answer_res->countResult($answer_res->id)])?></strong></div>
+                    <div class="progress-title"><?= $answer_res->translate($answer_res->id); ?>:
+                        <strong><?= Yii::t('app', '{n,plural,=0{not voted} =1{# vote} =2{# votes} other{# votes}}', ['n' => $answer_res->countResult($answer_res->id)])?></strong>
+                    </div>
                     <div class="progress">
                         <div class="progress-bar" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="<?= $result['all'];?>" style="width: <?php $present= $answer_res->countResult($answer_res->id)*100/$result['all'];
                         echo round($present);?>%;">
