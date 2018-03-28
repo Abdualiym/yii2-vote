@@ -12,16 +12,7 @@ class m180327_152515_create_vote_results_table extends Migration
      */
     public function safeUp()
     {
-        $this->createTable('vote_results', [
-            'id' => $this->primaryKey(),
-            'answer_id' => $this->integer()->notNull(),
-            'user_ip'=> $this->string(50)->notNull(),
-            'user_id'=> $this->integer()->defaultValue(null),
-            'created_at' => $this->integer()->notNull(),
-            'updated_at' => $this->integer()->notNull(),
-        ],'CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE=InnoDB');
-        $this->addForeignKey('fk-votes_results-vote_answers_id', 'vote_results', 'answer_id', 'vote_answers', 'id', 'CASCADE', 'CASCADE');
-        $this->addForeignKey('fk_vote_results_vote_questions_id', 'vote_results', 'question_id', 'vote_questions', 'id', 'CASCADE', 'CASCADE');
+        $this->dropColumn('vote_results', 'question_id');
     }
 
     /**
@@ -29,6 +20,6 @@ class m180327_152515_create_vote_results_table extends Migration
      */
     public function safeDown()
     {
-        $this->dropTable('vote_results');
+        false;
     }
 }

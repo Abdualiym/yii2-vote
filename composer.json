@@ -11,7 +11,7 @@
         }
     ],
     "require": {
-        "yiisoft/yii2": "~2.0.0",
+        "yiisoft/yii2": "~2.0",
         "elisdn/yii2-composite-form": "^1.0",
         "abdualiym/yii2-language-class": "*",
         "mihaildev/yii2-elfinder": "*",
@@ -26,13 +26,7 @@
             "abdualiym\\vote\\": ""
         }
     },
-    "config": {
-        "process-timeout": 1800
-    },
-    "repositories": [
-        {
-            "type": "composer",
-            "url": "https://asset-packagist.org"
-        }
-    ]
+    "extra": {
+        "bootstrap": "abdualiym\\vote\\Bootstrap"
+    }
 }
