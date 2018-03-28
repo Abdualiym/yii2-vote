@@ -31,7 +31,14 @@ Config
     ],
     
 ```
+Url manager
+```
+i18n url
+'vote/<_c:[\w\-]+>/<_a:[\w-]+>' => 'vote/<_c>/<_a>',
 
+Url manager
+'voteresult' => 'site/vote-result',
+```
 
 
  common/config.php
