@@ -75,10 +75,7 @@ $lang = Yii::$app->language;
                     //var message = data['message'];
                     //$('#vote-res-message').html(message);
                     //$('#view-results').show();
-                }
-            
-                    
-                
+                }                                          
             }
         });
         
@@ -92,7 +89,7 @@ $lang = Yii::$app->language;
             url: url+'/vote/vote/add',
             type: 'post',
             dataType: 'json',
-            data: {'ResultsForm[answer_id]': form, 'param':token},
+            data: {'ResultsForm[answer_id]': form, '_csrf':token},
             success: function(data, response, textStatus, jqXHR) {
                 var message = data['message'];
                $('#vote-res-message').html(message);

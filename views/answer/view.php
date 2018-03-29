@@ -47,11 +47,11 @@ $this->params['breadcrumbs'][] = $this->title;
                             'sort',
 
                             [
-                                'label' => Yii::t('vote', 'Count Voted'),
+                                'label' => Yii::t('vote', 'Number of Votes'),
                                 'value' => $answer->countAnswers
                             ],
                             [
-                                'label' => Yii::t('vote', 'Question'),
+                                'label' => Yii::t('vote', 'Number of Votes'),
                                 'value' => $answer->question->translate($answer->question->id)
                             ],
 

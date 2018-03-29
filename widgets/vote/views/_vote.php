@@ -37,7 +37,7 @@ $lang = Yii::$app->language;
                 <?php endforeach; ?>
 
             <?php else:?>
-                <ul class="list-group">
+                <ul class="list-group" style="box-shadow: 0 0px 0px rgba(0,0,0,.075);">
 
                     <div class="vote-question"><?= $question->translate($question->id); ?></div>
                     <?php foreach ($question->activeAnswersList as $answer):?>
@@ -55,7 +55,7 @@ $lang = Yii::$app->language;
                     <span id="<?= $question->id; ?>-vote-res-message"></span><br>
                     <span id="<?= $question->id; ?>-vote-empty" style="display: none"><?= Yii::t('vote', 'Please choose one of the answers.');?></span></br>
 
-                    <a id="<?= $question->id; ?>" class="vote-submit btn btn-info"><?= Yii::t('vote', 'Vote')?></a>
+                    <a id="<?= $question->id; ?>" class="vote-submit btn btn-primary vote-btn"><?= Yii::t('vote', 'Vote')?></a>
                 </ul>
             <?php endif; ?>
         </div>
@@ -82,7 +82,7 @@ $lang = Yii::$app->language;
                 url: url+'/vote/vote/add',
                 type: 'post',
                 dataType: 'json',
-                data: {'ResultsForm[answer_id]': id, 'param':token},
+                data: {'ResultsForm[answer_id]': id, '_csrf':token},
                 success: function(data, response, textStatus, jqXHR) {
                     var message = data['message'];
                     $('#'+form+'-vote-res-message').html(message);

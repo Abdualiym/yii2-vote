@@ -3,9 +3,12 @@
 return [
 
     'Sort' => 'Порядок ',
+    'Active' => 'Активный ',
     'Something is wrong or you already voted!' => 'Что-то не так, или вы уже голосовали',
     'Status' => 'Статус ',
-    'Number of votes' => 'Количество голосов',
+    'Activate' => 'Активировать ',
+    'Draft' => 'Черновик',
+    'Number of Votes' => 'Количество голосов',
     'View all results' => 'Посмотреть все результаты',
     'Select only one option' => 'Выбрать только один вариант',
     '{n,plural,=0{not voted} =1{# vote} =2{# votes} other{# votes}}' => '{n,plural,=0{не проголосовано} =1{# голос} =2{# голоса} other{# голосов}}',
