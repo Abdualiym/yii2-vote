@@ -82,7 +82,7 @@ class AnswerController extends Controller implements ViewContextInterface
         if ($form->load(Yii::$app->request->post()) && $form->validate()) {
             try {
                 $this->service->create($form);
-                Yii::$app->session->setFlash('success', Yii::t('app', 'Answer successfully added!'));
+                Yii::$app->session->setFlash('success', Yii::t('vote', 'Answer successfully added!'));
 
                 if(empty(Yii::$app->request->post('more'))){
                     return $this->redirect('/vote/question/index');
@@ -108,7 +108,7 @@ class AnswerController extends Controller implements ViewContextInterface
         if ($form->load(Yii::$app->request->post()) && $form->validate()) {
             try {
                 $this->service->edit($answer->id, $form);
-                Yii::$app->session->setFlash('success', Yii::t('app', 'Answer successfully updated!'));
+                Yii::$app->session->setFlash('success', Yii::t('vote', 'Answer successfully updated!'));
                 return $this->redirect(['view', 'id' => $answer->id]);
             } catch (\DomainException $e) {
                 Yii::$app->errorHandler->logException($e);

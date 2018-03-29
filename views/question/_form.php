@@ -38,7 +38,7 @@ foreach ($model->translations as $i => $translation) {
 
             <div class="box box-default">
                 <div class="box-body">
-                    <?= Yii::t('app', 'The form of creating question')?>
+                    <?= Yii::t('vote', 'The form of creating question')?>
                     <?= $form->errorSummary($model) ?>
                     <!-- Nav tabs -->
                     <ul class="nav nav-tabs" role="tablist">
@@ -83,13 +83,13 @@ foreach ($model->translations as $i => $translation) {
         </div>
         <div class="col-md-4">
             <div class="box box-default">
-                <div class="box-header with-border"><?= Yii::t('app', 'The form of creating question')?></div>
+                <div class="box-header with-border"><?= Yii::t('vote', 'The form of creating question')?></div>
                 <div class="box-body">
                     <?= $form->field($model, 'type')->dropDownList($model->typesList()) ?>
 
 
 
-                    <?php echo Html::submitButton(Yii::t('app', $this->title), ['class' => 'btn btn-success btn-block']) ?>
+                    <?php echo Html::submitButton(Yii::t('vote', $this->title), ['class' => 'btn btn-success btn-block']) ?>
 
                 </div>
             </div>

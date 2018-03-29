@@ -85,7 +85,12 @@ class Results extends \yii\db\ActiveRecord
                 ->asArray()
                 ->one();
             $item['count'] = $answerCount['AnswerCount'];
-            $item['count_message'] = Yii::t('app', '{n,plural,=0{not voted} =1{# vote} =2{# votes} other{# votes}}', ['n' => $answerCount['AnswerCount']]);
+            if($answerCount['AnswerCount'] == null || empty($answerCount['AnswerCount'])){
+                $count_answer = 0;
+            }else{
+                $count_answer = $answerCount['AnswerCount'];
+            }
+            $item['count_message'] = Yii::t('vote', '{n,plural,=0{not voted} =1{# vote} =2{# votes} other{# votes}}', ['n' => $count_answer]);
             $res[] = $item;
         }
         if(Question::find()->count() >=1){

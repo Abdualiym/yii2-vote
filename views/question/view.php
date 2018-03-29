@@ -13,26 +13,26 @@ $langList = \abdualiym\languageClass\Language::langList(Yii::$app->params['langu
 
 
 $this->title = $question->translations[1]->question;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Questions'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('vote', 'Questions'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
 <div class="vote-view">
 
     <p>
-        <?php echo Html::a(Yii::t('app', 'Update'), ['update', 'id' => $question->id], ['class' => 'btn btn-primary']) ?>
-        <?php echo Html::a(Yii::t('app', 'Create answer'), ['answer/create', 'question_id' => $question->id], ['class' => 'btn btn-default']) ?>
-        <?php echo Html::a(Yii::t('app', 'Delete'), ['delete', 'id' => $question->id], [
+        <?php echo Html::a(Yii::t('vote', 'Update'), ['update', 'id' => $question->id], ['class' => 'btn btn-primary']) ?>
+        <?php echo Html::a(Yii::t('vote', 'Create answer'), ['answer/create', 'question_id' => $question->id], ['class' => 'btn btn-default']) ?>
+        <?php echo Html::a(Yii::t('vote', 'Delete'), ['delete', 'id' => $question->id], [
             'class' => 'btn btn-danger pull-right',
             'data' => [
-                'confirm' => Yii::t('app', 'Are you sure you want to delete the element?'),
+                'confirm' => Yii::t('vote', 'Are you sure you want to delete the element?'),
                 'method' => 'post',
             ]
         ]) ?>
         <?php if ($question->isActive()): ?>
-            <?php echo Html::a(Yii::t('app', 'Draft'), ['draft', 'id' => $question->id], ['class' => 'btn btn-default pull-right', 'data-method' => 'post']) ?>
+            <?php echo Html::a(Yii::t('vote', 'Draft'), ['draft', 'id' => $question->id], ['class' => 'btn btn-default pull-right', 'data-method' => 'post']) ?>
         <?php else: ?>
-            <?php echo Html::a(Yii::t('app', 'Activate'), ['activate', 'id' => $question->id], ['class' => 'btn btn-success', 'data-method' => 'post']) ?>
+            <?php echo Html::a(Yii::t('vote', 'Activate'), ['activate', 'id' => $question->id], ['class' => 'btn btn-success', 'data-method' => 'post']) ?>
         <?php endif; ?>
     </p>
 
@@ -40,7 +40,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="row">
         <div class="col-md-6">
             <div class="box">
-                <div class="box-header with-border"><?= Yii::t('app', 'Question')?></div>
+                <div class="box-header with-border"><?= Yii::t('vote', 'Question')?></div>
                 <div class="box-body">
                     <?php echo DetailView::widget([
                         'model' => $question,
@@ -64,7 +64,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
         <div class="col-md-6">
             <div class="box">
-                <div class="box-header with-border"><?= Yii::t('app', 'Question')?></div>
+                <div class="box-header with-border"><?= Yii::t('vote', 'Question')?></div>
                 <div class="box-body">
                     <?php echo DetailView::widget([
                         'model' => $question,
@@ -72,26 +72,26 @@ $this->params['breadcrumbs'][] = $this->title;
 //                            'id',
                             [
                                 'attribute' => 'createdBy.username',
-                                'label' => Yii::t('app', 'Created by')
+                                'label' => Yii::t('vote', 'Created by')
                             ],
                             [
-                                'label' => Yii::t('app', 'Count Voted'),
+                                'label' => Yii::t('vote', 'Count Voted'),
                                 'value' => $question->countQuestions($question->id)
                             ],
 
                             [
                                 'attribute' => 'updatedBy.username',
-                                'label' => Yii::t('app', 'Updated by')
+                                'label' => Yii::t('vote', 'Updated by')
                             ],
                             [
                                 'attribute' => 'created_at',
                                 'format' => 'datetime',
-                                'label' => Yii::t('app', 'Created At')
+                                'label' => Yii::t('vote', 'Created At')
                             ],
                             [
                                 'attribute' => 'updated_at',
                                 'format' => 'datetime',
-                                'label' => Yii::t('app', 'Updated At')
+                                'label' => Yii::t('vote', 'Updated At')
                             ],
                         ],
                     ]) ?>
@@ -103,7 +103,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <div class="box box-default">
 
-        <div class="box-header with-border"><?= Yii::t('app', 'Content') ?></div>
+        <div class="box-header with-border"><?= Yii::t('vote', 'Content') ?></div>
 
         <div class="box-body">
             <!-- Nav tabs -->
@@ -154,8 +154,8 @@ $this->params['breadcrumbs'][] = $this->title;
     </div>
     <div class="box box-default">
 
-        <div class="box-header with-border"><?= Yii::t('app', 'Answers') ?></div>
-        <a href="<?php echo Url::toRoute(['answer/create', 'question_id' => $question->id])?>" class="btn btn-info pull-right" style="margin-right: 20px;"><i class="fa fa-plus-circle"></i> <?= Yii::t('app', 'Create answer')?></a>
+        <div class="box-header with-border"><?= Yii::t('vote', 'Answers') ?></div>
+        <a href="<?php echo Url::toRoute(['answer/create', 'question_id' => $question->id])?>" class="btn btn-info pull-right" style="margin-right: 20px;"><i class="fa fa-plus-circle"></i> <?= Yii::t('vote', 'Create answer')?></a>
 <br>
         <div class="box-body">
             <!-- Nav tabs -->
@@ -163,10 +163,10 @@ $this->params['breadcrumbs'][] = $this->title;
                 <thead>
                 <tr>
                     <th>№</th>
-                    <th><?= Yii::t('app', 'Answer')?></th>
-                    <th><?= Yii::t('app', 'Status')?></th>
-                    <th><?= Yii::t('app', 'Count Votes')?></th>
-                    <th><?= Yii::t('app', 'Actions')?></th>
+                    <th><?= Yii::t('vote', 'Answer')?></th>
+                    <th><?= Yii::t('vote', 'Status')?></th>
+                    <th><?= Yii::t('vote', 'Number of Votes')?></th>
+                    <th><?= Yii::t('vote', 'Actions')?></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -189,7 +189,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         <?=Html::a('<i class="fa fa-trash"></i>', '/vote/answer/delete?id='.$items->id, [
                             'class' => 'btn btn-danger',
                             'data' => [
-                                'confirm' => Yii::t('app', 'Are you sure you want to delete the element?'),
+                                'confirm' => Yii::t('vote', 'Are you sure you want to delete the element?'),
                                 'method' => 'post',
                             ],
 

@@ -70,13 +70,13 @@ class VoteController extends Controller
             if ($form->load(Yii::$app->request->post()) && !Question::isVoted($form->answer_id)) {
                     try {
                         $this->service->create($form);
-                        $response = ["status" => 1, "message" => Yii::t('app', 'Voting successfully received!')];
+                        $response = ["status" => 1, "message" => Yii::t('vote', 'Voting successfully received!')];
                     } catch (\DomainException $e) {
-                        $response = ["ok" => false, "status" => 0, "message" => Yii::t('app', 'Something is wrong! ')];
+                        $response = ["ok" => false, "status" => 0, "message" => Yii::t('vote', 'Something is wrong! ')];
                     }
                     return $response;
             }
-            return [ "ok" => false, "status" => 0, "message" => ""];
+            return [ "ok" => false, "status" => 0, "message" => Yii::t('vote', 'Something is wrong or you already voted!')];
         }
         return ['message' => "The format does not fit request", 'status' => 0, 'ok' => false];
     }

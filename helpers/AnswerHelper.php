@@ -12,9 +12,9 @@ class AnswerHelper
     public static function statusList(): array
     {
         return [
-            Answer::STATUS_DRAFT => \Yii::t('app', 'Draft'),
-            Answer::STATUS_ACTIVE => \Yii::t('app', 'Active'),
-            Answer::STATUS_ARCHIVE => \Yii::t('app', 'Archive'),
+            Answer::STATUS_DRAFT => \Yii::t('vote', 'Draft'),
+            Answer::STATUS_ACTIVE => \Yii::t('vote', 'Active'),
+            Answer::STATUS_ARCHIVE => \Yii::t('vote', 'Archive'),
 
         ];
     }

@@ -17,7 +17,7 @@ $lang = Yii::$app->language;
                 <?php foreach ($question->voteAnswers as $answer_res):?>
 
                     <div class="progress-title"><?= $answer_res->translate($answer_res->id); ?>:
-                        <strong><?= Yii::t('app', '{n,plural,=0{not voted} =1{# vote} =2{# votes} other{# votes}}', ['n' => $answer_res->countResult($answer_res->id)])?></strong>
+                        <strong><?= Yii::t('vote', '{n,plural,=0{not voted} =1{# vote} =2{# votes} other{# votes}}', ['n' => $answer_res->countResult($answer_res->id)])?></strong>
                     </div>
                     <div class="progress">
                         <div class="progress-bar" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="<?= $result['all'];?>" style="width: <?php $present= $answer_res->countResult($answer_res->id)*100/$result['all'];
@@ -44,9 +44,9 @@ $lang = Yii::$app->language;
                     <?php endforeach; ?>
                     <span id="vote-res-icon"></span><br>
                     <span id="<?= $question->id; ?>-vote-res-message"></span><br>
-                    <span id="<?= $question->id; ?>-vote-empty" style="display: none"><?= Yii::t('app', 'Please choose one of the answers.');?></span></br>
+                    <span id="<?= $question->id; ?>-vote-empty" style="display: none"><?= Yii::t('vote', 'Please choose one of the answers.');?></span></br>
 
-                    <a id="<?= $question->id; ?>" class="vote-submit btn btn-info"><?= Yii::t('app', 'Vote')?></a>
+                    <a id="<?= $question->id; ?>" class="vote-submit btn btn-info"><?= Yii::t('vote', 'Vote')?></a>
                 </ul>
             <?php endif; ?>
         </div>

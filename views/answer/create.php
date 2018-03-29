@@ -22,8 +22,8 @@ foreach ($model->translations as $i => $translation) {
     }
 }
 
-$this->title = Yii::t('app', 'Create answer');
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Questions'), 'url' => ['/vote/question/index']];
+$this->title = Yii::t('vote', 'Create answer');
+$this->params['breadcrumbs'][] = ['label' => Yii::t('vote', 'Questions'), 'url' => ['/vote/question/index']];
 $this->params['breadcrumbs'][] = ['label' => $_GET['question_id'], 'url' => ['/vote/question/view', 'id' => $_GET['question_id']]];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
@@ -36,7 +36,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="col-md-8">
             <div class="box box-default">
                 <div class="box-body">
-                    <?= Yii::t('app', 'Create answer')?>
+                    <?= Yii::t('vote', 'Create answer')?>
 
 <?= $form->errorSummary($model) ?>
                     <!-- Nav tabs -->
@@ -82,14 +82,14 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
         <div class="col-md-4">
             <div class="box box-default">
-                <div class="box-header with-border"><?= Yii::t('app', 'Vote') ?></div>
+                <div class="box-header with-border"><?= Yii::t('vote', 'Vote') ?></div>
                 <div class="box-body">
                     <?php echo $form->field($model, 'question_id')->hiddenInput(['value'=> $model->question_id])->label(false); ?>
                     <?php echo $form->field($model, 'sort')->dropDownList([1 => 1, 2 => 2, 3 => 3, 4 => 4, 5 => 5, 6 => 6, 7 => 7, 8 => 8, 9 => 9, 10 => 10]) ?>
 
 
-                    <button type="submit" class="btn btn-success btn-block"><i class="fa fa-file-archive-o"></i> <?= Yii::t('app', 'Create')?></button>
-                    <button value="more" name="more" type="submit" class="btn btn-success btn-block"><i class="fa fa-plus-circle"></i>  <?= Yii::t('app', 'Add More')?></button>
+                    <button type="submit" class="btn btn-success btn-block"><i class="fa fa-file-archive-o"></i> <?= Yii::t('vote', 'Create')?></button>
+                    <button value="more" name="more" type="submit" class="btn btn-success btn-block"><i class="fa fa-plus-circle"></i>  <?= Yii::t('vote', 'Add More')?></button>
                 </div>
             </div>
 
@@ -98,7 +98,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php ActiveForm::end(); ?>
     <div class="box box-default">
 
-        <div class="box-header with-border"><?= Yii::t('app', 'Answers') ?></div>
+        <div class="box-header with-border"><?= Yii::t('vote', 'Answers') ?></div>
 
         <div class="box-body">
             <!-- Nav tabs -->
@@ -107,10 +107,10 @@ $this->params['breadcrumbs'][] = $this->title;
                 <thead>
                 <tr>
                     <th>№</th>
-                    <th><?= Yii::t('app', 'Answer')?></th>
-                    <th><?= Yii::t('app', 'Count Votes')?></th>
-                    <th><?= Yii::t('app', 'Status')?></th>
-                    <th><?= Yii::t('app', 'Actions')?></th>
+                    <th><?= Yii::t('vote', 'Answer')?></th>
+                    <th><?= Yii::t('vote', 'Number of Votes')?></th>
+                    <th><?= Yii::t('vote', 'Status')?></th>
+                    <th><?= Yii::t('vote', 'Actions')?></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -133,7 +133,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             <?=Html::a('<i class="fa fa-trash"></i>', '/vote/answer/delete?id='.$items->id, [
                                 'class' => 'btn btn-danger',
                                 'data' => [
-                                    'confirm' => Yii::t('app', 'Are you sure you want to delete the element?'),
+                                    'confirm' => Yii::t('vote', 'Are you sure you want to delete the element?'),
                                     'method' => 'post',
                                 ],
 

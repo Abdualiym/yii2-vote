@@ -12,16 +12,16 @@ class QuestionHelper
     public static function statusList(): array
     {
         return [
-            Question::STATUS_DRAFT => \Yii::t('app', 'Draft'),
-            Question::STATUS_ACTIVE => \Yii::t('app', 'Active'),
-            Question::STATUS_ARCHIVE => \Yii::t('app', 'Archive'),
+            Question::STATUS_DRAFT => \Yii::t('vote', 'Draft'),
+            Question::STATUS_ACTIVE => \Yii::t('vote', 'Active'),
+            Question::STATUS_ARCHIVE => \Yii::t('vote', 'Archive'),
         ];
     }
 
     public static function typeList(): array
     {
         return [
-            Question::TYPE_ONE => \Yii::t('app', 'Select only one option'),
+            Question::TYPE_ONE => \Yii::t('vote', 'Select only one option'),
         ];
     }
 

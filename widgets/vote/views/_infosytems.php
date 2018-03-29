@@ -12,7 +12,7 @@ $lang = Yii::$app->language;
 ?>
 <div class="votes-block">
     <div class="title-cont">
-        <h3 class="title"><?= Yii::t('app', 'Your Vote');?></h3>
+        <h3 class="title"><?= Yii::t('vote', 'Your Vote');?></h3>
     </div>
     <div class="vote-question" id="vote-question-id"></div>
 <!---- result ---->
@@ -27,11 +27,11 @@ $lang = Yii::$app->language;
     <div class="text-center">
         <span id="vote-res-icon"></span><br>
         <span id="vote-res-message"></span><br>
-        <span id="vote-empty" style="display: none"><?= Yii::t('app', 'Please choose one of the answers.');?></span></br>
-        <a href="#" id="view-results" style="display: none" class="btn btn-primary vote-btn"><?= Yii::t('app', 'View results')?></a>
+        <span id="vote-empty" style="display: none"><?= Yii::t('vote', 'Please choose one of the answers.');?></span></br>
+        <a href="#" id="view-results" style="display: none" class="btn btn-primary vote-btn"><?= Yii::t('vote', 'View results')?></a>
     </div>
-    <a style="display: none" id="vote-submit" href="#" class="btn btn-primary vote-btn"><?= Yii::t('app', 'Vote');?></a>
-    <a style="display: none" id="vote-view" href="/voteresult" class="btn btn-primary vote-btn"><?= Yii::t('app', 'View all results');?></a>
+    <a style="display: none" id="vote-submit" href="#" class="btn btn-primary vote-btn"><?= Yii::t('vote', 'Vote');?></a>
+    <a style="display: none" id="vote-view" href="/voteresult" class="btn btn-primary vote-btn"><?= Yii::t('vote', 'View all results');?></a>
 </div>
 
 <?php $this->registerJs(

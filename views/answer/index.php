@@ -8,14 +8,14 @@ use yii\helpers\Html;
 /* @var $model backend\modules\vote\forms\QuestionSearch */
 
 
-$this->title = Yii::t('app', 'Answers');
+$this->title = Yii::t('vote', 'Answers');
 
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="answer-index">
 
     <p>
-        <?php echo Html::a(Yii::t('app', 'Create'), ['create'], ['class' => 'btn btn-success']) ?>
+        <?php echo Html::a(Yii::t('vote', 'Create'), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php echo GridView::widget([

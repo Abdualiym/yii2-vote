@@ -2,6 +2,10 @@
 
 return [
     // site helpers
+    'Sort' => 'Tartib',
+    'Something is wrong or you already voted!' => 'Xatolik yuz berdi yoki sizning ovozingiz allaqachon qabul qilingan!',
+    'Status' => 'Status',
+    'Number of votes' => 'Berilgan ovozlar soni',
     'View all results' => 'Hamma natijalarni ko`rish',
     'Select only one option' => 'Faqat bitta variantni tanlash',
     'Voting successfully received!' => 'Sizning ovozingiz qabul qilindi!',

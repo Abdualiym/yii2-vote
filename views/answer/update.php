@@ -23,10 +23,10 @@ foreach ($model->translations as $i => $translation) {
     }
 }
 
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Questions'), 'url' => ['/vote/question/index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('vote', 'Questions'), 'url' => ['/vote/question/index']];
 $this->params['breadcrumbs'][] = ['label' => $answer->question->translations[1]->question, 'url' => ['/vote/question/view', 'id' => $answer->question_id]];
 $this->params['breadcrumbs'][] = ['label' => $answer->translations[1]->answer, 'url' => ['view', 'id' => $answer->id]];
-$this->params['breadcrumbs'][] = Yii::t('app','Update');
+$this->params['breadcrumbs'][] = Yii::t('vote','Update');
 ?>
 
 <div class="slide-form">
@@ -81,12 +81,12 @@ $this->params['breadcrumbs'][] = Yii::t('app','Update');
         </div>
         <div class="col-md-4">
             <div class="box box-default">
-                <div class="box-header with-border"><?= Yii::t('app', 'Vote')?></div>
+                <div class="box-header with-border"><?= Yii::t('vote', 'Vote')?></div>
                 <div class="box-body">
                     <?php echo $form->field($model, 'question_id')->hiddenInput(['value'=> $model->question_id])->label(false); ?>
                     <?php echo $form->field($model, 'sort')->dropDownList([1 => 1, 2 => 2, 3 => 3, 4 => 4, 5 => 5, 6 => 6, 7 => 7, 8 => 8, 9 => 9, 10 => 10]) ?>
 
-                    <?php echo Html::submitButton(Yii::t('app', 'Update'), ['class' => 'btn btn-success btn-block']) ?>
+                    <?php echo Html::submitButton(Yii::t('vote', 'Update'), ['class' => 'btn btn-success btn-block']) ?>
                 </div>
             </div>
 

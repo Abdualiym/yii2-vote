@@ -90,7 +90,7 @@ class QuestionController extends Controller implements ViewContextInterface
         if ($form->load(Yii::$app->request->post()) && $form->validate()) {
             try {
                 $question = $this->service->create($form);
-                Yii::$app->session->setFlash('success', Yii::t('app', 'Question successfully added!'));
+                Yii::$app->session->setFlash('success', Yii::t('vote', 'Question successfully added!'));
                 return $this->redirect(['view', 'id' => $question->id]);
             } catch (\DomainException $e) {
                 Yii::$app->errorHandler->logException($e);
@@ -110,7 +110,7 @@ class QuestionController extends Controller implements ViewContextInterface
         if ($form->load(Yii::$app->request->post()) && $form->validate()) {
             try {
                 $this->service->edit($question->id, $form);
-                Yii::$app->session->setFlash('success', Yii::t('app', 'Question successfully updated!'));
+                Yii::$app->session->setFlash('success', Yii::t('vote', 'Question successfully updated!'));
                 return $this->redirect(['view', 'id' => $question->id]);
             } catch (\DomainException $e) {
                 Yii::$app->errorHandler->logException($e);

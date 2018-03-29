@@ -52,7 +52,7 @@ class ResultsForm extends Model
     public function attributeLabels()
     {
         return [
-            'answer_id' => Yii::t('app', 'Answer ID')
+            'answer_id' => Yii::t('vote', 'Answer ID')
         ];
     }
 

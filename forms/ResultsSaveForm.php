@@ -47,10 +47,10 @@ class ResultsSaveForm extends Model
     public function attributeLabels()
     {
         return [
-            'user_ip' => Yii::t('app', 'User Ip'),
-            'user_id' => Yii::t('app', 'User ID'),
-            'created_at' => Yii::t('app', 'Created At'),
-            'updated_at' => Yii::t('app', 'Updated At'),
+            'user_ip' => Yii::t('vote', 'User Ip'),
+            'user_id' => Yii::t('vote', 'User ID'),
+            'created_at' => Yii::t('vote', 'Created At'),
+            'updated_at' => Yii::t('vote', 'Updated At'),
         ];
     }
 

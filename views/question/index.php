@@ -6,24 +6,24 @@ use yii\helpers\Url;
 /* @var $dataProvider yii\data\ActiveDataProvider */
 /* @var $model backend\modules\vote\forms\QuestionSearch */
 
-$this->title = Yii::t('app', 'Questions');
+$this->title = Yii::t('vote', 'Questions');
 
 $this->params['breadcrumbs'][] = $this->title;
 
 
 ?>
-<a href="<?php echo Url::toRoute(['question/create'])?>" class="btn btn-success"><i class="fa fa-plus-circle"></i> <?= Yii::t('app', 'Create question')?></a>
+<a href="<?php echo Url::toRoute(['question/create'])?>" class="btn btn-success"><i class="fa fa-plus-circle"></i> <?= Yii::t('vote', 'Create question')?></a>
 <br>
 <div class="panel">
     <table class="table table-hover">
         <thead>
         <th></th>
         <th>ID </th>
-        <th>&nbsp;<i aria-hidden="true"></i><?= Yii::t('app', 'Question'); ?></th>
-        <th><i class="fa fa-check" aria-hidden="true"></i>&nbsp;<?= Yii::t('app', 'Count Votes')?></th>
-        <th><i class="fa fa-hourglass-o" aria-hidden="true"></i>&nbsp;<?= Yii::t('app', 'Status')?></th>
-        <th><i class="fa fa-navicon" aria-hidden="true"></i>&nbsp;<?= Yii::t('app', 'Type')?></th>
-        <th>&nbsp;<i class="fa fa-credit-card" aria-hidden="true"></i>&nbsp;<?= Yii::t('app', 'Actions')?></th>
+        <th>&nbsp;<i aria-hidden="true"></i><?= Yii::t('vote', 'Question'); ?></th>
+        <th><i class="fa fa-check" aria-hidden="true"></i>&nbsp;<?= Yii::t('vote', 'Number of Votes')?></th>
+        <th><i class="fa fa-hourglass-o" aria-hidden="true"></i>&nbsp;<?= Yii::t('vote', 'Status')?></th>
+        <th><i class="fa fa-navicon" aria-hidden="true"></i>&nbsp;<?= Yii::t('vote', 'Type')?></th>
+        <th>&nbsp;<i class="fa fa-credit-card" aria-hidden="true"></i>&nbsp;<?= Yii::t('vote', 'Actions')?></th>
         </thead>
 
         <tbody>
@@ -48,35 +48,53 @@ $this->params['breadcrumbs'][] = $this->title;
             <td colspan="4">
 
                 <div id="accordion-<?php echo $model->id; ?>" class="collapse">
-                    <h5><?= Yii::t('app', 'Answer') ?> > <?= Yii::t('app', 'Question') ?> > <?php echo $model->id; ?></h5><br>
-                    <a href="<?php echo Url::toRoute(['answer/create', 'question_id' => $model->id])?>" class="btn btn-info pull-right"><i class="fa fa-plus-circle"></i> <?= Yii::t('app', 'Create answer')?></a>
+                    <h5><?= Yii::t('vote', 'Answer') ?> > <?= Yii::t('vote', 'Question') ?> > <?php echo $model->id; ?></h5><br>
+                    <a href="<?php echo Url::toRoute(['answer/create', 'question_id' => $model->id])?>" class="btn btn-info"><i class="fa fa-plus-circle"></i> <?= Yii::t('vote', 'Create answer')?></a>
                     <br>
                     <?php if($model->voteAnswers == null):?>
-                        <span><?= Yii::t('app', 'There are no answers!')?></span><hr>
+                        <span><?= Yii::t('vote', 'There are no answers!')?></span><hr>
                     <?php endif; ?>
 
-                    <?php foreach ($model->voteAnswers as $items):?>
-                        <hr>
-                        <i class="fa fa-calendar" aria-hidden="true"></i>&nbsp;<b>ID:</b> <?php echo $items->id; ?></br>
-                        <i class="fa fa-calendar" aria-hidden="true"></i>&nbsp;<b><?= Yii::t('app', 'Sort')?>:</b> <?php echo $items->sort; ?></br>
-                        <i class="fa fa-clock-o" aria-hidden="true"></i>&nbsp;<b><?= Yii::t('app', 'Answers') ?>:</b> <?php echo $items->translations[1]->answer; ?></br>
-                        <i class="fa fa-calendar-check-o" aria-hidden="true"></i>&nbsp;<b><?= Yii::t('app', 'Count Votes')?>: </b><?php echo $items->countAnswers; ?></br>
-                        <i class="" aria-hidden="true"></i>&nbsp;<b><?= Yii::t('app', 'Status')?>: </b>
-                <?php echo \abdualiym\vote\helpers\QuestionHelper::statusLabel($items->status); ?>
-            </br>
-            </br>
-                        <i class="fa fa-credit-card" aria-hidden="true"></i>&nbsp;<b><?= Yii::t('app', 'Actions')?>: </b>
-                            <a href="<?php echo Url::toRoute(['/vote/answer/view', 'id' => $items->id])?>" class="btn btn-info"><i class="fa fa-eye"></i></a>
-                            <a href="<?php echo Url::toRoute(['/vote/answer/update', 'id' => $items->id])?>" class="btn btn-warning"><i class="fa fa-edit"></i></a>
-                            <?=Html::a('<i class="fa fa-trash"></i>', '/vote/answer/delete?id='.$items->id, [
-                                'class' => 'btn btn-danger',
-                                'data' => [
-                                    'confirm' => Yii::t('app', 'Are you sure you want to delete the element?'),
-                                    'method' => 'post',
-                                ],
 
-                            ])?></br>
-                    <?php endforeach; ?>
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th>№</th>
+                                <th><?= Yii::t('vote', 'Sort')?></th>
+                                <th><?= Yii::t('vote', 'Answers') ?></th>
+                                <th><?= Yii::t('vote', 'Number of Votes')?></th>
+                                <th><?= Yii::t('vote', 'Status')?></th>
+                                <th><?= Yii::t('vote', 'Actions')?></th>
+                            </tr>
+                            </thead>
+                            <tbody style="background-color: #e8ecf4">
+                            <?php foreach ($model->voteAnswers as $items):?>
+
+                            <tr>
+
+                                <td><?php echo $items->id; ?></td>
+                                <td><?php echo $items->sort; ?></td>
+                                <td><?php echo $items->translate($items->id); ?></td>
+                                <td><?php echo $items->countAnswers; ?></td>
+                                <td><?php echo \abdualiym\vote\helpers\QuestionHelper::statusLabel($items->status); ?></td>
+                                <td><a href="<?php echo Url::toRoute(['/vote/answer/view', 'id' => $items->id])?>" class="btn btn-info"><i class="fa fa-eye"></i></a>
+                                    <a href="<?php echo Url::toRoute(['/vote/answer/update', 'id' => $items->id])?>" class="btn btn-warning"><i class="fa fa-edit"></i></a>
+                                    <?=Html::a('<i class="fa fa-trash"></i>', '/vote/answer/delete?id='.$items->id, [
+                                        'class' => 'btn btn-danger',
+                                        'data' => [
+                                            'confirm' => Yii::t('vote', 'Are you sure you want to delete the element?'),
+                                            'method' => 'post',
+                                        ],
+
+                                    ])?></td>
+                            </tr>
+                            <?php endforeach; ?>
+                            </tbody>
+                        </table>
+
+
+
+
 
                 </div>
             </td>
