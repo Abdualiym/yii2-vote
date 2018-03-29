@@ -10,7 +10,6 @@ class Infosytems extends Widget
 
     public function run()
     {
-
         return $this->render('_infosytems');
     }
 

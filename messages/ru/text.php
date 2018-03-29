@@ -2,6 +2,7 @@
 
 return [
     # site helpers
+    'View all results' => 'Посмотреть все результаты',
     'Select only one option' => 'Выбрать только один вариант',
     '{n,plural,=0{not voted} =1{# vote} =2{# votes} other{# votes}}' => '{n,plural,=0{не проголосовано} =1{# голос} =2{# голоса} other{# голосов}}',
     'Your vote already accept!' => 'Ваш голос уже принят!',

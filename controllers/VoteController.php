@@ -42,6 +42,10 @@ class VoteController extends Controller
         if (Yii::$app->request->isAjax) {
         $result = new Results();
         $question = $result->selectQuestion(); //select one active question
+            if($question->isVotedQuestion($question->id)){
+               return $result->listAnswersResult($question->id);
+            }
+
         $response = [
             'question' =>  $question->translate($question->id),
             'question_id' => $question->id,

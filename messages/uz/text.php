@@ -2,6 +2,7 @@
 
 return [
     // site helpers
+    'View all results' => 'Hamma natijalarni ko`rish',
     'Select only one option' => 'Faqat bitta variantni tanlash',
     'Voting successfully received!' => 'Sizning ovozingiz qabul qilindi!',
     'Your vote already accept!' => 'Sizning ovozingiz qabul qilingan!',

@@ -74,6 +74,7 @@ class Results extends \yii\db\ActiveRecord
             ->orderBy(['sort' => SORT_DESC])->all();
         foreach ($answers as $items) {
             $item['id'] = $items->id;
+            $item['name'] = $items->translate($items->id);
             $answerCount = Results::find()
                 ->select(['vote_results.id', 'COUNT(vote_results.answer_id) as AnswerCount'])
                 ->innerJoin('vote_answers', 'vote_results.answer_id = vote_answers.id')
@@ -84,6 +85,7 @@ class Results extends \yii\db\ActiveRecord
                 ->asArray()
                 ->one();
             $item['count'] = $answerCount['AnswerCount'];
+            $item['count_message'] = Yii::t('app', '{n,plural,=0{not voted} =1{# vote} =2{# votes} other{# votes}}', ['n' => $answerCount['AnswerCount']]);
             $res[] = $item;
         }
         if(Question::find()->count() >=1){
@@ -102,6 +104,7 @@ class Results extends \yii\db\ActiveRecord
         }
 
 
+        $response['question'] = Question::translate($question_id);
         $response['all'] = $questionCount['QuestionCount'];
         $response['items'] = $res;
         return $response;

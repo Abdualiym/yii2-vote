@@ -92,6 +92,27 @@ class Question extends ActiveRecord
                 ->one();
         }
     }
+    /**
+     * this method validate this user already voted
+     * only active answer
+     * if user voted return true
+     */
+    public function isVotedQuestion($id = null)
+    {
+        $cookies = Yii::$app->request->cookies;
+        if (($cookie = $cookies->get('cookie_token')) !== null) {
+            if(!isset($id)){$id = $this->id;  }
+
+            return Results::find()
+                ->innerJoin('vote_answers', 'vote_results.answer_id = vote_answers.id')
+                ->innerJoin('vote_questions', 'vote_answers.question_id = vote_questions.id')
+                ->andWhere(['in', 'vote_answers.status', self::STATUS_ACTIVE])
+                ->andWhere(['in', 'vote_results.cookie_token', $cookie->value])
+                ->andWhere(['in', 'vote_questions.id', $id])
+                ->asArray()
+                ->one();
+        }
+    }
     // translations
 
     public function setTranslation($lang_id, $question)

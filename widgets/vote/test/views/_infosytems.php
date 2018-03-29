@@ -15,12 +15,6 @@ $lang = Yii::$app->language;
         <h3 class="title"><?= Yii::t('app', 'Your Vote');?></h3>
     </div>
     <div class="vote-question" id="vote-question-id"></div>
-<!---- result ---->
-    <div class="result-vote">
-
-    </div>
-    <!---- result ---->
-
     <ul class="vote-choise" id="vote-choise-id">
 
     </ul>
@@ -30,8 +24,7 @@ $lang = Yii::$app->language;
         <span id="vote-empty" style="display: none"><?= Yii::t('app', 'Please choose one of the answers.');?></span></br>
         <a href="#" id="view-results" style="display: none" class="btn btn-primary vote-btn"><?= Yii::t('app', 'View results')?></a>
     </div>
-    <a style="display: none" id="vote-submit" href="#" class="btn btn-primary vote-btn"><?= Yii::t('app', 'Vote');?></a>
-    <a style="display: none" id="vote-view" href="/voteresult" class="btn btn-primary vote-btn"><?= Yii::t('app', 'View all results');?></a>
+    <a id="vote-submit" class="btn btn-primary vote-btn"><?= Yii::t('app', 'Vote');?></a>
 </div>
 
 <?php $this->registerJs(
@@ -44,24 +37,6 @@ $lang = Yii::$app->language;
             type: 'get',
             dataType: 'json',
             success: function(data, response, textStatus, jqXHR) {
-                if(data['all'] != null){
-                        $('#vote-submit').hide();            
-                        $('#vote-view').show();            
-               
-                            $('#vote-question-id').html(data['question']);            
-                                var all = data['all'];
-                                for(var i in data['items']){
-                                var answer = data['items'][i].id;
-                                var name = data['items'][i].name;
-                                var count_message = data['items'][i].count_message;
-                                var answer_count = data['items'][i].count;
-                                                     
-                                var procent = answer_count * 100 / data['all'];
-                               
-                                $('.result-vote').append('<div class=\"progress-title\">'+name+'<strong > '+count_message+'</strong></div><div class=\"progress\"><div class=\"progress-bar\" role=\"progressbar\" aria-valuenow=\"30\" aria-valuemin=\"0\" aria-valuemax=\"'+all+'\" style=\"width: '+procent+'%;\">'+Math.round(procent)+'%</div></div>');
-                            }   
-                }else{
-                $('#vote-submit').show();    
                     var question = data['question'];
                     $('#vote-question-id').html(question);
                     var content = '';
@@ -75,9 +50,6 @@ $lang = Yii::$app->language;
                     //var message = data['message'];
                     //$('#vote-res-message').html(message);
                     //$('#view-results').show();
-                }
-            
-                    
                 
             }
         });
