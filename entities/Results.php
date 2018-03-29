@@ -2,12 +2,10 @@
 
 namespace abdualiym\vote\entities;
 
-use abdualiym\languageClass\Language;
 use lhs\Yii2SaveRelationsBehavior\SaveRelationsBehavior;
 use Yii;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveQuery;
-use yii\helpers\ArrayHelper;
 
 /**
  *
@@ -45,6 +43,7 @@ class Results extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Answer::class(), ['id' => 'answer_id']);
     }
+
     /**
      * @return \yii\db\ActiveQuery
      */
@@ -63,14 +62,16 @@ class Results extends \yii\db\ActiveRecord
     {
         $this->answer_id = $answer_id;
     }
+
     /**
      * for frontend
      * @return \yii\db\ActiveQuery
      * Response all count voted question and answers
      */
-    public function listAnswersResult($question_id){
+    public function listAnswersResult($question_id)
+    {
         $answers = Answer::find()->select('id')
-            ->where(['question_id' => $question_id, 'status' =>1])
+            ->where(['question_id' => $question_id, 'status' => 1])
             ->orderBy(['sort' => SORT_DESC])->all();
         foreach ($answers as $items) {
             $item['id'] = $items->id;
@@ -80,15 +81,15 @@ class Results extends \yii\db\ActiveRecord
                 ->innerJoin('vote_answers', 'vote_results.answer_id = vote_answers.id')
                 ->innerJoin('vote_questions', 'vote_answers.question_id = vote_questions.id')
                 ->andWhere(['in', 'vote_results.answer_id', $items->id])
-                ->andWhere(['in', 'vote_answers.status',self::STATUS_ACTIVE])
+                ->andWhere(['in', 'vote_answers.status', self::STATUS_ACTIVE])
                 ->having('COUNT(vote_results.id)>=1')
                 ->asArray()
                 ->one();
-            $item['count'] = $answerCount['AnswerCount'];
+            $item['count'] = $answerCount['AnswerCount'] ?: 0;
             $item['count_message'] = Yii::t('vote', '{n,plural,=0{not voted} =1{# vote} =2{# votes} other{# votes}}', ['n' => $answerCount['AnswerCount']]);
             $res[] = $item;
         }
-        if(Question::find()->count() >=1){
+        if (Question::find()->count() >= 1) {
             $questionCount = Results::find()
                 ->select(['vote_results.id', 'COUNT(vote_results.answer_id) as QuestionCount'])
                 ->innerJoin('vote_answers', 'vote_results.answer_id = vote_answers.id')
@@ -99,7 +100,7 @@ class Results extends \yii\db\ActiveRecord
                 ->having('COUNT(vote_results.id)>=1')
                 ->asArray()
                 ->one();
-        }else{
+        } else {
             $questionCount['QuestionCount'] = 0;
         }
 
@@ -109,17 +110,21 @@ class Results extends \yii\db\ActiveRecord
         $response['items'] = $res;
         return $response;
     }
+
     /**
      * for frontend
      * @return \yii\db\ActiveQuery
      * select one active question for ajax widget
      */
-    public function getCookieToken(){
+    public function getCookieToken()
+    {
 
         $cookies = Yii::$app->request->cookies;
         if (($cookie = $cookies->get('cookie_token')) !== null) {
             $token = $cookie->value;
-        }else{ $token = sha1(rand(0000,9999999)); }
+        } else {
+            $token = sha1(rand(0000, 9999999));
+        }
 
         $cookie = new \yii\web\Cookie([
             'name' => 'cookie_token',
@@ -127,18 +132,22 @@ class Results extends \yii\db\ActiveRecord
             'expire' => time() + 86400 * 365,
         ]);
         \yii::$app->response->cookies->add($cookie);
-        if(\yii::$app->response->cookies->has('cookie_token')){
+        if (\yii::$app->response->cookies->has('cookie_token')) {
             return $token;
-        }else{ return null;}
+        } else {
+            return null;
+        }
     }
+
     /**
      * for frontend
      * @return \yii\db\ActiveQuery
      * select one active question for ajax widget
      */
-    public function selectQuestion(){
+    public function selectQuestion()
+    {
         $question = Question::find()->active()->one();
-        return isset($question)? $question : null;
+        return isset($question) ? $question : null;
     }
 
     /**
@@ -146,17 +155,19 @@ class Results extends \yii\db\ActiveRecord
      * @return \yii\db\ActiveQuery
      * list answers for ajax widget
      */
-    public function listAnswers($question_id){
+    public function listAnswers($question_id)
+    {
         $answers = Answer::find()->select('id')
             ->where(['question_id' => $question_id, 'status' => self::STATUS_ACTIVE])
             ->orderBy(['sort' => SORT_DESC])
             ->all();
         foreach ($answers as $items) {
             $response[] = ['id' => $items->id,
-            'answer' => $items->translate($items->id)];
+                'answer' => $items->translate($items->id)];
         }
         return $response;
     }
+
     // behaviors
     public function behaviors(): array
     {
