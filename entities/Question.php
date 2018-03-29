@@ -78,17 +78,19 @@ class Question extends ActiveRecord
      */
     public function isVoted($id = null)
     {
+        $cookies = Yii::$app->request->cookies;
+        if (($cookie = $cookies->get('cookie_token')) !== null) {
+            if(isset($id)){ $id = Answer::findOne($id)->question_id; }else{ $id = $this->id;}
 
-        if(isset($id)){ $id = Answer::findOne($id)->question_id; }else{ $id = $this->id;}
-
-        return Results::find()
-            ->innerJoin('vote_answers', 'vote_results.answer_id = vote_answers.id')
-            ->innerJoin('vote_questions', 'vote_answers.question_id = vote_questions.id')
-            ->andWhere(['in', 'vote_answers.status', self::STATUS_ACTIVE])
-            ->andWhere(['in', 'vote_questions.id', $id])
-            ->andWhere(['in', 'vote_results.user_ip', Yii::$app->request->getUserIP()])
-            ->asArray()
-            ->one();
+            return Results::find()
+                ->innerJoin('vote_answers', 'vote_results.answer_id = vote_answers.id')
+                ->innerJoin('vote_questions', 'vote_answers.question_id = vote_questions.id')
+                ->andWhere(['in', 'vote_answers.status', self::STATUS_ACTIVE])
+                ->andWhere(['in', 'vote_results.cookie_token', $cookie->value])
+                ->andWhere(['in', 'vote_questions.id', $id])
+                ->asArray()
+                ->one();
+        }
     }
     // translations
 

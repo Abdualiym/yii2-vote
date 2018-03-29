@@ -53,6 +53,7 @@ class Results extends \yii\db\ActiveRecord
     {
         $result = new static();
         $result->answer_id = $answer_id;
+        $result->cookie_token = self::getCookieToken();
         $result->user_ip = Yii::$app->getRequest()->getUserIP();
         $result->user_id = Yii::$app->user->id;
         return $result;
@@ -64,9 +65,9 @@ class Results extends \yii\db\ActiveRecord
     }
     /**
      * for frontend
-    * @return \yii\db\ActiveQuery
+     * @return \yii\db\ActiveQuery
      * Response all count voted question and answers
-    */
+     */
     public function listAnswersResult($question_id){
         $answers = Answer::find()->select('id')
             ->where(['question_id' => $question_id, 'status' =>1])
@@ -85,22 +86,48 @@ class Results extends \yii\db\ActiveRecord
             $item['count'] = $answerCount['AnswerCount'];
             $res[] = $item;
         }
-        $questionCount = Results::find()
-            ->select(['vote_results.id', 'COUNT(vote_results.answer_id) as QuestionCount'])
-            ->innerJoin('vote_answers', 'vote_results.answer_id = vote_answers.id')
-            ->innerJoin('vote_questions', 'vote_answers.question_id = vote_questions.id')
-            ->andWhere(['in', 'vote_questions.id', $question_id])
-            ->andWhere(['in', 'vote_questions.status', self::STATUS_ACTIVE])
-            ->andWhere(['in', 'vote_answers.status', self::STATUS_ACTIVE])
-            ->having('COUNT(vote_results.id)>=1')
-            ->asArray()
-            ->one();
+        if(Question::find()->count() >=1){
+            $questionCount = Results::find()
+                ->select(['vote_results.id', 'COUNT(vote_results.answer_id) as QuestionCount'])
+                ->innerJoin('vote_answers', 'vote_results.answer_id = vote_answers.id')
+                ->innerJoin('vote_questions', 'vote_answers.question_id = vote_questions.id')
+                ->andWhere(['in', 'vote_questions.id', $question_id])
+                ->andWhere(['in', 'vote_questions.status', self::STATUS_ACTIVE])
+                ->andWhere(['in', 'vote_answers.status', self::STATUS_ACTIVE])
+                ->having('COUNT(vote_results.id)>=1')
+                ->asArray()
+                ->one();
+        }else{
+            $questionCount['QuestionCount'] = 0;
+        }
+
 
         $response['all'] = $questionCount['QuestionCount'];
         $response['items'] = $res;
         return $response;
     }
+    /**
+     * for frontend
+     * @return \yii\db\ActiveQuery
+     * select one active question for ajax widget
+     */
+    public function getCookieToken(){
 
+        $cookies = Yii::$app->request->cookies;
+        if (($cookie = $cookies->get('cookie_token')) !== null) {
+            $token = $cookie->value;
+        }else{ $token = sha1(rand(0000,9999999)); }
+
+        $cookie = new \yii\web\Cookie([
+            'name' => 'cookie_token',
+            'value' => $token,
+            'expire' => time() + 86400 * 365,
+        ]);
+        \yii::$app->response->cookies->add($cookie);
+        if(\yii::$app->response->cookies->has('cookie_token')){
+            return $token;
+        }else{ return null;}
+    }
     /**
      * for frontend
      * @return \yii\db\ActiveQuery
