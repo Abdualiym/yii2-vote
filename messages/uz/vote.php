@@ -1,7 +1,7 @@
 <?php
 
 return [
-    
+
     'Sort' => 'Tartib',
     'View all results' => 'Hamma natijalarni ko`rish',
     'Something is wrong or you already voted!' => 'Xatolik yuz berdi yoki sizning ovozingiz allaqachon qabul qilingan!',
