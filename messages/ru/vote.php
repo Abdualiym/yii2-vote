@@ -1,8 +1,7 @@
 <?php
 
 return [
-    # site helpers
-    'View all results' => 'Просмотреть все результаты',
+
     'Sort' => 'Порядок ',
     'Something is wrong or you already voted!' => 'Что-то не так, или вы уже голосовали',
     'Status' => 'Статус ',
