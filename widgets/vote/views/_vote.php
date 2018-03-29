@@ -82,7 +82,7 @@ $lang = Yii::$app->language;
                 url: url+'/vote/vote/add',
                 type: 'post',
                 dataType: 'json',
-                data: {'ResultsForm[answer_id]': id},
+                data: {'ResultsForm[answer_id]': id, 'param':token},
                 success: function(data, response, textStatus, jqXHR) {
                     var message = data['message'];
                     $('#'+form+'-vote-res-message').html(message);
