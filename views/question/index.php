@@ -26,9 +26,9 @@ $this->params['breadcrumbs'][] = $this->title;
         </thead>
 
         <tbody>
-        <?php foreach ($models  as $model):?>
+        <?php $i = 0; foreach ($models  as $model): $i++;?>
         <tr  style="background-color: #e8ecf4">
-            <td><?php echo $model->id; ?></td>
+            <td><?php echo $i; ?></td>
             <td width="200px"  data-toggle="collapse" data-target="#accordion-<?php echo $model->id; ?>" class="clickable"><?php echo $model->translate($model->id); ?></td>
             <td data-toggle="collapse" data-target="#accordion-<?php echo $model->id; ?>" class="clickable" ><?php echo $model->countQuestions($model->id); ?></td>
             <td data-toggle="collapse" data-target="#accordion-<?php echo $model->id; ?>" class="clickable" >
@@ -60,9 +60,9 @@ $this->params['breadcrumbs'][] = $this->title;
                             </tr>
                             </thead>
                             <tbody>
-                            <?php foreach ($model->voteAnswers as $items):?>
+                            <?php  $j = 0; foreach ($model->voteAnswers as $items): $j++;?>
                             <tr>
-                                <td><?php echo $items->id; ?></td>
+                                <td><?php echo $j; ?></td>
                                 <td width="200px;"><?php echo $items->translate($items->id); ?></td>
                                 <td><?php echo $items->countAnswers; ?></td>
                                 <td><?php echo \abdualiym\vote\helpers\QuestionHelper::statusLabel($items->status); ?></td>

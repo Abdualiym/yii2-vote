@@ -6,6 +6,7 @@ use abdualiym\languageClass\Language;
 use abdualiym\vote\entities\Question;
 use elisdn\compositeForm\CompositeForm;
 use abdualiym\vote\helpers\QuestionHelper;
+use Yii;
 
 /**
  *
@@ -44,12 +45,12 @@ class QuestionForm extends CompositeForm
     public function attributeLabels()
     {
         return [
-            'type' => 'Тип запроса',
-            'status' => 'Статус',
-            'created_at' => 'Дата добавления',
-            'updated_at' => 'Дата обновления',
-            'created_by' => 'Добавил',
-            'updated_by' => 'Обновил',
+            'type' => Yii::t('vote', 'Type'),
+            'status' => Yii::t('vote', 'Status'),
+            'created_at' => Yii::t('vote', 'Created at'),
+            'updated_at' => Yii::t('vote', 'Updated at'),
+            'created_by' => Yii::t('vote', 'Created by'),
+            'updated_by' => Yii::t('vote', 'Updated by'),
         ];
     }
 

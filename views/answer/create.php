@@ -29,7 +29,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 
 <div class="slide-form">
-<h3>Вопрос: </h3>
+<h3><?= Yii::t('vote', 'Question')?>: </h3>
     <?php $form = ActiveForm::begin(); ?>
 
     <div class="row">

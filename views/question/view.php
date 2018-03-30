@@ -75,7 +75,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                 'label' => Yii::t('vote', 'Created by')
                             ],
                             [
-                                'label' => Yii::t('vote', 'Count Voted'),
+                                'label' => Yii::t('vote', 'Number of Votes'),
                                 'value' => $question->countQuestions($question->id)
                             ],
 
@@ -176,7 +176,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         <?php echo $items->id; ?>
                     </td>
                     <td>
-                        <?php echo $items->translations[1]->answer; ?>
+                        <?php echo $items->translate($items->id); ?>
                     </td>
                     <td>
                         <?php echo \abdualiym\vote\helpers\QuestionHelper::statusLabel($items->status); ?>

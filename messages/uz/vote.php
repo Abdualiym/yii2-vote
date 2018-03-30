@@ -4,7 +4,8 @@ return [
 
     'Sort' => 'Tartib',
     'Something is wrong or you already voted!' => 'Xatolik yuz berdi yoki sizning ovozingiz allaqachon qabul qilingan!',
-    'Status' => 'Status',
+    'Status' => 'Holati',
+    'Answers' => 'Javoblar',
     'Active' => 'Aktiv',
     'Draft' => 'Черновик',
     'Activate' => 'Aktiv qilish',

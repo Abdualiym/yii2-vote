@@ -18,7 +18,6 @@ $this->params['breadcrumbs'][] = $this->title;
 
 ?>
 <div class="vote-view">
-
     <p>
         <?php echo Html::a(Yii::t('vote', 'Update'), ['update', 'id' => $answer->id], ['class' => 'btn btn-primary']) ?>
         <?php echo Html::a(Yii::t('vote', 'Delete'), ['delete', 'id' => $answer->id], [
