@@ -45,17 +45,20 @@ $this->params['breadcrumbs'][] = $this->title;
                     <?php echo DetailView::widget([
                         'model' => $question,
                         'attributes' => [
+                            'id',
                             [
+                                'label' => Yii::t('vote', 'Type'),
                                 'attribute' => 'type',
                                 'value' => \abdualiym\vote\helpers\QuestionHelper::typeLabel($question->type),
                                 'format' => 'raw',
                             ],
                             [
+                                'label' => Yii::t('vote', 'Status'),
                                 'attribute' => 'status',
                                 'value' => \abdualiym\vote\helpers\QuestionHelper::statusLabel($question->status),
                                 'format' => 'raw',
                             ],
-                            'id',
+
                         ],
                     ]) ?>
                 </div>
@@ -86,12 +89,12 @@ $this->params['breadcrumbs'][] = $this->title;
                             [
                                 'attribute' => 'created_at',
                                 'format' => 'datetime',
-                                'label' => Yii::t('vote', 'Created At')
+                                'label' => Yii::t('vote', 'Created at')
                             ],
                             [
                                 'attribute' => 'updated_at',
                                 'format' => 'datetime',
-                                'label' => Yii::t('vote', 'Updated At')
+                                'label' => Yii::t('vote', 'Updated at')
                             ],
                         ],
                     ]) ?>
@@ -142,8 +145,12 @@ $this->params['breadcrumbs'][] = $this->title;
                             <?php echo DetailView::widget([
                                 'model' => $translation,
                                 'attributes' => [
-                                    'question:html',
+                                [                                                  // name свойство зависимой модели owner
+                                    'label' => Yii::t('vote', 'Question'),
+                                    'value' => $translation->question,  // настройка HTML атрибутов для тега, соответсвующего label
                                 ],
+
+                            ]
                             ]) ?>
 
                         </div>
@@ -170,10 +177,10 @@ $this->params['breadcrumbs'][] = $this->title;
                 </tr>
                 </thead>
                 <tbody>
-                <?php foreach ($question->voteAnswers as $items):?>
+                <?php $i = 0; foreach ($question->voteAnswers as $items): $i++;?>
                 <tr>
                     <td>
-                        <?php echo $items->id; ?>
+                        <?php echo $i; ?>
                     </td>
                     <td>
                         <?php echo $items->translate($items->id); ?>

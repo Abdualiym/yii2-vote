@@ -43,23 +43,27 @@ $this->params['breadcrumbs'][] = $this->title;
                     <?php echo DetailView::widget([
                         'model' => $answer,
                         'attributes' => [
-                            'sort',
 
+                            'id',
+                            [
+                                'label' => Yii::t('vote', 'Question'),
+                                'value' => $answer->question->translate($answer->question->id)
+                            ],
+                            [
+                                'label' => Yii::t('vote', 'Sort'),
+                                'value' => $answer->sort
+                            ],
                             [
                                 'label' => Yii::t('vote', 'Number of Votes'),
                                 'value' => $answer->countAnswers
                             ],
-                            [
-                                'label' => Yii::t('vote', 'Number of Votes'),
-                                'value' => $answer->question->translate($answer->question->id)
-                            ],
 
                             [
-                                'attribute' => 'status',
+                                'attribute' => Yii::t('vote', 'Status'),
                                 'value' => \abdualiym\vote\helpers\AnswerHelper::statusLabel($answer->status),
                                 'format' => 'raw',
                             ],
-                            'id',
+
                         ],
                     ]) ?>
                 </div>
@@ -84,12 +88,12 @@ $this->params['breadcrumbs'][] = $this->title;
                             [
                                 'attribute' => 'created_at',
                                 'format' => 'datetime',
-                                'label' => Yii::t('vote', 'Created At')
+                                'label' => Yii::t('vote', 'Created at')
                             ],
                             [
                                 'attribute' => 'updated_at',
                                 'format' => 'datetime',
-                                'label' => Yii::t('vote', 'Updated At')
+                                'label' => Yii::t('vote', 'Updated at')
                             ],
                         ],
                     ]) ?>
@@ -137,9 +141,14 @@ $this->params['breadcrumbs'][] = $this->title;
                              id="<?php echo $langList[$translation->lang_id]['prefix'] ?>">
                             <?php echo DetailView::widget([
                                 'model' => $translation,
+
                                 'attributes' => [
-                                    'answer:html',
-                                ],
+                                    [                                                  // name свойство зависимой модели owner
+                                        'label' => Yii::t('vote', 'Answer'),
+                                        'value' => $translation->answer,  // настройка HTML атрибутов для тега, соответсвующего label
+                                    ],
+
+                                ]
                             ]) ?>
 
                         </div>

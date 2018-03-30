@@ -39,7 +39,7 @@ class Answer extends ActiveRecord
         return $answer;
     }
 
-    public function edit($sort, $status)
+    public function edit($sort)
     {
         $this->sort = $sort;
     }
