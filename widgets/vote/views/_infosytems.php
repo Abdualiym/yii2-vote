@@ -36,9 +36,12 @@ $lang = Yii::$app->language;
 
 <?php $this->registerJs(
     "$(document).ready(function() {
+        var url = '$hostInfo/$lang';
+        var fp = new Fingerprint2();
+        fp.get(function(result, components) {
+        $.get( url+'/vote/vote/cookie?token='+result+'');
     var param = $('meta[name=csrf-param]').attr('content');
     var token = $('meta[name=csrf-token]').attr('content');
-    var url = '$hostInfo/$lang';
     $.ajax({
             url: url+'/vote/vote/list',
             type: 'get',
@@ -89,7 +92,7 @@ $lang = Yii::$app->language;
             url: url+'/vote/vote/add',
             type: 'post',
             dataType: 'json',
-            data: {'ResultsForm[answer_id]': form, '_csrf':token},
+            data: {'ResultsForm[answer_id]': form,  'ResultsForm[cookie_token]': result, '_csrf':token },
             success: function(data, response, textStatus, jqXHR) {
                 var message = data['message'];
                $('#vote-res-message').html(message);
@@ -98,13 +101,12 @@ $lang = Yii::$app->language;
                setTimeout(function() { window.location.href = '/voteresult';  }, 1000);
                        
                //$('#view-results').show();
-               //$('#vote-submit').remove();
-                     
+               //$('#vote-submit').remove();  
            }
         });
         return false;
     });
-    
+   });
 });
 
 ",

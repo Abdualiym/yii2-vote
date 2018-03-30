@@ -76,8 +76,9 @@ class Question extends ActiveRecord
      * only active answer
      * if user voted return true
      */
-    public function isVoted($id = null)
+    public function isVoted($id = null, $cookie_token = null)
     {
+
         $cookies = Yii::$app->request->cookies;
         if (($cookie = $cookies->get('cookie_token')) !== null) {
             if(isset($id)){ $id = Answer::findOne($id)->question_id; }else{ $id = $this->id;}

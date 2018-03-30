@@ -16,6 +16,7 @@ class ResultsForm extends Model
 
     public $user_ip;
     public $user_id;
+    public $cookie_token;
     public $answer_id;
     /**
      * @inheritdoc
@@ -25,6 +26,7 @@ class ResultsForm extends Model
         return [
             [['answer_id'], 'required'],
             [['answer_id'], 'integer'],
+            [['cookie_token'], 'string'],
             [['user_ip', 'user_id'], 'required'],
             [['user_ip'], 'ip'],
         ];

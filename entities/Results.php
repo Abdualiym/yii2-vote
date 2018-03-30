@@ -49,11 +49,11 @@ class Results extends \yii\db\ActiveRecord
      * @return \yii\db\ActiveQuery
      */
 
-    public function create($answer_id): self
+    public function create($answer_id, $cookie_token): self
     {
         $result = new static();
         $result->answer_id = $answer_id;
-        $result->cookie_token = self::getCookieToken();
+        $result->cookie_token = $cookie_token;
         $result->user_ip = Yii::$app->getRequest()->getUserIP();
         $result->user_id = Yii::$app->user->id;
         return $result;
@@ -114,27 +114,27 @@ class Results extends \yii\db\ActiveRecord
         $response['items'] = $res;
         return $response;
     }
-    /**
-     * for frontend
-     * @return \yii\db\ActiveQuery
-     * select one active question for ajax widget
-     */
-    public function getCookieToken(){
 
-        $cookies = Yii::$app->request->cookies;
-        if (($cookie = $cookies->get('cookie_token')) !== null) {
-            $token = $cookie->value;
-        }else{ $token = sha1(rand(0000,9999999)); }
-
+    public function addCookies($token)
+    {
         $cookie = new \yii\web\Cookie([
             'name' => 'cookie_token',
             'value' => $token,
             'expire' => time() + 86400 * 365,
         ]);
         \yii::$app->response->cookies->add($cookie);
-        if(\yii::$app->response->cookies->has('cookie_token')){
-            return $token;
-        }else{ return null;}
+
+
+    }
+    /**
+     * for frontend
+     * @return \yii\db\ActiveQuery
+     * select one active question for ajax widget
+     */
+    public function CookieToken(){
+
+        $cookies = Yii::$app->request->cookies;
+        return $cookies->get('cookie_token')->value;
     }
     /**
      * for frontend

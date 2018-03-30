@@ -67,10 +67,12 @@ $lang = Yii::$app->language;
 <?php ob_start(); ?>
 <script type="text/javascript" charset="utf-8">
     $(document).ready(function() {
-
+        var url = '<?=$hostInfo.'/'.$lang ?>';
+        var fp = new Fingerprint2();
+        fp.get(function(result, components) {
+            $.get( url+'/vote/vote/cookie?token='+result+'');
         var param = $('meta[name=csrf-param]').attr('content');
         var token = $('meta[name=csrf-token]').attr('content');
-        var url = '<?=$hostInfo.'/'.$lang ?>';
         $(document).on('click', '.vote-submit', function(e){
             var form = $(this).attr('id');
             var id = $('.'+form+'-vote-check:checked').val();
@@ -82,7 +84,7 @@ $lang = Yii::$app->language;
                 url: url+'/vote/vote/add',
                 type: 'post',
                 dataType: 'json',
-                data: {'ResultsForm[answer_id]': id, '_csrf':token},
+                data: {'ResultsForm[answer_id]': id, 'ResultsForm[cookie_token]': result, '_csrf': token },
                 success: function(data, response, textStatus, jqXHR) {
                     var message = data['message'];
                     $('#'+form+'-vote-res-message').html(message);
@@ -96,7 +98,7 @@ $lang = Yii::$app->language;
             });
             return false;
         });
-
+       });
     });
 </script>
 <?php $this->registerJs(preg_replace('~^\s*<script.*>|</script>\s*$~ U', '', ob_get_clean())) ?>

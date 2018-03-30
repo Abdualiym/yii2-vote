@@ -31,6 +31,25 @@ class VoteController extends Controller
         $this->service = $service;
     }
 
+    public function actionCookie($token)
+    {
+        \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        if(Results::addCookies($token)){
+            return "success";
+        }else{
+            return 'error';
+        }
+    }
+
+    public function actionIndex()
+    {
+        \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        $cookies = Yii::$app->request->cookies;
+        if (($cookie = $cookies->get('cookie_token')) !== null) {
+           return $cookie->value;
+        }
+    }
+
     /**
      * @param not
      * @type request get
@@ -67,7 +86,13 @@ class VoteController extends Controller
         \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
         if (Yii::$app->request->isAjax) {
             $form = new ResultsForm();
-            if ($form->load(Yii::$app->request->post()) && !Question::isVoted($form->answer_id)) {
+            $formMas = Yii::$app->request->post("ResultsForm");
+            $cookies = Yii::$app->request->cookies;
+            if (($cookie = $cookies->get('cookie_token')) == null) {
+                Results::addCookies($formMas['cookie_token']);
+            }
+
+            if ($form->load(Yii::$app->request->post()) && !Question::isVoted($form->answer_id, $form->cookie_token)) {
                     try {
                         $this->service->create($form);
                         $response = ["status" => 1, "message" => Yii::t('vote', 'Voting successfully received!')];
