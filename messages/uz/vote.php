@@ -3,7 +3,7 @@
 return [
 
     'Sort' => 'Tartib',
-    'Something is wrong or you already voted!' => 'Xatolik yuz berdi yoki sizning ovozingiz allaqachon qabul qilingan!',
+    'Something is wrong or you already voted!' => 'Xatolik yuz berdi yoki sizning ovozingiz oldin qabul qilingan!',
     'Status' => 'Holati',
     'Answers' => 'Javoblar',
     'Active' => 'Aktiv',
