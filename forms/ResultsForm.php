@@ -26,7 +26,7 @@ class ResultsForm extends Model
         return [
             [['answer_id'], 'required'],
             [['answer_id'], 'integer'],
-            [['cookie_token'], 'string'],
+            [['cookie_token'], 'string', 'max'=> 32],
             [['user_ip', 'user_id'], 'required'],
             [['user_ip'], 'ip'],
         ];
