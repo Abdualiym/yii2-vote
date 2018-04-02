@@ -31,23 +31,19 @@ class VoteController extends Controller
         $this->service = $service;
     }
 
-    public function actionCookie($token)
+    public function actionCookie()
     {
-        \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
-        if(Results::addCookies($token)){
-            return "success";
-        }else{
-            return 'error';
-        }
-    }
-
-    public function actionIndex()
-    {
-        \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
-        $cookies = Yii::$app->request->cookies;
-        if (($cookie = $cookies->get('cookie_token')) !== null) {
-           return $cookie->value;
-        }
+        Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        if (Yii::$app->request->isAjax) {
+           $token = Yii::$app->request->post('token');
+           if(isset($token) && !empty($token)){
+               if(Results::addCookies($token)){
+                   return ['ok' => true, 'message' => 'Cookie succussful saved!'];
+               }else{ return 'No Saved';}
+           }else{
+               return ['ok' => false, 'message' => 'Empty value'];
+           }
+        }return ['ok' => false, 'message' => 'Format request not validate'];
     }
 
     /**

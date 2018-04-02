@@ -70,7 +70,6 @@ $lang = Yii::$app->language;
         var url = '<?=$hostInfo.'/'.$lang ?>';
         var fp = new Fingerprint2();
         fp.get(function(result, components) {
-            $.get( url+'/vote/vote/cookie?token='+result+'');
         var param = $('meta[name=csrf-param]').attr('content');
         var token = $('meta[name=csrf-token]').attr('content');
         $(document).on('click', '.vote-submit', function(e){
@@ -88,12 +87,7 @@ $lang = Yii::$app->language;
                 success: function(data, response, textStatus, jqXHR) {
                     var message = data['message'];
                     $('#'+form+'-vote-res-message').html(message);
-
                     setTimeout(function() {     location.reload();  }, 1000);
-
-                    //$('#view-results').show();
-                    //$('#vote-submit').remove();
-
                 }
             });
             return false;

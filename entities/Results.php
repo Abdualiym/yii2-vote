@@ -117,13 +117,14 @@ class Results extends \yii\db\ActiveRecord
 
     public function addCookies($token)
     {
+        $cookies = Yii::$app->request->cookies;
         $cookie = new \yii\web\Cookie([
             'name' => 'cookie_token',
             'value' => $token,
             'expire' => time() + 86400 * 365,
         ]);
         \yii::$app->response->cookies->add($cookie);
-
+        if($cookies->has('cookie_token')){return true;}else{return null;}
 
     }
     /**

@@ -37,11 +37,11 @@ $lang = Yii::$app->language;
 <?php $this->registerJs(
     "$(document).ready(function() {
         var url = '$hostInfo/$lang';
+        var param = $('meta[name=csrf-param]').attr('content');
+        var token = $('meta[name=csrf-token]').attr('content');
         var fp = new Fingerprint2();
         fp.get(function(result, components) {
-        $.get( url+'/vote/vote/cookie?token='+result+'');
-    var param = $('meta[name=csrf-param]').attr('content');
-    var token = $('meta[name=csrf-token]').attr('content');
+        $.post(''+url+'/vote/vote/cookie', {'token': result, '_crsf': token } );
     $.ajax({
             url: url+'/vote/vote/list',
             type: 'get',
@@ -74,10 +74,6 @@ $lang = Yii::$app->language;
                         content += '<li><label><input class=\"vote-check\" type=\"radio\" name=\"vote-radio\" value=\"'+id+'\">'+answer+'</label></li>'
                         }
                         $('#vote-choise-id').html(content);
-                
-                    //var message = data['message'];
-                    //$('#vote-res-message').html(message);
-                    //$('#view-results').show();
                 }                                          
             }
         });
@@ -96,12 +92,7 @@ $lang = Yii::$app->language;
             success: function(data, response, textStatus, jqXHR) {
                 var message = data['message'];
                $('#vote-res-message').html(message);
-               
-              //$('#vote-res-icon').html('<span class=\"glyphicon glyphicon-ok\"></span>');
                setTimeout(function() { window.location.href = '/voteresult';  }, 1000);
-                       
-               //$('#view-results').show();
-               //$('#vote-submit').remove();  
            }
         });
         return false;
